@@ -15,6 +15,8 @@
 - [歴史人物の調査・監査計画](docs/CHARACTER_RESEARCH_PLAN.md)：候補120件、史実性・逸話・典拠の区別、調査スキーマ
 - [データソース・ライセンス](docs/SOURCES_AND_LICENSES.md)：OpenPOI API、歴史史料、交通・土地利用、公開条件
 - [開発ロードマップ](docs/ROADMAP.md)：P0〜P5、受入条件、テスト、引継ぎ
+- [軍記本文の確認方針](docs/TEXT_VERIFICATION_POLICY.md)：作品・巻・章段の特定、公開原文と小学館版の照合の使い分け
+- [人物史料台帳・第1集](data/people/RESEARCH_LEDGER_001.md)：源義経・平宗盛・平知盛・佐藤嗣信・那須与一の主張別の根拠・確認状況
 
 ## 現在の状態
 
