@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101f29">
+  <meta name="description" content="源平異聞録。史料の根拠を表示する人物カードと、仮想の歴史的引力を観察する小規模試作品。">
+  <title>源平異聞録 | GENPEI SANDBOX</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <div class="brand">
+        <div class="brand-mark">源<br>平</div>
+        <div>
+          <div class="eyebrow">GENPEI / SANDBOX <span class="version">CONCEPT PROTOTYPE 0.1</span></div>
+          <h1>源平異聞録</h1>
+          <p class="tagline">史実には引力があり、結末には自由がある。</p>
+        </div>
+      </div>
+      <div class="head-links">
+        <a href="../docs/FOUNDATION_DESIGN.md">基礎設計</a>
+        <a href="../docs/YASHIMA_11_RESEARCH_GATE.md">史料の監査状況</a>
+        <a href="https://github.com/yama-books/genpei-sandbox" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </header>
+
+    <div class="notice" role="note">
+      <strong>これはゲーム機構の実験です。</strong>
+      画面中央は地理情報ではない模式図です。人物の座標・能力値・行動、施設、移動経路はすべて架空の設定です。人物の史料情報はCSVから読み込みますが、史実としての人間による最終監査は未完了です。
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <span class="small-label">仮想時間</span>
+        <strong id="clock" class="mononum" aria-live="off">第 0 刻</strong>
+        <button id="play" class="button primary" type="button">▶ 再生</button>
+        <button id="step" class="button" type="button">1刻進める</button>
+        <select id="speed" aria-label="観察速度">
+          <option value="1">×1</option>
+          <option value="4">×4</option>
+          <option value="12">×12</option>
+        </select>
+      </div>
+      <div class="control-group gravity-group">
+        <label for="gravity" class="small-label">歴史的引力</label>
+        <input id="gravity" type="range" min="0" max="100" value="65" step="5">
+        <strong id="gravity-value" class="mononum">65</strong><span class="small-label">/ 100</span>
+      </div>
+      <div class="control-group reset-group">
+        <label for="seed" class="small-label">乱数シード</label>
+        <input id="seed" type="number" min="1" max="4294967295" value="1185" inputmode="numeric">
+        <button id="reset" class="button quiet" type="button">↺ リセット</button>
+      </div>
+    </div>
+
+    <main class="workspace">
+      <aside class="roster panel">
+        <div class="panel-heading">
+          <div><div class="eyebrow">PEOPLE / SOURCES</div><h2>人物台帳</h2></div>
+          <span class="count" id="people-count">11</span>
+        </div>
+        <p class="helper">史料の種類と確認状況を人物別に見ます。<span class="subtle">●</span> は移動試験に参加している3人。</p>
+        <div id="load-status" class="load-status" role="status">GitHub保存の人物台帳を読み込み中…</div>
+        <div id="people-list" class="people-list" aria-label="屋島篇の重点人物一覧"></div>
+      </aside>
+
+      <section class="world panel">
+        <div class="panel-heading world-heading">
+          <div><div class="eyebrow">WORLD / OBSERVATION</div><h2>運命の舞台</h2></div>
+          <span class="outline-tag">MODELED SPACE · 非地理</span>
+        </div>
+        <div class="world-content">
+          <svg class="stage" id="stage" viewBox="0 0 1000 640" role="img" aria-label="実際の地理とは異なる、阿波方面、屋島、仮想施設を配置した模式図">
+            <defs>
+              <linearGradient id="ground" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#dae4db"/>
+                <stop offset="1" stop-color="#f4ede0"/>
+              </linearGradient>
+              <linearGradient id="water" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#acc8d0"/>
+                <stop offset="1" stop-color="#d2e3df"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="1000" height="640" fill="url(#ground)"/>
+            <path d="M 730,0 Q 665,135 750,240 C 790,332 768,392 840,465 Q 912,528 1000,514 L 1000,0 Z" fill="url(#water)"/>
+            <path d="M-45,590 Q180,470 330,560 T630,570 T1100,560" class="land-contour"/>
+            <path d="M-40,310 C120,245 200,290 355,247 S660,165 710,140" class="land-contour"/>
+            <path d="M64,540 C210,480 310,490 388,458 S625,330 744,300" class="map-route"/>
+            <path d="M288,164 Q332,335 388,458 Q460,400 520,175 Q646,215 744,300" class="map-route muted"/>
+            <text x="72" y="62" class="map-title">架空の行動空間</text>
+            <text x="74" y="87" class="map-subtitle">現地座標・実在の道路や海岸線ではありません</text>
+            <text x="882" y="510" class="map-water" transform="rotate(-90 882 510)">WATER / ABSTRACT</text>
+            <g id="station-layer"></g>
+            <g id="agent-layer"></g>
+          </svg>
+          <div class="map-legend"><span><i class="legend-dot historic"></i>運命ノード</span><span><i class="legend-dot facility"></i>仮想施設</span><span><i class="legend-dot agent"></i>人物エージェント</span></div>
+        </div>
+        <div class="event-section">
+          <div class="section-head"><div class="eyebrow">EVENT STREAM / SIMULATION</div><h3>観察日誌</h3></div>
+          <div class="events" id="events" role="log" aria-label="シミュレーション行動記録"></div>
+        </div>
+      </section>
+
+      <aside class="detail panel">
+        <div class="panel-heading">
+          <div><div class="eyebrow">PERSON / EVIDENCE</div><h2 id="person-title">人物を選択</h2></div>
+          <span class="outline-tag" id="person-stage">候補</span>
+        </div>
+        <p id="person-subtitle" class="detail-intro">公開史料から区別した情報を表示します。</p>
+        <div id="agent-status" class="agent-status"></div>
+        <div class="section-head"><div class="eyebrow">HISTORICAL CLAIMS / UNCERTAINTY</div><h3>典拠付きの主張</h3></div>
+        <div id="claims" class="claims"></div>
+        <div class="section-head split"><div><div class="eyebrow">DECISION / WHAT-IF</div><h3>介入と判断</h3></div><span class="tiny-pill" id="budget">残り 3 回</span></div>
+        <div id="decision" class="decision-panel"></div>
+        <div class="intervention-row">
+          <button id="advise" type="button" class="button primary">屋島へ向かうよう助言</button>
+          <button id="support" type="button" class="button">資金・食料支援</button>
+        </div>
+        <div class="checkpoint">
+          <button id="save" class="button quiet" type="button">現在の状態を記録</button>
+          <button id="restore" class="button quiet" type="button" disabled>記録地点へ戻る</button>
+          <p class="helper">ページ内だけの一時保存です。リロードで消去されます。</p>
+        </div>
+      </aside>
+    </main>
+    <footer class="footer">
+      <span>GENPEI SANDBOX / EXPLORATORY SIMULATION</span>
+      <span>データ：<a href="../data/people/YASHIMA_MVP_CLAIMS.csv">人物別の33主張</a> ／ <a href="../docs/TEXT_VERIFICATION_POLICY.md">軍記本文確認方針</a></span>
+    </footer>
+  </div>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
