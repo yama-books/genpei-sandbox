@@ -22,6 +22,9 @@
 - [人物全体索引（CSV）](data/people/MASTER_INDEX.csv)：P0・P1・P2の優先配分、調査状態
 - [義経・宗盛の年月日条照合](data/research/chronologies/YOSHITSUNE_MUNEMORI_1185_PILOT.md)：『吾妻鏡』と『玉葉』紹介の屋島日程差
 
+- [屋島篇11人・史料監査の到達点](docs/YASHIMA_11_RESEARCH_GATE.md)：史実／軍記の区別、重大な論点、試作へ進むための停止基準
+- [屋島篇11人・33主張（CSV）](data/people/YASHIMA_MVP_CLAIMS.csv)：人物別の必要な3項目と出典・未確認状態
+
 ## 現在の状態
 
 **基礎設計・史料調査準備段階。アプリの実装・地理データの一括取得・動作確認は未着手です。**
