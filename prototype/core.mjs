@@ -59,6 +59,7 @@ export function createWorld(seed = 1185) {
       ...p, energy: 85, provisions: 72, money: 45, morale: 65,
       target: p.initialTarget, arrivals: 0, adviceUntil: 0,
       lastDecision: "初期配置：ゲーム上の仮定", lastScores: [],
+      visitedYashima: false, recentlyVisited: null, cooldownUntil: 0, clock: 0,
     }))
   };
 }
@@ -73,12 +74,16 @@ export function destinationScores(agent, gravity = 65) {
     const cost = distance(agent.x, agent.y, p) * 0.062;
     let base = 7;
     let why = "探索";
-    if (p.id === "yashima") { base = 16 + pull * 0.92; why = "歴史的引力"; }
+    if (p.id === "yashima") { base = 16 + pull * 0.92 - (agent.visitedYashima ? 80 : 0); why = "歴史的引力"; }
     if (p.id === "supply") { base = 12 + (100 - agent.provisions) * 1.15; why = "補給"; }
     if (p.id === "rest") { base = 10 + (100 - agent.energy) * 1.12; why = "疲労"; }
     if (p.id === "leisure") { base = 7 + agent.curiosity * 67 + (100 - agent.morale) * 0.16; why = "娯楽への関心"; }
     if (p.id === "sea") { base = 2; why = "海上（仮）"; }
     if (p.id === "awa") { base = 1; why = "移動"; }
+    if (agent.recentlyVisited === p.id && agent.cooldownUntil > agent.clock) base -= 85;
+    if (p.id === "supply" && agent.money < 9) base -= 120;
+    if (p.id === "rest" && agent.money < 6) base -= 120;
+    if (p.id === "leisure" && agent.money < 5) base -= 120;
     return { id: p.id, label: p.label, why, score: round(base - cost) };
   }).sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
 }
@@ -102,6 +107,8 @@ function chooseTarget(world, agent, gravity) {
 
 function arrive(world, agent, station) {
   agent.arrivals++;
+  agent.recentlyVisited = station.id;
+  agent.cooldownUntil = world.tick + 10;
   if (station.id === "supply") {
     if (agent.money >= 9) {
       agent.money -= 9;
@@ -124,6 +131,7 @@ function arrive(world, agent, station) {
     } else logEvent(world, "warning", agent.short + "は費用不足で娯楽施設を利用しなかった", agent.id);
   } else if (station.id === "yashima") {
     agent.morale = clamp(agent.morale + 9, 0, 100);
+    agent.visitedYashima = true;
     logEvent(world, "fate", agent.short + "が運命の場所へ接近した（史実の再現・イベント成立ではない）", agent.id);
   } else logEvent(world, "movement", agent.short + "が「" + station.label + "」へ到達", agent.id);
   agent.target = null; // Re-evaluate next tick, rather than staying permanently.
@@ -132,11 +140,12 @@ function arrive(world, agent, station) {
 export function stepWorld(world, gravity = 65) {
   world.tick++;
   for (const agent of world.agents) {
+    agent.clock = world.tick;
     agent.provisions = round(clamp(agent.provisions - 0.32, 0, 100));
     agent.energy = round(clamp(agent.energy - 0.45, 0, 100));
     if (agent.provisions === 0) agent.energy = round(clamp(agent.energy - 0.65, 0, 100));
     if (agent.energy < 12 || agent.provisions < 12) agent.morale = round(clamp(agent.morale - 0.3, 0, 100));
-    if ((!agent.target || world.tick % 10 === 1) && world.tick > agent.adviceUntil) {
+    if (!agent.target || (world.tick % 10 === 1 && world.tick > agent.adviceUntil)) {
       chooseTarget(world, agent, gravity);
     }
     const p = getStation(agent.target);
