@@ -18,6 +18,10 @@
 - [軍記本文の確認方針](docs/TEXT_VERIFICATION_POLICY.md)：作品・巻・章段の特定、公開原文と小学館版の照合の使い分け
 - [人物史料台帳・第1集](data/people/RESEARCH_LEDGER_001.md)：源義経・平宗盛・平知盛・佐藤嗣信・那須与一の主張別の根拠・確認状況
 
+- [人物調査の統御規則](docs/RESEARCH_GOVERNANCE.md)：120候補の調査深度・打切り条件・複数セッションの分担
+- [人物全体索引（CSV）](data/people/MASTER_INDEX.csv)：P0・P1・P2の優先配分、調査状態
+- [義経・宗盛の年月日条照合](data/research/chronologies/YOSHITSUNE_MUNEMORI_1185_PILOT.md)：『吾妻鏡』と『玉葉』紹介の屋島日程差
+
 ## 現在の状態
 
 **基礎設計・史料調査準備段階。アプリの実装・地理データの一括取得・動作確認は未着手です。**
