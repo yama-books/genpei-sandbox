@@ -64,3 +64,12 @@ Node.jsの標準テストランナーを使用（リポジトリのルートか�
 5. 介入の履歴を保持し、独立した二つの実行結果を比較する。
 
 先に研究対象を増やすのではなく、試作によって生じた不足項目だけ調査へ戻す。
+
+## ブラウザ自動検査（2026-10-18更新）
+
+Playwrightを使う`tests/headless-smoke.mjs`を追加し、GitHub-hosted Ubuntuにインストール済みのGoogle Chromeを使用したPC幅・スマホ相当幅のE2E検証を行いました。
+
+- GitHub Actions成功：https://github.com/yama-books/genpei-sandbox/actions/runs/39077201278
+- 確認済み：11人物・8史跡・33主張の読み込み、再生・停止、時間進行、引力、支援、保存・復帰、横スクロール超過、JavaScript例外。
+- **iPhone Safari実機ではない**。OpenPOI実通信も検証対象外。
+- GitHub Pagesの公開予定URLは2026-10-18に404を確認。設定・公開完了とは区別する。
