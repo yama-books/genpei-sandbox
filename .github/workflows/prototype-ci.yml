@@ -1,0 +1,42 @@
+name: Prototype integrity
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'prototype/**'
+      - 'tests/**'
+      - 'data/people/**'
+      - 'data/places/**'
+      - 'index.html'
+      - '.github/workflows/prototype-ci.yml'
+  pull_request:
+    paths:
+      - 'prototype/**'
+      - 'tests/**'
+      - 'data/people/**'
+      - 'data/places/**'
+      - 'index.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prototype:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check prototype/core.mjs
+          node --check prototype/app.mjs
+          node --check prototype/openpoi.mjs
+      - name: Prototype tests
+        run: node --test tests/prototype.test.mjs
