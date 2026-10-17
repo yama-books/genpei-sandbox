@@ -34,6 +34,12 @@
 - [史跡台帳JSON](data/places/YASHIMA_SITE_REGISTRY.json)：現地の遺構・伝承を分離し、精密座標がないものはnullのまま保持
 - [ブラウザ検証用の画面](tests/browser-smoke.html)：人物・史跡・操作・一時保存のスモークテスト（HTTP配信で開く）
 
+## GitHub Pagesで試す
+
+[GitHub Pagesの初回設定・iPhone/PC検証手順](docs/PAGES_AND_DEVICE_ACCEPTANCE_20261017.md) を参照してください。初回はリポジトリの **Settings → Pages → Deploy from a branch → main / (root)** を設定する必要があります。操作画面は、設定が有効になれば https://yama-books.github.io/genpei-sandbox/prototype/ で開ける構成です。**公開URLの実際の稼働は未確認です。**
+
+JavaScriptの構文とNode標準テストは [Actionsの初回実行](https://github.com/yama-books/genpei-sandbox/actions/runs/39030005537) で成功しています。
+
 ## 現在の状態
 
 **史料調査と独立した操作試作を開始しました。** [ブラウザ操作試作](prototype/) は人物CSVと小さな仮想行動エンジンを利用します。屋島の公的資料に基づく史跡8地点の参照表示とOpenPOIへの任意の読み取り検索コードは追加済みですが、実API通信は未検証です。実際の道路・施設を使った移動、史実イベント、部隊、永続セーブは未実装で、実機ブラウザ検証とGitHub Pages公開も未確認です。
