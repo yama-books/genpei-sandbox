@@ -84,3 +84,13 @@ GitHubの接続機能はファイル追加・更新が可能だが、Pagesの公
 **公開操作の成功を確認できたら、**実機で見つかった具体的なレイアウト／動作問題をまず修正する。次に、旧国名エンジンとのデータ契約を受けるための歴史地理レイヤーと、屋島史跡の位置精度の検証を進める。
 
 この段階で大規模な中世日本地図復元は始めない。松尾芭蕉アプリ側の共通歴史地理エンジンを待ち、独自に重複した基盤を作らない。
+
+## 6. 2026-10-18 追加検証と公開ブロッカー
+
+- 初回より検証範囲を拡大し、`tests/headless-smoke.mjs` を作成。PC幅（1280px）およびスマートフォン相当幅（390px）のChrome実ブラウザで画面操作を検証。
+- GitHub Actions： https://github.com/yama-books/genpei-sandbox/actions/runs/39077201278
+- **CI Success**：既存の単体テスト、JS構文検査、ブラウザの人物11人・史跡8地点表示、引力操作、時刻進行、支援、保存復帰、再生・停止、横スクロール超過、JS例外の検査が成功。
+- 外部のGitHub Pages URL `https://yama-books.github.io/genpei-sandbox/prototype/` は2026-10-18に独立したサイト取得で**HTTP 404 / There isn't a GitHub Pages site here**。つまりPages配信サイトは未作成（少なくとも当該時刻の取得では未存在）。
+- 接続済みGitHubアプリは**Pages設定の更新権限・操作APIを提供していない**。一度だけ所有者が `Settings → Pages → Deploy from a branch → main / (root) → Save` を設定する必要がある。
+- Pages公開後のURL確認、iPhone Safari等の実機操作、OpenPOI実API/CORS確認は引き続き未実施。
+- 自動ブラウザ成功は、実機の描画・ネットワーク条件・タップ操作の完全な保証ではない。これらを別の受入項目とする。
