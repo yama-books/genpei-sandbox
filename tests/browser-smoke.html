@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>源平異聞録 | Browser Smoke Test</title>
+<style>
+:root{font-family:system-ui,"Yu Gothic",sans-serif;color:#243b35;background:#eef2ec}
+body{margin:0 auto;max-width:1280px;padding:20px}
+h1{font-size:23px}p{font-size:13px;line-height:1.7}
+#results{padding:15px;background:white;border:1px solid #d4dfd4;border-radius:8px;display:grid;gap:7px}
+.result{padding:7px 12px;border-radius:6px;font-size:13px}
+.pass{background:#e7f4ea;color:#205b32}.fail{background:#fff0eb;color:#8e3924}
+iframe{width:100%;height:730px;margin-top:14px;border:1px solid #bdcbbd;border-radius:9px;background:#fff}
+</style>
+</head>
+<body>
+<h1>GENPEI SANDBOX / Browser Smoke Test</h1>
+<p>このページは <code>/tests/browser-smoke.html</code> からHTTPで開き、同一オリジンの試作品をiframe内で検証します。人物CSVや史跡JSONの読込、基本UI操作、保存・復帰まで検査します。OpenPOIへの外部通信は発生させません。実際の地理・歴史の正しさや実API接続は検証対象外です。</p>
+<div id="results" role="status" aria-live="polite">画面の読み込みとデータ取得を確認しています…</div>
+<iframe id="preview" title="屋島篇ブラウザ試作" src="../prototype/"></iframe>
+<script>
+const output=document.querySelector("#results");
+let failures=0;
+function report(ok,title,explain=""){
+ const row=document.createElement("div");
+ row.className="result "+(ok?"pass":"fail");
+ row.textContent=(ok?"✓ ":"× ")+title+(explain?"（"+explain+"）":"");
+ output.append(row);
+ if(!ok) failures++;
+}
+function delay(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+async function until(fn, maxMs=8500){
+ const start=Date.now();
+ while(Date.now()-start<maxMs){if(fn())return true;await delay(150);}
+ return false;
+}
+document.querySelector("#preview").addEventListener("load",async()=>{
+ output.replaceChildren();
+ const frame=document.querySelector("#preview");
+ const doc=frame.contentDocument;
+ if(!doc){report(false,"同一オリジンでiframeにアクセスできること");return;}
+ const q=id=>doc.querySelector(id);
+ const loaded=await until(()=>q("#people-list")?.querySelectorAll(".person-item").length===11 && q("#heritage-sites")?.children.length===8);
+ report(loaded,"人物11件・史跡8件のデータ取得と描画");
+ if(!loaded){report(false,"ブラウザ上の残りのUI操作","前提データを読めません");return;}
+ report(q("#claims")?.querySelectorAll(".claim-card").length===3,"初期人物の主張3件を表示");
+ report(q("#poi-status")?.textContent.includes("未取得"),"外部APIが勝手に起動しない");
+ q("#step").click();
+ report(q("#clock").textContent.includes("1 刻"),"1刻進める");
+ q("#gravity").value="90";
+ q("#gravity").dispatchEvent(new Event("input",{bubbles:true}));
+ report(q("#gravity-value").textContent==="90","歴史的引力の変更を反映");
+ q("#save").click();
+ q("#step").click();
+ report(q("#clock").textContent.includes("2 刻"),"一時保存後の時間進行");
+ q("#restore").click();
+ report(q("#clock").textContent.includes("1 刻"),"一時保存地点へ復帰");
+ const next=q("#people-list .person-item");
+ next.click();
+ report(q("#person-title").textContent===next.querySelector(".person-name").textContent,"人物カードの切替");
+ report(q("#claims").querySelectorAll(".claim-card").length===3,"人物ごとの主張を差し替える");
+ const summary=document.createElement("strong");
+ summary.textContent=failures===0?"ブラウザ基本操作：全項目PASS（実API・地図接続は別検証）":failures+"件の失敗があります";
+ output.prepend(summary);
+},{once:true});
+</script>
+</body>
+</html>
