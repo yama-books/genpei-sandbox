@@ -5,6 +5,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { resolve, dirname } from "node:path";
 import { createWorld, stepWorld, snapshot, intervene, destinationScores, fatePull, STATIONS } from "../prototype/core.mjs";
+import { makePoiSampleUrl, normalizePoiResults, classifyPoi, loadPoiSample, YASHIMA_SAMPLE_CENTER } from "../prototype/openpoi.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const read = async path => readFile(resolve(here, "..", path), "utf8");
@@ -76,4 +77,57 @@ test("スナップショットは後続の操作で変化しない", () => {
   const control = snapshot(saved);
   for (let i = 0; i < 45; i++) { stepWorld(restarted, 65); stepWorld(control, 65); }
   assert.deepEqual(restarted, control);
+});
+
+
+test("屋島の現在の史跡8件は出典付きで、伝承座標を捏造していない", async () => {
+  const data = JSON.parse(await read("data/places/YASHIMA_SITE_REGISTRY.json"));
+  assert.equal(data.sites.length, 8);
+  assert.equal(new Set(data.sites.map(s=>s.site_id)).size, 8);
+  assert.ok(data.sites.every(s => s.source_urls?.length >= 1));
+  assert.ok(data.sites.every(s => s.source_urls.every(url => url.startsWith("https://"))));
+  const geocoded = data.sites.filter(s => s.location.lat !== null);
+  assert.equal(geocoded.length, 1);
+  assert.equal(geocoded[0].location.precision, "area_representative_not_event_point");
+  assert.ok(data.sites.some(s=>s.name==="佐藤継信の墓" && s.notes.includes("移設")));
+});
+
+test("OpenPOIの中心指定は経度・緯度順、半径と取得数に制限がある", () => {
+  const url = new URL(makePoiSampleUrl());
+  assert.equal(url.hostname, "api.openpoiapi.com");
+  assert.equal(url.searchParams.get("center"), "134.1012,34.3566");
+  assert.equal(url.searchParams.get("radius"), "1200");
+  assert.equal(url.searchParams.get("limit"), "50");
+  assert.equal(classifyPoi("unknown"), "用途未分類（分類未確認）");
+});
+
+test("OpenPOIで座標異常・範囲外を除外し、ライセンスを保持する", () => {
+  const json = {results:[
+    {name:"試験飲食店",lat:34.357,lng:134.101,category:"restaurant",source:"fixture",licenses:["Apache-2.0"],attributions:["Test source"]},
+    {name:"未分類の候補",lat:34.3572,lng:134.102,category:"unknown",source:"fixture"},
+    {name:"遠隔の誤座標",lat:35.357,lng:135.101,category:"tourism"},
+    {name:"座標が不正",lat:"bad",lng:134.101,category:"station"},
+  ]};
+  const result=normalizePoiResults(json);
+  assert.equal(result.responseCount,4);
+  assert.equal(result.returned,2);
+  assert.equal(result.invalid,1);
+  assert.equal(result.outOfRange,1);
+  assert.equal(result.unknown,1);
+  assert.deepEqual(result.records[0].licenses,["Apache-2.0"]);
+  assert.deepEqual(result.records[0].attributions,["Test source"]);
+  assert.equal(result.saturated,false);
+});
+
+test("OpenPOIの通信は明示的に呼ばれるまで実行されない", async () => {
+  let calls=0;
+  const mockFetch=async(url) => {
+    calls++;
+    assert.ok(String(url).includes("center=134.1012%2C34.3566"));
+    return {ok:true, json:async()=>({count:0,results:[]})};
+  };
+  assert.equal(calls,0);
+  const sample=await loadPoiSample(mockFetch);
+  assert.equal(calls,1);
+  assert.equal(sample.returned,0);
 });
