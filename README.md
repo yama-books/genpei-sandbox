@@ -30,6 +30,10 @@
 
 - [試作引継ぎチェックポイント](docs/PROTOTYPE_CHECKPOINT_2026-10-17.md)：実装・検証した範囲と、未実施の確認事項
 
+- [屋島史跡・現代施設取得の最小実証](docs/YASHIMA_SITE_POI_PILOT.md)：市の資料を根拠とする8地点、OpenPOIの任意取得と未検証事項
+- [史跡台帳JSON](data/places/YASHIMA_SITE_REGISTRY.json)：現地の遺構・伝承を分離し、精密座標がないものはnullのまま保持
+- [ブラウザ検証用の画面](tests/browser-smoke.html)：人物・史跡・操作・一時保存のスモークテスト（HTTP配信で開く）
+
 ## 現在の状態
 
 **史料調査と独立した操作試作を開始しました。** [ブラウザ操作試作](prototype/) は人物CSVと小さな仮想行動エンジンを利用します。実際の地理、OpenPOI、史実イベント、部隊、永続セーブは未実装で、実機ブラウザ検証とGitHub Pages公開の確認は未実施です。
