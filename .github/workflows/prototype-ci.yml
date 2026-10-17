@@ -25,7 +25,7 @@ permissions:
 jobs:
   prototype:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,3 +40,12 @@ jobs:
           node --check prototype/openpoi.mjs
       - name: Prototype tests
         run: node --test tests/prototype.test.mjs
+      - name: Install lightweight browser driver
+        run: npm install --no-save --no-audit --no-fund playwright@1.56.1
+      - name: Serve site locally
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/genpei-http.log 2>&1 &
+          sleep 1
+          curl --fail --silent --show-error http://127.0.0.1:8765/prototype/ > /dev/null
+      - name: Headless desktop and mobile-width browser checks
+        run: node tests/headless-smoke.mjs
