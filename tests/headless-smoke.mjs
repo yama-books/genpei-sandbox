@@ -8,7 +8,7 @@ import { chromium } from "playwright";
 
 const URL = process.env.TEST_BASE_URL || "http://127.0.0.1:8765";
 const failures = [];
-const browser = await chromium.launch({ headless: true, args: ["--no-sandbox"] });
+const browser = await chromium.launch({ headless: true, channel: "chrome", args: ["--no-sandbox"] });
 try {
   for (const viewport of [{ width: 1280, height: 850 }, { width: 390, height: 844 }]) {
     const page = await browser.newPage({ viewport, reducedMotion: "reduce" });
