@@ -38,7 +38,7 @@
 
 [GitHub Pagesの初回設定・iPhone/PC検証手順](docs/PAGES_AND_DEVICE_ACCEPTANCE_20261017.md) を参照してください。初回はリポジトリの **Settings → Pages → Deploy from a branch → main / (root)** を設定する必要があります。操作画面は、設定が有効になれば https://yama-books.github.io/genpei-sandbox/prototype/ で開ける構成です。**公開URLの実際の稼働は未確認です。**
 
-JavaScriptの構文とNode標準テストは [Actionsの初回実行](https://github.com/yama-books/genpei-sandbox/actions/runs/39030005537) で成功しています。
+JavaScriptの構文とNode標準テストに加え、ChromeでのPC幅（1280px）・スマートフォン相当幅（390px）の自動ブラウザ操作も [Actionsの検証](https://github.com/yama-books/genpei-sandbox/actions/runs/39077201278) で成功しています。なお2026-10-18時点でPagesサイトは404のため、所有者によるPages公開元の設定が必要です。iPhone Safari実機は未検証です。
 
 ## 現在の状態
 
