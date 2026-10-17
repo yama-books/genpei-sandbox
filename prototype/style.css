@@ -75,6 +75,19 @@ input[type=range]{accent-color:#3f806e;cursor:pointer;width:126px}
 .checkpoint{margin:12px 15px 0;border-top:1px solid #e9ece7;padding-top:12px;display:flex;gap:7px;flex-wrap:wrap}
 .checkpoint .button{flex:1 1 42%}.checkpoint .helper{margin:0;flex:1 1 100%}
 .footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#8a9790;margin-top:15px;font-size:10px;letter-spacing:.02em}
+
+.heritage-section,.poi-section{border-top:1px solid #e4eae3;padding:13px 15px 11px}
+.heritage-section .helper,.poi-section .helper{margin:6px 0 8px}
+.heritage-list{display:flex;gap:8px;overflow-x:auto;padding:1px 0 7px;scroll-snap-type:x proximity}
+.heritage-card{flex:0 0 224px;max-width:85%;border:1px solid #e1e7dc;background:#fffef9;border-radius:7px;padding:9px 10px;scroll-snap-align:start}
+.heritage-card-head,.poi-top{display:flex;justify-content:space-between;align-items:start;gap:6px;font-size:11px;color:#3c524a}
+.heritage-card p,.poi-card p{font-size:10px;color:#65786d;line-height:1.5;margin:5px 0}
+.heritage-source{display:inline-block;font-size:10px;color:#57796b;margin-top:4px}
+.poi-heading{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.poi-list{display:flex;gap:8px;overflow-x:auto;max-width:100%;padding:0 0 7px}
+.poi-card{flex:0 0 218px;max-width:85%;background:#eaf1eb;border:1px solid #dfe8dd;border-radius:6px;padding:9px}
+.poi-credit{display:inline-block;color:#567970;font-size:10px;margin-top:3px}
+
 @media(max-width:1260px){.workspace{grid-template-columns:235px minmax(340px,1fr)}.detail{grid-column:1/-1;display:block}.people-list{max-height:720px}}
 @media(max-width:780px){.shell{padding:12px}.masthead{flex-wrap:wrap}.head-links{width:100%;gap:12px}.controls{padding:10px}.workspace{grid-template-columns:1fr}.world{grid-row:1}.roster{grid-row:2}.detail{grid-column:1;grid-row:3;display:block}.people-list{max-height:260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.person-item{border:1px solid #e5eae5}.stage{aspect-ratio:1000/640}.world-content{padding:0 7px 10px}.event-section{padding:12px}.notice{font-size:10px}.panel-heading{padding:13px}.gravity-group{width:100%}.gravity-group input{flex:1}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
