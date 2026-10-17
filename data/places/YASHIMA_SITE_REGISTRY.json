@@ -1,0 +1,198 @@
+{
+  "schema_version": "0.1",
+  "generated_on": "2026-10-17",
+  "scope": "Takamatsu Yashima / Mure heritage site candidates",
+  "usage_note": "The listing documents present-day heritage places. The 1185 historical event is not spatially proven by a modern marker. Null coordinates mean not geocoded.",
+  "coordinate_crs": "WGS84",
+  "source_status": "municipal_heritage_pages_and_official_tourism_plus_nara_bunkazai_center",
+  "sites": [
+    {
+      "site_id": "YS001",
+      "name": "屋島（国指定史跡）",
+      "current_site_kind": "designated_historic_area",
+      "designation": "国指定史跡",
+      "modern_locality": "香川県高松市屋島東町・屋島中町・屋島西町・高松町",
+      "location": {
+        "lat": 34.3566,
+        "lng": 134.1012,
+        "precision": "area_representative_not_event_point",
+        "coordinate_source": "https://heritagemap.nabunken.go.jp/statistic/36339-%E5%B1%8B%E5%B3%B6.html"
+      },
+      "narrative_association": "1185年屋島合戦に関わる広域の歴史的舞台",
+      "historical_truth": "historical_battle_region",
+      "event_link": "yashima_battle",
+      "person_ids": [],
+      "source_urls": [
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kosodate/bunka/bunkazai/shiteibunkazai/shiseki/yashima.html",
+        "https://heritagemap.nabunken.go.jp/statistic/36339-%E5%B1%8B%E5%B3%B6.html"
+      ],
+      "notes": "座標は広い史跡屋島の代表点。合戦位置や屋島上の特定地点を示さない。"
+    },
+    {
+      "site_id": "YS002",
+      "name": "祈り岩",
+      "current_site_kind": "registered_heritage_monument",
+      "designation": "高松市登録史跡",
+      "modern_locality": "高松市牟礼町牟礼",
+      "location": {
+        "lat": null,
+        "lng": null,
+        "precision": "locality_only",
+        "coordinate_source": null
+      },
+      "narrative_association": "那須与一が扇を射る前に祈念したとされる場所",
+      "historical_truth": "local_tradition",
+      "event_link": "fan_target",
+      "person_ids": [
+        "C115"
+      ],
+      "source_urls": [
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kosodate/bunka/bunkazai/shiteibunkazai/shiseki/inoriiwa.html"
+      ],
+      "notes": "現存する登録史跡と1185年の出来事の実証は別。現在の岩の正確な座標は未採録。"
+    },
+    {
+      "site_id": "YS003",
+      "name": "駒立岩",
+      "current_site_kind": "registered_heritage_monument",
+      "designation": "高松市登録史跡",
+      "modern_locality": "高松市牟礼町牟礼",
+      "location": {
+        "lat": null,
+        "lng": null,
+        "precision": "locality_only",
+        "coordinate_source": null
+      },
+      "narrative_association": "那須与一が馬を止めて扇を射たとされる場所",
+      "historical_truth": "local_tradition",
+      "event_link": "fan_target",
+      "person_ids": [
+        "C115"
+      ],
+      "source_urls": [
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kosodate/bunka/bunkazai/shiteibunkazai/shiseki/komadateiwa.html"
+      ],
+      "notes": "高松市資料では祈り岩の北西数十歩の川中と説明。距離や方位から座標を推測していない。"
+    },
+    {
+      "site_id": "YS004",
+      "name": "射落畠",
+      "current_site_kind": "registered_heritage_monument",
+      "designation": "高松市登録史跡",
+      "modern_locality": "高松市牟礼町牟礼",
+      "location": {
+        "lat": null,
+        "lng": null,
+        "precision": "locality_only",
+        "coordinate_source": null
+      },
+      "narrative_association": "佐藤継信が義経をかばって射落とされたと伝わる場所",
+      "historical_truth": "local_tradition",
+      "event_link": "tsugunobu_sacrifice",
+      "person_ids": [
+        "C065",
+        "C036",
+        "C021"
+      ],
+      "source_urls": [
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kosodate/bunka/bunkazai/shiteibunkazai/shiseki/iochibata.html"
+      ],
+      "notes": "昭和6年に碑などが整備された現在の伝承地であり、戦闘時の位置を直接測量した記録ではない。"
+    },
+    {
+      "site_id": "YS005",
+      "name": "佐藤継信の墓",
+      "current_site_kind": "registered_heritage_gravesite",
+      "designation": "高松市登録史跡",
+      "modern_locality": "高松市牟礼町牟礼",
+      "location": {
+        "lat": null,
+        "lng": null,
+        "precision": "locality_only",
+        "coordinate_source": null
+      },
+      "narrative_association": "継信を記念・供養する墓所",
+      "historical_truth": "memorial_site_not_battle_point",
+      "event_link": "tsugunobu_death_commemoration",
+      "person_ids": [
+        "C065"
+      ],
+      "source_urls": [
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kosodate/bunka/bunkazai/shiteibunkazai/shiseki/sato_haka.html"
+      ],
+      "notes": "高松市資料によれば1645年の池造成時に現在地へ移設。1643年の標石と1931年の改修がある。現地点を1185年の戦死地点として流用しない。"
+    },
+    {
+      "site_id": "YS006",
+      "name": "六萬寺 附 杉の井",
+      "current_site_kind": "registered_heritage_religious_site",
+      "designation": "高松市登録史跡",
+      "modern_locality": "高松市牟礼町牟礼",
+      "location": {
+        "lat": null,
+        "lng": null,
+        "precision": "locality_only",
+        "coordinate_source": null
+      },
+      "narrative_association": "1183年に安徳天皇が屋島行宮完成前の一時的な行在所としたと伝わる",
+      "historical_truth": "local_tradition",
+      "event_link": "antoku_temporary_lodging",
+      "person_ids": [
+        "C078",
+        "C026"
+      ],
+      "source_urls": [
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kosodate/bunka/bunkazai/shiteibunkazai/shiseki/rokumanji.html"
+      ],
+      "notes": "1583年の焼失・1678年の再興伝承あり。現在境内と1183年の行在所は地理・史料上の同一性を未監査。"
+    },
+    {
+      "site_id": "YS007",
+      "name": "安徳天皇社（安徳社）",
+      "current_site_kind": "tourism_heritage_association",
+      "designation": null,
+      "modern_locality": "香川県高松市屋島周辺（厳密所在地未照合）",
+      "location": {
+        "lat": null,
+        "lng": null,
+        "precision": "locality_only",
+        "coordinate_source": null
+      },
+      "narrative_association": "屋島で安徳天皇を祀り、かつて行宮があったとされる地点",
+      "historical_truth": "local_tradition",
+      "event_link": "antoku_yashima_court",
+      "person_ids": [
+        "C078",
+        "C026",
+        "C005"
+      ],
+      "source_urls": [
+        "https://www.yashima-navi.jp/jp/history/entry-154.html"
+      ],
+      "notes": "公式観光資料に掲載。市登録史跡としての指定をこの調査で確認したわけではない。"
+    },
+    {
+      "site_id": "YS008",
+      "name": "義経弓流し跡",
+      "current_site_kind": "tourism_heritage_association",
+      "designation": null,
+      "modern_locality": "香川県高松市屋島周辺（厳密所在地未照合）",
+      "location": {
+        "lat": null,
+        "lng": null,
+        "precision": "locality_only",
+        "coordinate_source": null
+      },
+      "narrative_association": "義経が落とした弓を引き上げたという軍記・伝承の場所",
+      "historical_truth": "gunki_and_local_tradition",
+      "event_link": "yoshitsune_bow_retrieval",
+      "person_ids": [
+        "C036"
+      ],
+      "source_urls": [
+        "https://www.yashima-navi.jp/jp/history/entry-154.html"
+      ],
+      "notes": "観光解説中の伝承地。『平家物語』巻十一「弓流」との位置・本文の対応は後続監査。"
+    }
+  ]
+}
