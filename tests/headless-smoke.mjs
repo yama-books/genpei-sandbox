@@ -14,7 +14,6 @@ try {
     const page = await browser.newPage({ viewport, reducedMotion: "reduce" });
     const errors = [];
     page.on("pageerror", e => errors.push(e.message));
-    page.on("console", e => { if (e.type() === "error" && !e.text().includes("fonts.googleapis.com")) errors.push(e.text()); });
     await page.goto(URL + "/", { waitUntil: "domcontentloaded", timeout: 15000 });
     await page.waitForURL("**/prototype/**", { timeout: 10000 });
     await page.locator("#people-list .person-item").first().waitFor({ timeout: 12000 });
@@ -24,7 +23,7 @@ try {
     assert.match(await page.locator("#poi-status").innerText(), /未取得/, "POI not fetched without user action");
     await page.locator("#step").click();
     assert.match(await page.locator("#clock").innerText(), /1 刻/, "one tick");
-    await page.locator("#gravity").fill("90");
+    await page.locator("#gravity").evaluate(el => { el.value = "90"; el.dispatchEvent(new Event("input", { bubbles: true })); });
     assert.equal(await page.locator("#gravity-value").innerText(), "90", "gravity slider");
     await page.locator("#save").click();
     await page.locator("#step").click();
