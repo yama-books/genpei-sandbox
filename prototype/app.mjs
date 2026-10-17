@@ -1,5 +1,7 @@
 import { STATIONS, STATION_BY_ID, PERSONAS, createWorld, stepWorld, intervene, snapshot, fatePull, destinationScores } from "./core.mjs";
 
+import { loadPoiSample } from "./openpoi.mjs";
+
 const q = selector => document.querySelector(selector);
 const svgNS = "http://www.w3.org/2000/svg";
 const sourceLinks = {
@@ -69,6 +71,77 @@ export function parseCSV(text) {
   if (rows.length < 2) throw new Error("人物資料の行数が不足しています");
   const [head, ...data] = rows;
   return data.map(cells => Object.fromEntries(head.map((name, i) => [name, cells[i] ?? ""])));
+}
+
+
+function renderHeritageSites(sites) {
+  const root = q("#heritage-sites"); root.replaceChildren();
+  for (const site of sites) {
+    const card = element("div", "heritage-card");
+    const header = element("div", "heritage-card-head");
+    header.append(element("strong", "", site.name), element("span", "person-tag", site.designation || "地域の伝承地"));
+    card.append(header);
+    const history = element("p", "", site.narrative_association);
+    card.append(history);
+    const prec = site.location?.precision === "area_representative_not_event_point"
+      ? "屋島全体の代表点。事件が起きた位置ではありません"
+      : "史跡・伝承地の正確な座標は未照合";
+    card.append(element("div", "claim-note", prec));
+    const source = site.source_urls?.[0];
+    if (typeof source === "string" && source.startsWith("https://")) {
+      const link = element("a", "heritage-source", "根拠の資料を見る ↗");
+      link.href = source; link.target = "_blank"; link.rel = "noopener noreferrer";
+      card.append(link);
+    }
+    root.append(card);
+  }
+}
+
+async function loadHeritageSites() {
+  try {
+    const response = await fetch("../data/places/YASHIMA_SITE_REGISTRY.json", {cache:"no-cache"});
+    if (!response.ok) throw new Error("史跡台帳を取得できません");
+    const data = await response.json();
+    if (!Array.isArray(data.sites) || !data.sites.length) throw new Error("史跡台帳の形式が異なります");
+    renderHeritageSites(data.sites);
+    const precise = data.sites.filter(s => s.location?.precision === "verified_site_point").length;
+    q("#heritage-status").textContent = data.sites.length + "地点登録。史跡単位の実測座標は" + precise + "件。現在地と伝承は分けて表示。";
+  } catch (error) {
+    q("#heritage-status").classList.add("error");
+    q("#heritage-status").textContent = "史跡台帳の読み込みに失敗：" + error.message;
+  }
+}
+
+async function fetchModernPoi() {
+  const button = q("#fetch-poi");
+  button.disabled = true;
+  q("#poi-status").classList.remove("error");
+  q("#poi-status").textContent = "OpenPOIから読み込み中…（ブラウザから直接通信）";
+  try {
+    const sample = await loadPoiSample();
+    const root = q("#poi-list"); root.replaceChildren();
+    q("#poi-status").textContent =
+      "返却 " + sample.responseCount + "件／座標等の検査後 " + sample.returned +
+      "件（分類unknown " + sample.unknown + "件、座標不正 " + sample.invalid +
+      "件、範囲外 " + sample.outOfRange + "件）。" +
+      (sample.saturated ? "上限50件に達しています。地域内の全施設ではありません。" : "施設網羅性は保証されません。");
+    for (const item of sample.records.slice(0, 8)) {
+      const card = element("div", "poi-card");
+      const top = element("div", "poi-top");
+      top.append(element("strong", "", item.name), element("span", "person-tag", item.distanceMeters + "m"));
+      card.append(top);
+      card.append(element("p", "", item.gameCategory + " ／ " + (item.address || "住所情報なし")));
+      // Source licenses are retained in memory only; no raw API data is committed.
+      card.title = "source: " + item.source + " / licenses: " + item.licenses.join(",") + " / attributions: " + item.attributions.join("; ");
+      root.append(card);
+    }
+    if (sample.records.length === 0) root.append(element("p", "helper", "条件に合う施設がありません。"));
+  } catch (error) {
+    q("#poi-status").classList.add("error");
+    q("#poi-status").textContent = "施設データを取得できません：" + error.message + "。APIの状態・CORS・通信環境を確認してください。";
+  } finally {
+    button.disabled = false;
+  }
 }
 
 function renderStations() {
@@ -282,4 +355,6 @@ q("#restore").addEventListener("click", () => {
   render();
 });
 document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); });
+q("#fetch-poi").addEventListener("click", fetchModernPoi);
 await load();
+await loadHeritageSites();
