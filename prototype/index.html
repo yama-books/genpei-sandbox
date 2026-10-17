@@ -97,6 +97,22 @@
           </svg>
           <div class="map-legend"><span><i class="legend-dot historic"></i>運命ノード</span><span><i class="legend-dot facility"></i>仮想施設</span><span><i class="legend-dot agent"></i>人物エージェント</span></div>
         </div>
+        <section class="heritage-section" aria-labelledby="heritage-heading">
+          <div class="section-head"><div class="eyebrow">HISTORICAL PLACES / MUNICIPAL SOURCES</div><h3 id="heritage-heading">屋島の史跡と伝承地</h3></div>
+          <p class="helper">現存する記念物と1185年の事件の実証は別です。正確な座標が未確認の史跡は、模式図に配置しません。</p>
+          <div id="heritage-status" class="load-status" role="status">高松市の史跡台帳を読み込み中…</div>
+          <div id="heritage-sites" class="heritage-list"></div>
+        </section>
+        <section class="poi-section" aria-labelledby="poi-heading">
+          <div class="poi-heading">
+            <div><div class="eyebrow">MODERN PLACES / OPENPOI · OPTIONAL</div><h3 id="poi-heading">現代施設のサンプル調査</h3></div>
+            <button type="button" id="fetch-poi" class="button">周辺施設を取得</button>
+          </div>
+          <p class="helper">実在する屋島史跡の代表点から1.2km以内を試験検索。施設一覧は参照専用で、人物の移動・資源には影響しません。API通信はボタンを押したときだけ行います。</p>
+          <div id="poi-status" class="load-status" role="status">未取得。現代施設データはリポジトリへ保存しません。</div>
+          <div id="poi-list" class="poi-list"></div>
+          <a class="poi-credit" href="https://openpoiapi.com/attribution.html" target="_blank" rel="noopener noreferrer">施設情報の出典・ライセンス：OpenPOI API ↗</a>
+        </section>
         <div class="event-section">
           <div class="section-head"><div class="eyebrow">EVENT STREAM / SIMULATION</div><h3>観察日誌</h3></div>
           <div class="events" id="events" role="log" aria-label="シミュレーション行動記録"></div>
