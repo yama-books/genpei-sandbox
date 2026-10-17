@@ -51,3 +51,16 @@ GitHubのmainに以下を保存した。
 - OpenPOIデータの大規模取得と公開、鉄道ネットワークは未着手。
 - Web公開は未確認。GitHub上にファイルがあることと、GitHub Pagesでプレイできることは別。
 - P0史料監査、P1正式な人物エンジン、P2イベントエンジンは**すべて未達**。今回の動く試作は一部機構の技術検証である。
+
+## 追記：屋島史跡・実POI読取の段階（同日）
+
+- `data/places/YASHIMA_SITE_REGISTRY.json`：高松市文化財資料などに基づく8地点を登録。正確な座標のない7地点はnull。屋島全体の代表点は広域の目安であって屋島合戦の射手位置ではない。
+- `prototype/openpoi.mjs`：OpenPOIの`/v1/search`に対する小範囲・上限50件の任意取得、カテゴリの保留、座標検査、`licenses/attributions`保持を実装。
+- `prototype/index.html`, `prototype/app.mjs`, `prototype/style.css`：史跡の根拠リンクと、現代施設の独立した参照専用パネルを追加。施設を仮想人物の行動に適用する処理はまだない。
+- `tests/prototype.test.mjs`：8史跡・OpenPOI条件と異常座標のテストを追加。
+- `tests/browser-smoke.html`：HTTP配信時に11人・8史跡・各3主張、操作、保存復帰をブラウザから試せる検査画面を追加。
+- `docs/YASHIMA_SITE_POI_PILOT.md`：現在の史跡と軍記・伝承の叙述を分離して、座標確認と権利監査の保留を記録。
+- JavaScript単体ロジックを独立環境で検査し、同一シードの決定論的再現、500刻以内の資源非負、POIの不正／遠隔座標排除、ライセンス保持を確認。
+- **外部APIの実通信、Nodeテストランナーの正式実行、ブラウザ上の画面・ボタン操作、iPhone表示・GitHub Pages公開は未検証。** Operaブラウザ連携は未接続。実通信の成果を装ってはならない。
+- 次の最低限の作業順：①`node --test tests/prototype.test.mjs`とHTTPから`/tests/browser-smoke.html`を開いて確認、②OpenPOI取得ボタンを使ったサンプル観測、③7史跡の現代座標を個別に出典付きで確認、④交通ネットワークを別途整備して実施設をゲーム効果に接続。
+- 120人の全員分を深掘りする研究には戻らない。史料の不足を発見したときだけ小さな監査タスクを発行する。
