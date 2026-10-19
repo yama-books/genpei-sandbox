@@ -1,4 +1,6 @@
-// Genpei Sandbox / PROTOTYPE v0.1
+import { newFateState, advanceFate, adviseParley } from "./fate.mjs";
+
+// Genpei Sandbox / PROTOTYPE v0.2
 // All values and locations below are hypothetical game mechanics,
 // NOT historical reconstructions or measured geographical coordinates.
 
@@ -51,6 +53,7 @@ export function createWorld(seed = 1185) {
     rng: intSeed,
     tick: 0,
     interventionBudget: 3,
+    fate: newFateState(),
     events: [{
       tick: 0, kind: "system",
       text: "架空の地理・施設で観察を開始しました。人物の性格や初期位置はすべてゲーム上の仮定です。"
@@ -59,7 +62,7 @@ export function createWorld(seed = 1185) {
       ...p, energy: 85, provisions: 72, money: 45, morale: 65,
       target: p.initialTarget, arrivals: 0, adviceUntil: 0,
       lastDecision: "初期配置：ゲーム上の仮定", lastScores: [],
-      visitedYashima: false, recentlyVisited: null, cooldownUntil: 0, clock: 0,
+      visitedYashima: false, arrivedAtYashimaTick: null, recentlyVisited: null, cooldownUntil: 0, clock: 0,
     }))
   };
 }
@@ -132,6 +135,7 @@ function arrive(world, agent, station) {
   } else if (station.id === "yashima") {
     agent.morale = clamp(agent.morale + 9, 0, 100);
     agent.visitedYashima = true;
+    if(agent.arrivedAtYashimaTick===null) agent.arrivedAtYashimaTick=world.tick;
     logEvent(world, "fate", agent.short + "が運命の場所へ接近した（史実の再現・イベント成立ではない）", agent.id);
   } else logEvent(world, "movement", agent.short + "が「" + station.label + "」へ到達", agent.id);
   agent.target = null; // Re-evaluate next tick, rather than staying permanently.
@@ -159,12 +163,14 @@ export function stepWorld(world, gravity = 65) {
       agent.y = round(agent.y + ((p.y - agent.y) / d) * step);
     }
   }
+  advanceFate(world, gravity, logEvent, rngNext);
   return world;
 }
 
 export function intervene(world, id, action, gravity = 65) {
   const a = world.agents.find(p => p.id === id);
-  if (!a || !["advise", "support"].includes(action)) return { ok: false, reason: "対象外" };
+  if (!a || !["advise", "support", "mediate"].includes(action)) return { ok: false, reason: "対象外" };
+  if (action === "mediate") return adviseParley(world, a, rngNext, logEvent);
   if (world.interventionBudget <= 0) return { ok: false, reason: "介入可能回数がありません" };
   world.interventionBudget--;
   if (action === "support") {
