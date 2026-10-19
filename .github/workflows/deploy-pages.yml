@@ -1,0 +1,65 @@
+name: Deploy Genpei Sandbox to Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '.nojekyll'
+      - 'prototype/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'tests/browser-smoke.html'
+      - '.github/workflows/deploy-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: genpei-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify prototype before publishing
+        run: |
+          node --check prototype/core.mjs
+          node --check prototype/app.mjs
+          node --check prototype/openpoi.mjs
+          node --test tests/prototype.test.mjs
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p dist/tests
+          cp index.html .nojekyll dist/
+          cp -R prototype data docs dist/
+          cp tests/browser-smoke.html dist/tests/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
