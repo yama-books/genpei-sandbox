@@ -162,8 +162,11 @@ async function fetchModernPoi() {
       "件／行動候補 "+usable.length+"件（用途未分類 "+sample.unknown+"件、不正座標 "+sample.invalid+
       "件、範囲外 "+sample.outOfRange+"件）。"+
       (sample.saturated?"検索上限に達しているため全施設ではありません。":"施設の網羅性・営業状況は保証されません。");
-    const adoptedNames=new Set(usable.map(p=>p.label));
-    for(const p of sample.records.slice(0,15)) {
+    const poiKey=p=>p.name+"|"+p.lat.toFixed(5)+"|"+p.lng.toFixed(5);
+    const adoptedKeys=new Set(usable.map(p=>p.label+"|"+p.modernLocation.lat.toFixed(5)+"|"+p.modernLocation.lng.toFixed(5)));
+    const featured=sample.records.filter(p=>adoptedKeys.has(poiKey(p)));
+    const extras=sample.records.filter(p=>!adoptedKeys.has(poiKey(p))).slice(0,4);
+    for(const p of [...featured,...extras]) {
       const card=element("div","poi-card");
       const top=element("div","poi-top");
       top.append(element("strong","",p.name),element("span","person-tag",p.distanceMeters+"m"));
@@ -172,7 +175,8 @@ async function fetchModernPoi() {
       const label={meal:"食事候補",supplies:"食料調達候補",rest:"休息候補",visit:"見物候補"}[action]||"用途未分類・参照のみ";
       card.append(element("p","",label+" ／ "+(p.address||"住所情報なし")));
       card.append(element("p","poi-source","出典："+p.source+" ／ "+p.licenses.join(", ")));
-      if(adoptedNames.has(p.name)) card.append(element("span","person-tag","行動候補"));
+      card.append(element("p","poi-source","帰属："+p.attributions.join("; ")));
+      if(adoptedKeys.has(poiKey(p))) card.append(element("span","person-tag","行動候補"));
       list.append(card);
     }
     if(sample.records.length===0) list.append(element("p","helper","近くの施設が取得できませんでした。"));
