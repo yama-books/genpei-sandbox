@@ -9,7 +9,7 @@ on:
       - 'prototype/**'
       - 'data/**'
       - 'docs/**'
-      - 'tests/browser-smoke.html'
+      - 'tests/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
@@ -46,7 +46,9 @@ jobs:
           node --check prototype/core.mjs
           node --check prototype/app.mjs
           node --check prototype/openpoi.mjs
-          node --test tests/prototype.test.mjs
+          node --check prototype/fate.mjs
+          node --check prototype/geography-bridge.mjs
+          node --test tests/*.test.mjs
 
       - name: Prepare Pages artifact
         run: |
