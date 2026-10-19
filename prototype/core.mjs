@@ -1,4 +1,5 @@
 import { newFateState, advanceFate, adviseParley } from "./fate.mjs";
+import { buildModernStations, modernPoiScore, POI_GAME_EFFECT } from "./poi-world.mjs";
 
 // Genpei Sandbox / PROTOTYPE v0.2
 // All values and locations below are hypothetical game mechanics,
@@ -34,7 +35,7 @@ export const PERSONAS = Object.freeze([
 
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 const round = v => Math.round(v * 10) / 10;
-const getStation = id => STATION_BY_ID[id] ?? STATION_BY_ID.awa;
+const getStation = (world,id) => STATION_BY_ID[id] ?? world.modernPois?.find(p=>p.id===id) ?? STATION_BY_ID.awa;
 const distance = (x, y, p) => Math.hypot(x - p.x, y - p.y);
 
 export function rngNext(world) {
@@ -54,6 +55,7 @@ export function createWorld(seed = 1185) {
     tick: 0,
     interventionBudget: 3,
     fate: newFateState(),
+    modernPois: [],
     events: [{
       tick: 0, kind: "system",
       text: "架空の地理・施設で観察を開始しました。人物の性格や初期位置はすべてゲーム上の仮定です。"
@@ -71,9 +73,9 @@ export function fatePull(agent, gravity = 65) {
   return Math.round(clamp(gravity, 0, 100) * agent.affinity);
 }
 
-export function destinationScores(agent, gravity = 65) {
+export function destinationScores(agent, gravity = 65, world = null) {
   const pull = fatePull(agent, gravity);
-  return STATIONS.map(p => {
+  return [...STATIONS,...(world?.modernPois||[])].map(p => {
     const cost = distance(agent.x, agent.y, p) * 0.062;
     let base = 7;
     let why = "探索";
@@ -83,6 +85,11 @@ export function destinationScores(agent, gravity = 65) {
     if (p.id === "leisure") { base = 7 + agent.curiosity * 67 + (100 - agent.morale) * 0.16; why = "娯楽への関心"; }
     if (p.id === "sea") { base = 2; why = "海上（仮）"; }
     if (p.id === "awa") { base = 1; why = "移動"; }
+    if (p.kind === "modern-poi") {
+      const motive=modernPoiScore(agent,p);
+      base=motive.base;why=motive.why;
+      if(agent.money < POI_GAME_EFFECT[p.action].cost) base-=120;
+    }
     if (agent.recentlyVisited === p.id && agent.cooldownUntil > agent.clock) base -= 85;
     if (p.id === "supply" && agent.money < 9) base -= 120;
     if (p.id === "rest" && agent.money < 6) base -= 120;
@@ -97,7 +104,7 @@ export function logEvent(world, kind, text, personId = null) {
 }
 
 function chooseTarget(world, agent, gravity) {
-  const scores = destinationScores(agent, gravity);
+  const scores = destinationScores(agent, gravity, world);
   agent.lastScores = scores;
   // Top 2 get random exploration; both deterministically seeded.
   const chosen = rngNext(world) < (0.10 + agent.curiosity * 0.12)
@@ -113,7 +120,21 @@ function arrive(world, agent, station) {
   agent.currentStationId = station.id;
   agent.recentlyVisited = station.id;
   agent.cooldownUntil = world.tick + 10;
-  if (station.id === "supply") {
+  if (station.kind === "modern-poi") {
+    const effect=POI_GAME_EFFECT[station.action];
+    if (!effect) {
+      logEvent(world,"warning",agent.short+"は用途の分からない施設へ立ち寄らなかった",agent.id);
+    } else if (agent.money < effect.cost) {
+      logEvent(world,"warning",agent.short+"は資金不足で「"+station.label+"」を利用できなかった",agent.id);
+    } else {
+      agent.money-=effect.cost;
+      agent.provisions=clamp(agent.provisions+effect.food,0,100);
+      agent.energy=clamp(agent.energy+effect.energy,0,100);
+      agent.morale=clamp(agent.morale+effect.morale,0,100);
+      const actionLabel={meal:"食事",supplies:"食料の調達",rest:"休息",visit:"見物"}[station.action];
+      logEvent(world,"facility",agent.short+"が「"+station.label+"」で"+actionLabel+"をした",agent.id);
+    }
+  } else if (station.id === "supply") {
     if (agent.money >= 9) {
       agent.money -= 9;
       agent.provisions = clamp(agent.provisions + 43, 0, 100);
@@ -153,7 +174,7 @@ export function stepWorld(world, gravity = 65) {
     if (!agent.target || (world.tick % 10 === 1 && world.tick > agent.adviceUntil)) {
       chooseTarget(world, agent, gravity);
     }
-    const p = getStation(agent.target);
+    const p = getStation(world,agent.target);
     const d = distance(agent.x, agent.y, p);
     const step = agent.energy < 15 ? 5 : 15; // Virtual distance per tick; not km/h.
     if (d <= step) {
@@ -178,7 +199,7 @@ export function intervene(world, id, action, gravity = 65) {
   if (action === "support") {
     a.money = clamp(a.money + 20, 0, 120);
     a.provisions = clamp(a.provisions + 20, 0, 100);
-    logEvent(world, "intervention", a.short + "に資金・食料を支援（現実の支出ではありません）", a.id);
+    logEvent(world, "intervention", a.short + "に資金と食料を支援した", a.id);
     return { ok: true, accepted: true };
   }
   // An advice is not an enforced command. The acceptance ratio is fictional.
@@ -192,6 +213,27 @@ export function intervene(world, id, action, gravity = 65) {
     logEvent(world, "intervention", a.short + "が「屋島へ向かう」助言を見送った", a.id);
   }
   return { ok: true, accepted };
+}
+
+
+export function installModernPois(world,records) {
+  const sites=buildModernStations(records);
+  if(sites.length===0) return {added:0,rejected:records?.length||0};
+  removeModernPois(world);
+  world.modernPois=sites;
+  logEvent(world,"system","屋島周辺の現代施設"+sites.length+"件を行動候補へ追加");
+  return {added:sites.length,rejected:Math.max(0,(records?.length||0)-sites.length)};
+}
+export function removeModernPois(world) {
+  if(!world.modernPois?.length) return;
+  const ids=new Set(world.modernPois.map(p=>p.id));
+  for(const a of world.agents) {
+    if(ids.has(a.target)) {a.target=null;a.adviceUntil=0;}
+    if(ids.has(a.currentStationId)) a.currentStationId=null;
+    if(ids.has(a.recentlyVisited)) {a.recentlyVisited=null;a.cooldownUntil=0;}
+  }
+  world.modernPois=[];
+  logEvent(world,"system","現代施設を行動候補から外した");
 }
 
 export function snapshot(world) {
