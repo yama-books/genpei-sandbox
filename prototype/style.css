@@ -105,6 +105,17 @@ input[type=range]{accent-color:#3f806e;cursor:pointer;width:126px}
 .fate-footnote{font-size:10px;color:#7e8574;flex-basis:100%}
 .fate-caption{font-size:9px;color:#9b9183;margin-top:12px;line-height:1.5}
 
+
+/* Modern POI activation, with real names in the list and abstract-only markers */
+.poi-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:7px 0 11px}
+.poi-actions .button{min-height:32px}
+.poi-integration-status{font-size:10px;color:#647e74;font-weight:600}
+.poi-source{font-size:9px!important;color:#909f93!important;overflow-wrap:anywhere}
+.poi-card .person-tag{white-space:nowrap}
+.modern-station-dot{fill:#427f76;stroke:#fffdf7;stroke-width:3;opacity:.93;filter:drop-shadow(0 1px 3px #2549414d)}
+.modern-station-dot:hover{fill:#286b72;stroke:#ffcc76;stroke-width:4}
+.legend-dot.modern{background:#427f76;outline:2px solid #c5dbd2}
+
 @media(max-width:1260px){.workspace{grid-template-columns:235px minmax(340px,1fr)}.detail{grid-column:1/-1;display:block}.people-list{max-height:720px}}
 @media(max-width:780px){.shell{padding:12px}.masthead{flex-wrap:wrap}.head-links{width:100%;gap:12px}.controls{padding:10px}.workspace{grid-template-columns:1fr}.world{grid-row:1}.roster{grid-row:2}.detail{grid-column:1;grid-row:3;display:block}.people-list{max-height:260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.person-item{border:1px solid #e5eae5}.stage{aspect-ratio:1000/640}.world-content{padding:0 7px 10px}.event-section{padding:12px}.notice{font-size:10px}.panel-heading{padding:13px}.gravity-group{width:100%}.gravity-group input{flex:1}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
