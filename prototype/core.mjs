@@ -62,7 +62,7 @@ export function createWorld(seed = 1185) {
       ...p, energy: 85, provisions: 72, money: 45, morale: 65,
       target: p.initialTarget, arrivals: 0, adviceUntil: 0,
       lastDecision: "初期配置：ゲーム上の仮定", lastScores: [],
-      visitedYashima: false, arrivedAtYashimaTick: null, recentlyVisited: null, cooldownUntil: 0, clock: 0,
+      visitedYashima: false, arrivedAtYashimaTick: null, currentStationId: null, recentlyVisited: null, cooldownUntil: 0, clock: 0,
     }))
   };
 }
@@ -110,6 +110,7 @@ function chooseTarget(world, agent, gravity) {
 
 function arrive(world, agent, station) {
   agent.arrivals++;
+  agent.currentStationId = station.id;
   agent.recentlyVisited = station.id;
   agent.cooldownUntil = world.tick + 10;
   if (station.id === "supply") {
@@ -159,6 +160,7 @@ export function stepWorld(world, gravity = 65) {
       agent.x = p.x; agent.y = p.y;
       arrive(world, agent, p);
     } else {
+      agent.currentStationId = null;
       agent.x = round(agent.x + ((p.x - agent.x) / d) * step);
       agent.y = round(agent.y + ((p.y - agent.y) / d) * step);
     }
