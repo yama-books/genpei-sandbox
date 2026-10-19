@@ -94,3 +94,15 @@ GitHubの接続機能はファイル追加・更新が可能だが、Pagesの公
 - 接続済みGitHubアプリは**Pages設定の更新権限・操作APIを提供していない**。一度だけ所有者が `Settings → Pages → Deploy from a branch → main / (root) → Save` を設定する必要がある。
 - Pages公開後のURL確認、iPhone Safari等の実機操作、OpenPOI実API/CORS確認は引き続き未実施。
 - 自動ブラウザ成功は、実機の描画・ネットワーク条件・タップ操作の完全な保証ではない。これらを別の受入項目とする。
+
+## 7. 2026-10-19 GitHub Actionsによる公開成功（最新状態）
+
+- 所有者によるGitHub PagesのSource変更後、[.github/workflows/deploy-pages.yml](../.github/workflows/deploy-pages.yml)を新規作成した。
+- `main` の公開対象ファイル変更時に自動デプロイ。Actionsの `workflow_dispatch` から手動実行もできる。ChatGPTから任意のワークフロー起動APIを直接操作できるとは限らないため、連携が利用できる場合のコミットによる自動デプロイが基本。
+- デプロイの前にNode構文チェック・単体テストを実施。アーティファクトには `index.html`, `.nojekyll`, `prototype/`, `data/`, `docs/`, `tests/browser-smoke.html`を含める。
+- [初回デプロイ実行 39192421009](https://github.com/yama-books/genpei-sandbox/actions/runs/39192421009)：**Success**。
+- [アプリ](https://yama-books.github.io/genpei-sandbox/prototype/)：2026-10-19の外部HTTP取得で **200**。
+- [ブラウザ検査ページ](https://yama-books.github.io/genpei-sandbox/tests/browser-smoke.html)：外部HTTP取得で **200**、ページ表示上は**全項目PASS**。
+- 2026-10-18以前の404と旧手順「Deploy from a branch」は**過去の状態**。**現行の発行元はGitHub Actions**。分岐元を変更する必要はない。
+- 残る実機検証は、iPhone Safariのタップ・表示、PC実機、OpenPOIの実API通信・CORS。現段階では史実地図・移動・交通路は実装していない。
+
