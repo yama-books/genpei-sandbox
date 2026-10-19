@@ -49,10 +49,16 @@ function record(world,kind,body,log) {
   log(world,"fate",entry.title+"（屋島篇の架空判定）","C036");
 }
 function closeChapter(world,kind,title,summary,why,metrics,log,randomFactor=null) {
+  // The ending keeps a small causal trace from the actually observed playthrough.
+  // It is not a historical account and remains unchanged after the chapter closes.
+  const journey=world.events.filter(e=>e.personId==="C036" &&
+    (e.kind==="facility" || e.kind==="intervention" || e.kind==="warning"))
+    .slice(0,4).reverse().map(e=>({tick:e.tick,text:e.text}));
   const result={
     kind,title,summary,
     resolvedAt:world.tick,
     factors:why,
+    journey,
     metrics:{...metrics},
     randomFactor,
     provenance:"fictional_simulation",
