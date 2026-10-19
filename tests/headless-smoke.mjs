@@ -46,13 +46,8 @@ try {
     // The chapter resolves independently of arrival, and never rewrites historical claims.
     await page.locator("#mediate").click();
     assert.equal(await page.locator("#budget").innerText(), "残り 1 回", "mediation uses intervention budget");
-    await page.locator("#speed").selectOption("12");
-    let ended=false;
-    for(let i=0;i<15;i++){
-      if((await page.locator("#fate-phase").innerText()).includes("結末")){ended=true;break;}
-      await page.locator("#step").click();
-    }
-    assert.ok(ended || (await page.locator("#fate-phase").innerText()).includes("結末"), "chapter must resolve within 112 ticks");
+    await page.locator("#to-fate").click();
+    assert.match(await page.locator("#fate-phase").innerText(), /結末/, "chapter resolves when skipping ahead");
     const outcome = await page.locator("#fate-description").innerText();
     assert.ok(outcome.length>25, "chapter outcome contains a causal explanation");
     assert.ok(await page.locator("#fate-reasons .fate-reason").count()>=2, "display resolution reasons");
