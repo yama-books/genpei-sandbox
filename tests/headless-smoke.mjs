@@ -55,7 +55,7 @@ try {
     await page.locator("#step").click();
     assert.equal(await page.locator("#fate-description").innerText(),outcome, "fate result remains fixed after free exploration");
     // Independent browser test of real-POI response wiring, without reliance on the live API.
-    await page.route(/api\\.openpoiapi\\.com\\/v1\\/search/, route => route.fulfill({
+    await page.route(url => url.toString().includes("api.openpoiapi.com/v1/search"), route => route.fulfill({
       status:200,
       contentType:"application/json",
       body:JSON.stringify({count:2,results:[
