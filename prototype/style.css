@@ -88,6 +88,23 @@ input[type=range]{accent-color:#3f806e;cursor:pointer;width:126px}
 .poi-card{flex:0 0 218px;max-width:85%;background:#eaf1eb;border:1px solid #dfe8dd;border-radius:6px;padding:9px}
 .poi-credit{display:inline-block;color:#567970;font-size:10px;margin-top:3px}
 
+
+/* Autonomous chapter decision, separate from both map and historical evidence */
+.fate-chapter{margin:0 12px 13px;padding:15px;background:#f3f0e9;border:1px solid #dfd7c8;border-radius:9px}
+.fate-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.fate-head h3{font-size:16px;color:#5d4a35}
+.fate-head .tiny-pill{background:#e7ded0;color:#786343}
+.fate-description{font-family:"Noto Serif JP",serif;color:#5b4f42;font-size:13px;line-height:1.8;margin:8px 0}
+.fate-progress{display:flex;align-items:center;gap:12px;color:#917f6e;font-size:10px;font-variant-numeric:tabular-nums}
+.fate-track{flex:1;background:#e5ddd1;border-radius:30px;height:5px;overflow:hidden}
+.fate-track-fill{height:100%;background:#bca078;border-radius:30px;transition:width .15s linear}
+.fate-reasons{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.fate-reason{font-size:10px;padding:6px 9px;border-radius:5px;background:#fffaf2;color:#735f43;border:1px solid #e7ddcc}
+.fate-preview{font-size:10px;color:#6d7364;padding:2px 3px}
+.fate-stamp{font-size:10px;color:#a0754e;font-weight:700;flex-basis:100%}
+.fate-footnote{font-size:10px;color:#7e8574;flex-basis:100%}
+.fate-caption{font-size:9px;color:#9b9183;margin-top:12px;line-height:1.5}
+
 @media(max-width:1260px){.workspace{grid-template-columns:235px minmax(340px,1fr)}.detail{grid-column:1/-1;display:block}.people-list{max-height:720px}}
 @media(max-width:780px){.shell{padding:12px}.masthead{flex-wrap:wrap}.head-links{width:100%;gap:12px}.controls{padding:10px}.workspace{grid-template-columns:1fr}.world{grid-row:1}.roster{grid-row:2}.detail{grid-column:1;grid-row:3;display:block}.people-list{max-height:260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.person-item{border:1px solid #e5eae5}.stage{aspect-ratio:1000/640}.world-content{padding:0 7px 10px}.event-section{padding:12px}.notice{font-size:10px}.panel-heading{padding:13px}.gravity-group{width:100%}.gravity-group input{flex:1}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
