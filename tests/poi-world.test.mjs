@@ -60,8 +60,8 @@ test("人物が実在POI形状の登録先へ到達し、費用と食料の状�
   assert.equal(actor.currentStationId,modern.id);
   assert.ok(actor.provisions>food);
   assert.ok(actor.money<cash);
-  assert.match(w.events[0].text,/カフェ/);
-  assert.equal(w.events[0].kind,"facility");
+  const facility=w.events.find(e=>e.personId==="C036" && e.kind==="facility" && /カフェ/.test(e.text));
+  assert.ok(facility,"visit is recorded for the correct character");
 });
 
 test("財布が空の人物は料金を払ったことにしない",()=>{
@@ -73,7 +73,7 @@ test("財布が空の人物は料金を払ったことにしない",()=>{
   stepWorld(w,0);
   assert.equal(a.money,0);
   assert.ok(a.provisions<=food);
-  assert.match(w.events[0].text,/資金不足/);
+  assert.ok(w.events.some(e=>e.personId==="C036" && e.kind==="warning" && /資金不足/.test(e.text)));
 });
 
 test("施設の有無で目的地の得点が変わり、削除すると元の候補に戻る",()=>{
