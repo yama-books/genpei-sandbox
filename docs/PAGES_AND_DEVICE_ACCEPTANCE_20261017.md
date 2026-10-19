@@ -106,3 +106,17 @@ GitHubの接続機能はファイル追加・更新が可能だが、Pagesの公
 - 2026-10-18以前の404と旧手順「Deploy from a branch」は**過去の状態**。**現行の発行元はGitHub Actions**。分岐元を変更する必要はない。
 - 残る実機検証は、iPhone Safariのタップ・表示、PC実機、OpenPOIの実API通信・CORS。現段階では史実地図・移動・交通路は実装していない。
 
+## 7. 2026-10-19 公開成功・現行運用（旧手順の更新）
+
+**2026-10-17〜18の「未公開・404」「Deploy from a branch を選択」という記録は当時の経過です。現在の手順としては使いません。**
+
+- 公開元：**GitHub Actions**。ワークフローは [`.github/workflows/deploy-pages.yml`](../.github/workflows/deploy-pages.yml)。
+- デプロイ成功： [Actions 実行 #39192421009](https://github.com/yama-books/genpei-sandbox/actions/runs/39192421009)。サイト組立、Nodeテスト、artifact upload、deploy-pagesすべてSuccess。
+- サイト本体：[https://yama-books.github.io/genpei-sandbox/](https://yama-books.github.io/genpei-sandbox/)（2026-10-19にHTTP 200確認）。
+- 試作画面：[https://yama-books.github.io/genpei-sandbox/prototype/](https://yama-books.github.io/genpei-sandbox/prototype/)（同HTTP 200）。
+- 公開環境の[ブラウザ検査画面](https://yama-books.github.io/genpei-sandbox/tests/browser-smoke.html)（同HTTP 200、人物11件・史跡8件・基本操作が全項目PASS）。
+- 更新方法：対象のソース・資料・ワークフローを `main` にコミットすると自動配信される。GitHub UIから手動ワークフロー実行するための `workflow_dispatch` も設定済み。
+- ChatGPTの接続中GitHub機能では `workflow_dispatch` を直接起動する専用操作がない場合もあるが、更新作業に伴うmainへのコミットでワークフローが起動する。デプロイ後はActions成功と実際の公開URL応答を確認する。
+- **未検証**：iPhone Safariでの実機手動操作、OpenPOI実通信、実際の道路・史跡位置への移動。
+
+以後の開発は、GitHub Pages公開設定を繰り返さず、実機で確認できたUI課題を修正する段階へ移行する。
