@@ -1,4 +1,5 @@
-import { STATIONS, STATION_BY_ID, PERSONAS, createWorld, stepWorld, intervene, snapshot, fatePull, destinationScores } from "./core.mjs";
+import { STATIONS, STATION_BY_ID, PERSONAS, createWorld, stepWorld, intervene, snapshot, fatePull, destinationScores, installModernPois, removeModernPois } from "./core.mjs";
+import { buildModernStations, gameActionForCategory } from "./poi-world.mjs";
 
 import { loadPoiSample } from "./openpoi.mjs";
 import { FATE_RULES, chapterMetrics } from "./fate.mjs";
@@ -39,6 +40,8 @@ let selected = "C036";
 let world = createWorld(1185);
 let checkpoint = null;
 let timer = null;
+let loadedModernPois = [];
+let poiEnabled = false;
 
 const element = (tag, cls, value) => {
   const e = document.createElement(tag);
@@ -114,35 +117,72 @@ async function loadHeritageSites() {
   }
 }
 
+function renderPoiIntegrationStatus() {
+  const count=world.modernPois?.length||0;
+  q("#activate-poi").disabled=loadedModernPois.length===0 || buildModernStations(loadedModernPois).length===0;
+  q("#remove-poi").disabled=count===0;
+  q("#poi-integration-status").textContent=count
+    ? "現代施設 "+count+" 件を自律行動へ反映中"
+    : (loadedModernPois.length ? "行動候補への追加待ち" : "仮想施設のみで行動中");
+}
+function activateModernPois() {
+  stop();
+  const result=installModernPois(world,loadedModernPois);
+  if(result.added===0){ q("#poi-status").textContent="用途・出典を確認できる行動候補がありません。"; return; }
+  poiEnabled=true;
+  render();
+}
+function deactivateModernPois() {
+  stop(); removeModernPois(world);poiEnabled=false;render();
+}
+function renderModernStations() {
+  const layer=q("#modern-station-layer");layer.replaceChildren();
+  for(const p of world.modernPois||[]) {
+    const item=svgNode("g",{"aria-label":"現代施設："+p.label});
+    const dot=svgNode("circle",{cx:p.x,cy:p.y,r:8,class:"modern-station-dot"});
+    const title=svgNode("title");
+    title.textContent=p.label+"（実在施設の所在地を模式図に簡略投影。道路ではありません）";
+    dot.append(title);
+    item.append(dot);
+    layer.append(item);
+  }
+}
+
 async function fetchModernPoi() {
-  const button = q("#fetch-poi");
-  button.disabled = true;
+  const button=q("#fetch-poi");
+  button.disabled=true;
   q("#poi-status").classList.remove("error");
-  q("#poi-status").textContent = "OpenPOIから読み込み中…（ブラウザから直接通信）";
+  q("#poi-status").textContent="OpenPOIから読み込み中…";
   try {
-    const sample = await loadPoiSample();
-    const root = q("#poi-list"); root.replaceChildren();
-    q("#poi-status").textContent =
-      "返却 " + sample.responseCount + "件／座標等の検査後 " + sample.returned +
-      "件（分類unknown " + sample.unknown + "件、座標不正 " + sample.invalid +
-      "件、範囲外 " + sample.outOfRange + "件）。" +
-      (sample.saturated ? "上限50件に達しています。地域内の全施設ではありません。" : "施設網羅性は保証されません。");
-    for (const item of sample.records.slice(0, 8)) {
-      const card = element("div", "poi-card");
-      const top = element("div", "poi-top");
-      top.append(element("strong", "", item.name), element("span", "person-tag", item.distanceMeters + "m"));
+    const sample=await loadPoiSample();
+    loadedModernPois=sample.records;
+    const usable=buildModernStations(loadedModernPois);
+    const list=q("#poi-list");list.replaceChildren();
+    q("#poi-status").textContent="返却 "+sample.responseCount+"件／検査済み "+sample.returned+
+      "件／行動候補 "+usable.length+"件（用途未分類 "+sample.unknown+"件、不正座標 "+sample.invalid+
+      "件、範囲外 "+sample.outOfRange+"件）。"+
+      (sample.saturated?"検索上限に達しているため全施設ではありません。":"施設の網羅性・営業状況は保証されません。");
+    const adoptedNames=new Set(usable.map(p=>p.label));
+    for(const p of sample.records.slice(0,15)) {
+      const card=element("div","poi-card");
+      const top=element("div","poi-top");
+      top.append(element("strong","",p.name),element("span","person-tag",p.distanceMeters+"m"));
       card.append(top);
-      card.append(element("p", "", item.gameCategory + " ／ " + (item.address || "住所情報なし")));
-      // Source licenses are retained in memory only; no raw API data is committed.
-      card.title = "source: " + item.source + " / licenses: " + item.licenses.join(",") + " / attributions: " + item.attributions.join("; ");
-      root.append(card);
+      const action=gameActionForCategory(p.category);
+      const label={meal:"食事候補",supplies:"食料調達候補",rest:"休息候補",visit:"見物候補"}[action]||"用途未分類・参照のみ";
+      card.append(element("p","",label+" ／ "+(p.address||"住所情報なし")));
+      card.append(element("p","poi-source","出典："+p.source+" ／ "+p.licenses.join(", ")));
+      if(adoptedNames.has(p.name)) card.append(element("span","person-tag","行動候補"));
+      list.append(card);
     }
-    if (sample.records.length === 0) root.append(element("p", "helper", "条件に合う施設がありません。"));
-  } catch (error) {
+    if(sample.records.length===0) list.append(element("p","helper","近くの施設が取得できませんでした。"));
+    if(usable.length===0) list.append(element("p","helper","行動へ利用できる分類・出典付き施設はありません。"));
+  } catch(error) {
     q("#poi-status").classList.add("error");
-    q("#poi-status").textContent = "施設データを取得できません：" + error.message + "。APIの状態・CORS・通信環境を確認してください。";
+    q("#poi-status").textContent="施設情報を取得できません："+error.message+"。通信環境・CORS・API状態を確認してください。";
   } finally {
-    button.disabled = false;
+    button.disabled=false;
+    renderPoiIntegrationStatus();
   }
 }
 
@@ -221,7 +261,8 @@ function renderStatus() {
       const fill = element("div", "fill " + cls); fill.style.width = Math.round(value) + "%";
       bar.append(fill); r.append(element("span", "", name), bar, element("span", "mononum", String(Math.round(value)))); parent.append(r);
     }
-    parent.append(element("p", "stat-note", "目的地："+(STATION_BY_ID[agent.target]?.label || "再検討中")+" ／ 仮想所持金："+agent.money+" ／ "+agent.note));
+    const destination=STATION_BY_ID[agent.target] ?? world.modernPois?.find(p=>p.id===agent.target);
+    parent.append(element("p", "stat-note", "目的地："+(destination?.label || "再検討中")+" ／ 所持金："+agent.money+" ／ "+agent.note));
   }
   q("#advise").disabled = !agent || world.interventionBudget === 0;
   q("#support").disabled = !agent || world.interventionBudget === 0;
@@ -259,7 +300,7 @@ function renderDecision() {
   }
   root.append(element("p", "", "直近の選択理由：" + a.lastDecision));
   const list = element("div", "score-list");
-  for (const v of destinationScores(a, Number(q("#gravity").value)).slice(0, 4)) {
+  for (const v of destinationScores(a, Number(q("#gravity").value), world).slice(0, 4)) {
     const row = element("div", "score-row");
     const bar = element("div", "track");
     const fill = element("div", "fill"); fill.style.width = Math.max(0, Math.min(100, v.score)) + "%";
@@ -317,7 +358,8 @@ function render() {
   q("#clock").textContent = "第 " + world.tick + " 刻";
   q("#gravity-value").textContent = q("#gravity").value;
   q("#to-fate").disabled = Boolean(world.fate.resolution);
-  renderRoster(); renderAgents(); renderStatus(); renderClaims(); renderDecision(); renderFate(); renderEvents();
+  renderRoster(); renderModernStations(); renderAgents(); renderStatus(); renderClaims(); renderDecision(); renderFate(); renderEvents();
+  renderPoiIntegrationStatus();
 }
 function stop() {
   if (timer !== null) { clearInterval(timer); timer = null; }
@@ -340,6 +382,7 @@ function toggle() {
 function reset() {
   stop();
   world = createWorld(q("#seed").value);
+  if(poiEnabled && loadedModernPois.length) installModernPois(world,loadedModernPois);
   checkpoint = null;
   q("#restore").disabled = true;
   render();
@@ -401,6 +444,7 @@ q("#restore").addEventListener("click", () => {
   if (!checkpoint) return;
   stop();
   world = snapshot(checkpoint.world);
+  poiEnabled = Boolean(world.modernPois?.length);
   selected = checkpoint.selected;
   q("#gravity").value = checkpoint.gravity;
   world.events.unshift({ tick: world.tick, kind: "system", text: "記録地点に戻りました。介入前の世界を再実行できます。" });
@@ -408,5 +452,7 @@ q("#restore").addEventListener("click", () => {
 });
 document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); });
 q("#fetch-poi").addEventListener("click", fetchModernPoi);
+q("#activate-poi").addEventListener("click", activateModernPois);
+q("#remove-poi").addEventListener("click", deactivateModernPois);
 await load();
 await loadHeritageSites();
