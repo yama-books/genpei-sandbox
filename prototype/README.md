@@ -72,4 +72,4 @@ Playwrightを使う`tests/headless-smoke.mjs`を追加し、GitHub-hosted Ubuntu
 - GitHub Actions成功：https://github.com/yama-books/genpei-sandbox/actions/runs/39077201278
 - 確認済み：11人物・8史跡・33主張の読み込み、再生・停止、時間進行、引力、支援、保存・復帰、横スクロール超過、JavaScript例外。
 - **iPhone Safari実機ではない**。OpenPOI実通信も検証対象外。
-- GitHub Pagesの公開予定URLは2026-10-18に404を確認。設定・公開完了とは区別する。
+- GitHub Pagesは2026-10-19にGitHub Actionsによる公開が成功し、 https://yama-books.github.io/genpei-sandbox/prototype/ のHTTP 200を確認。公開ワークフローは [.github/workflows/deploy-pages.yml](../.github/workflows/deploy-pages.yml)、成功履歴は https://github.com/yama-books/genpei-sandbox/actions/runs/39192421009 。iPhone Safariでの人手による実機確認とOpenPOI実通信は別途必要。
