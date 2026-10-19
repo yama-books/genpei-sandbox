@@ -16,7 +16,7 @@ iframe{width:100%;height:730px;margin-top:14px;border:1px solid #bdcbbd;border-r
 </head>
 <body>
 <h1>GENPEI SANDBOX / Browser Smoke Test</h1>
-<p>このページは <code>/tests/browser-smoke.html</code> からHTTPで開き、同一オリジンの試作品をiframe内で検証します。人物CSVや史跡JSONの読込、基本UI操作、保存・復帰まで検査します。OpenPOIへの外部通信は発生させません。実際の地理・歴史の正しさや実API接続は検証対象外です。</p>
+<p>このページは <code>/tests/browser-smoke.html</code> からHTTPで開き、同一オリジンの試作品をiframe内で検証します。人物CSVや史跡JSONの読込、基本UI操作、保存・復帰、章末の決断まで検査します。OpenPOIへの外部通信は発生させません。実際の地理・歴史の正しさや実API接続は検証対象外です。</p>
 <div id="results" role="status" aria-live="polite">画面の読み込みとデータ取得を確認しています…</div>
 <iframe id="preview" title="屋島篇ブラウザ試作" src="../prototype/"></iframe>
 <script>
@@ -60,6 +60,10 @@ document.querySelector("#preview").addEventListener("load",async()=>{
  next.click();
  report(q("#person-title").textContent===next.querySelector(".person-name").textContent,"人物カードの切替");
  report(q("#claims").querySelectorAll(".claim-card").length===3,"人物ごとの主張を差し替える");
+ q("#to-fate").click();
+ report(q("#fate-phase").textContent.includes("結末"),"運命の章が期限内に収束する");
+ report(q("#fate-reasons").querySelectorAll(".fate-reason").length>=2,"結末の理由が記録される");
+ report(q("#claims").querySelectorAll(".claim-card").length===3,"結末後も史料カードは変わらない");
  const summary=document.createElement("strong");
  summary.textContent=failures===0?"ブラウザ基本操作：全項目PASS（実API・地図接続は別検証）":failures+"件の失敗があります";
  output.prepend(summary);
