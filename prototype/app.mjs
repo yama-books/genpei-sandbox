@@ -316,6 +316,7 @@ function renderEvents() {
 function render() {
   q("#clock").textContent = "第 " + world.tick + " 刻";
   q("#gravity-value").textContent = q("#gravity").value;
+  q("#to-fate").disabled = Boolean(world.fate.resolution);
   renderRoster(); renderAgents(); renderStatus(); renderClaims(); renderDecision(); renderFate(); renderEvents();
 }
 function stop() {
@@ -368,6 +369,11 @@ async function load() {
 renderStations();
 q("#play").addEventListener("click", toggle);
 q("#step").addEventListener("click", () => { stop(); tick(); });
+q("#to-fate").addEventListener("click", () => {
+  stop();
+  for(let i=0;i<200 && !world.fate.resolution;i++) stepWorld(world,Number(q("#gravity").value));
+  render();
+});
 q("#reset").addEventListener("click", reset);
 q("#gravity").addEventListener("input", render);
 q("#advise").addEventListener("click", () => {
