@@ -58,7 +58,7 @@ export function createWorld(seed = 1185) {
     modernPois: [],
     events: [{
       tick: 0, kind: "system",
-      text: "架空の地理・施設で観察を開始しました。人物の性格や初期位置はすべてゲーム上の仮定です。"
+      text: "観察を開始しました。"
     }],
     agents: PERSONAS.map(p => ({
       ...p, energy: 85, provisions: 72, money: 45, morale: 65,
@@ -158,7 +158,7 @@ function arrive(world, agent, station) {
     agent.morale = clamp(agent.morale + 9, 0, 100);
     agent.visitedYashima = true;
     if(agent.arrivedAtYashimaTick===null) agent.arrivedAtYashimaTick=world.tick;
-    logEvent(world, "fate", agent.short + "が運命の場所へ接近した（史実の再現・イベント成立ではない）", agent.id);
+    logEvent(world, "fate", agent.short + "が屋島へ到達した", agent.id);
   } else logEvent(world, "movement", agent.short + "が「" + station.label + "」へ到達", agent.id);
   agent.target = null; // Re-evaluate next tick, rather than staying permanently.
 }
