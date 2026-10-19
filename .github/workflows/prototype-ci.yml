@@ -38,8 +38,10 @@ jobs:
           node --check prototype/core.mjs
           node --check prototype/app.mjs
           node --check prototype/openpoi.mjs
+          node --check prototype/fate.mjs
+          node --check prototype/geography-bridge.mjs
       - name: Prototype tests
-        run: node --test tests/prototype.test.mjs
+        run: node --test tests/*.test.mjs
       - name: Install lightweight browser driver
         run: npm install --no-save --no-audit --no-fund playwright@1.56.1
       - name: Serve site locally
