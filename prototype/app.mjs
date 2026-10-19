@@ -1,6 +1,8 @@
 import { STATIONS, STATION_BY_ID, PERSONAS, createWorld, stepWorld, intervene, snapshot, fatePull, destinationScores } from "./core.mjs";
 
 import { loadPoiSample } from "./openpoi.mjs";
+import { FATE_RULES, chapterMetrics } from "./fate.mjs";
+import { createHistoricalGeoRequest } from "./geography-bridge.mjs";
 
 const q = selector => document.querySelector(selector);
 const svgNS = "http://www.w3.org/2000/svg";
@@ -223,6 +225,7 @@ function renderStatus() {
   }
   q("#advise").disabled = !agent || world.interventionBudget === 0;
   q("#support").disabled = !agent || world.interventionBudget === 0;
+  q("#mediate").disabled = !agent || agent.id !== "C036" || world.interventionBudget === 0 || Boolean(world.fate?.resolution);
   q("#budget").textContent = "残り " + world.interventionBudget + " 回";
 }
 
@@ -268,6 +271,36 @@ function renderDecision() {
   root.append(list);
 }
 
+function renderFate() {
+  const f=world.fate;
+  const m=chapterMetrics(world, Number(q("#gravity").value));
+  const label={watching:"運命はまだ遠い",approaching:"運命が近づく",postponed:"攻撃を延期",resolved:"屋島篇の結末"};
+  q("#fate-phase").textContent=label[f.phase] || "観察中";
+  const progress=Math.min(100,Math.max(0,Math.round(world.tick/FATE_RULES.closingTick*100)));
+  const bar=q("#fate-progress");bar.replaceChildren();
+  const track=element("div","fate-track");const fill=element("div","fate-track-fill");fill.style.width=progress+"%";track.append(fill);
+  bar.append(element("span","",String(world.tick)+" / "+FATE_RULES.closingTick+" 刻"),track);
+  const reasons=q("#fate-reasons");reasons.replaceChildren();
+  const resolution=f.resolution;
+  if(resolution){
+    q("#fate-description").textContent=resolution.title+"。"+resolution.summary;
+    reasons.append(element("div","fate-stamp","第 "+resolution.resolvedAt+" 刻｜分岐確定（ゲーム上の判定）"));
+    for(const cause of resolution.factors) reasons.append(element("div","fate-reason",cause));
+    reasons.append(element("div","fate-footnote","世界の生活は続きます。再生すると章の結末を保持したまま人物が移動します。"));
+  }else{
+    const title=f.phase==="postponed"?"補給・休息が整うか、機会が去るか。":
+      f.phase==="approaching"?"運命の場所に着いても、戦うとは限らない。":"人物の寄り道も、運命の結末を変える。";
+    q("#fate-description").textContent=title;
+    reasons.append(element("div","fate-preview",m.arrived?"義経は屋島を訪問済み":"義経はまだ屋島へ到着していません"));
+    reasons.append(element("div","fate-preview","行動余力 "+m.readiness+"／交渉意向 "+m.negotiationBias+"（いずれも仮想値）"));
+    const next=f.decisions[f.decisions.length-1];
+    if(next && next.kind==="postponed") reasons.append(element("div","fate-reason",next.title));
+  }
+  // Stable semantic ID only; the future historical-province engine supplies verified GIS separately.
+  const geo=createHistoricalGeoRequest();
+  q("#fate-title").title="地理連携待機中："+geo.feature.provinceLabel+"（旧国名エンジン側の地物ID・中世座標・経路は未接続）";
+}
+
 function renderEvents() {
   const root = q("#events"); root.replaceChildren();
   for (const e of world.events.slice(0, 12)) {
@@ -279,7 +312,7 @@ function renderEvents() {
 function render() {
   q("#clock").textContent = "第 " + world.tick + " 刻";
   q("#gravity-value").textContent = q("#gravity").value;
-  renderRoster(); renderAgents(); renderStatus(); renderClaims(); renderDecision(); renderEvents();
+  renderRoster(); renderAgents(); renderStatus(); renderClaims(); renderDecision(); renderFate(); renderEvents();
 }
 function stop() {
   if (timer !== null) { clearInterval(timer); timer = null; }
@@ -287,7 +320,11 @@ function stop() {
 }
 function tick() {
   const count = Number(q("#speed").value);
-  for (let i = 0; i < count; i++) stepWorld(world, Number(q("#gravity").value));
+  for (let i = 0; i < count; i++) {
+    const unresolved=!world.fate.resolution;
+    stepWorld(world, Number(q("#gravity").value));
+    if(unresolved && world.fate.resolution){stop();break;}
+  }
   render();
 }
 function toggle() {
@@ -337,6 +374,11 @@ q("#advise").addEventListener("click", () => {
 q("#support").addEventListener("click", () => {
   const result = intervene(world, selected, "support", Number(q("#gravity").value));
   if (!result.ok) window.alert(result.reason);
+  render();
+});
+q("#mediate").addEventListener("click", () => {
+  const result=intervene(world, selected, "mediate", Number(q("#gravity").value));
+  if(!result.ok) window.alert(result.reason);
   render();
 });
 q("#save").addEventListener("click", () => {
