@@ -286,6 +286,10 @@ function renderFate() {
     q("#fate-description").textContent=resolution.title+"。"+resolution.summary;
     reasons.append(element("div","fate-stamp","第 "+resolution.resolvedAt+" 刻｜分岐確定（ゲーム上の判定）"));
     for(const cause of resolution.factors) reasons.append(element("div","fate-reason",cause));
+    if(resolution.journey?.length){
+      reasons.append(element("div","fate-stamp","この周回の道中で起きたこと"));
+      for(const stop of resolution.journey) reasons.append(element("div","fate-reason","第 "+stop.tick+" 刻： "+stop.text));
+    }
     reasons.append(element("div","fate-footnote","世界の生活は続きます。再生すると章の結末を保持したまま人物が移動します。"));
   }else{
     const title=f.phase==="postponed"?"補給・休息が整うか、機会が去るか。":
