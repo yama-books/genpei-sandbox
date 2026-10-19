@@ -89,7 +89,7 @@ test("遅れて到着したら空振りに、到着しなければ時限終了�
   absent.tick=FATE_RULES.closingTick;
   advance(absent);
   assert.equal(absent.fate.resolution.kind,"missed");
-  assert.match(absent.fate.resolution.summary,/到達しない/);
+  assert.match(absent.fate.resolution.summary,/訪れない/);
 });
 
 test("交渉助言は義経専用で、成功すると意向が強まる。終章後は受けられない",()=>{
