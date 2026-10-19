@@ -46,7 +46,7 @@ export function chapterMetrics(world, gravity=65) {
 function record(world,kind,body,log) {
   const entry={tick:world.tick,kind,...body};
   world.fate.decisions.push(entry);
-  log(world,"fate",entry.title+"（屋島篇の架空判定）","C036");
+  log(world,"fate",entry.title,"C036");
 }
 function closeChapter(world,kind,title,summary,why,metrics,log,randomFactor=null) {
   // The ending keeps a small causal trace from the actually observed playthrough.
