@@ -34,11 +34,19 @@
 - [史跡台帳JSON](data/places/YASHIMA_SITE_REGISTRY.json)：現地の遺構・伝承を分離し、精密座標がないものはnullのまま保持
 - [ブラウザ検証用の画面](tests/browser-smoke.html)：人物・史跡・操作・一時保存のスモークテスト（HTTP配信で開く）
 
-## GitHub Pagesで試す
+## 公開中のWeb試作品
 
-[GitHub Pagesの初回設定・iPhone/PC検証手順](docs/PAGES_AND_DEVICE_ACCEPTANCE_20261017.md) を参照してください。初回はリポジトリの **Settings → Pages → Deploy from a branch → main / (root)** を設定する必要があります。操作画面は、設定が有効になれば https://yama-books.github.io/genpei-sandbox/prototype/ で開ける構成です。**公開URLの実際の稼働は未確認です。**
+- **[源平異聞録を開く](https://yama-books.github.io/genpei-sandbox/)**（自動的に `/prototype/` へ移動）
+- [公開サイトのブラウザ基本操作テスト](https://yama-books.github.io/genpei-sandbox/tests/browser-smoke.html)
+- [GitHub Pagesの公開・実機検証手順](docs/PAGES_AND_DEVICE_ACCEPTANCE_20261017.md)
 
-JavaScriptの構文とNode標準テストに加え、ChromeでのPC幅（1280px）・スマートフォン相当幅（390px）の自動ブラウザ操作も [Actionsの検証](https://github.com/yama-books/genpei-sandbox/actions/runs/39077201278) で成功しています。なお2026-10-18時点でPagesサイトは404のため、所有者によるPages公開元の設定が必要です。iPhone Safari実機は未検証です。
+2026-10-19にHTTP 200と公開環境のスモークテスト**全項目PASS**を確認。[Pagesデプロイ実行結果](https://github.com/yama-books/genpei-sandbox/actions/runs/39192421009)はSuccess。
+
+### 今後の公開手順
+
+`.github/workflows/deploy-pages.yml` が **mainへの関連ファイル更新を検知して自動デプロイ**する。GitHub Actionsの `workflow_dispatch` にも対応。静的成果物を組み立て、Nodeテスト成功後にGitHub Pagesへ公開する。設定済みの公開元はGitHub Actionsなので、以前の「Deploy from a branch → main /(root)」の案内は適用しない。
+
+ただしChrome自動検査・公開ブラウザ検査の成功は、iPhone Safariでの手動実機検証やOpenPOI実通信の成功まで保証しない。地理・人物行動は現在も実験用の模式モデル。
 
 ## 現在の状態
 
