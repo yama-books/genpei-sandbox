@@ -27,7 +27,7 @@ const strength = (a, allyCount) => Math.round(a.energy * .32 + a.provisions * .3
 export function chapterMetrics(world, gravity=65) {
   const leader=world.agents.find(a=>a.id==="C036");
   if (!leader) return { leaderPresent:false, arrived:false, readiness:0, allyCount:0 };
-  const allyCount=world.agents.filter(a=>a.id!=="C036" && a.visitedYashima).length;
+  const allyCount=world.agents.filter(a=>a.id!=="C036" && a.currentStationId==="yashima").length;
   return {
     leaderPresent: true,
     arrived: leader.visitedYashima===true,
