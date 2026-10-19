@@ -43,10 +43,26 @@ try {
     assert.match(await play.innerText(), /停止/, "started");
     await play.click();
     assert.match(await play.innerText(), /再生/, "paused");
+    // The chapter resolves independently of arrival, and never rewrites historical claims.
+    await page.locator("#mediate").click();
+    assert.equal(await page.locator("#budget").innerText(), "残り 1 回", "mediation uses intervention budget");
+    await page.locator("#speed").selectOption("12");
+    let ended=false;
+    for(let i=0;i<15;i++){
+      if((await page.locator("#fate-phase").innerText()).includes("結末")){ended=true;break;}
+      await page.locator("#step").click();
+    }
+    assert.ok(ended || (await page.locator("#fate-phase").innerText()).includes("結末"), "chapter must resolve within 112 ticks");
+    const outcome = await page.locator("#fate-description").innerText();
+    assert.ok(outcome.length>25, "chapter outcome contains a causal explanation");
+    assert.ok(await page.locator("#fate-reasons .fate-reason").count()>=2, "display resolution reasons");
+    assert.equal(await page.locator("#claims .claim-card").count(),3, "historical claims unaffected");
+    await page.locator("#step").click();
+    assert.equal(await page.locator("#fate-description").innerText(),outcome, "fate result remains fixed after free exploration");
     const dimensions = await page.evaluate(() => ({clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
     assert.ok(dimensions.scrollWidth <= dimensions.clientWidth + 4, "no horizontal document overflow: " + JSON.stringify(dimensions));
     assert.deepEqual(errors, [], "uncaught browser console errors");
-    console.log("PASS browser UI " + viewport.width + "px: people, sources, historic places, slider, save, interventions, play/pause");
+    console.log("PASS browser UI " + viewport.width + "px: people, sources, historic places, slider, save, interventions, fate ending, play/pause");
     await page.close();
   }
 } catch(e) {
