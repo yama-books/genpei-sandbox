@@ -54,6 +54,27 @@ try {
     assert.equal(await page.locator("#claims .claim-card").count(),3, "historical claims unaffected");
     await page.locator("#step").click();
     assert.equal(await page.locator("#fate-description").innerText(),outcome, "fate result remains fixed after free exploration");
+    // Independent browser test of real-POI response wiring, without reliance on the live API.
+    await page.route(/api\\.openpoiapi\\.com\\/v1\\/search/, route => route.fulfill({
+      status:200,
+      contentType:"application/json",
+      body:JSON.stringify({count:2,results:[
+        {name:"試験カフェA",address:"高松市内の模擬施設",category:"cafe",lat:34.3572,lng:134.1008,source:"fixture",licenses:["CC BY 4.0"],attributions:["Fixture"]},
+        {name:"試験資料館B",address:"高松市内の模擬施設",category:"tourism",lat:34.3578,lng:134.1011,source:"fixture",licenses:["CC BY 4.0"],attributions:["Fixture"]},
+      ]}),
+    }));
+    await page.locator("#reset").click();
+    assert.equal(await page.locator("#modern-station-layer circle").count(),0,"modern POIs not preloaded");
+    await page.locator("#fetch-poi").click();
+    await page.locator("#activate-poi").click();
+    assert.equal(await page.locator("#modern-station-layer circle").count(),2,"two sourced POI nodes adopted");
+    assert.match(await page.locator("#poi-integration-status").innerText(),/2 件/,"integration reports candidates");
+    await page.locator("#step").click();
+    await page.locator("#remove-poi").click();
+    assert.equal(await page.locator("#modern-station-layer circle").count(),0,"modern POIs removable");
+    await page.locator("#activate-poi").click();
+    await page.locator("#reset").click();
+    assert.equal(await page.locator("#modern-station-layer circle").count(),2,"reset retains activated POI dataset");
     const dimensions = await page.evaluate(() => ({clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
     assert.ok(dimensions.scrollWidth <= dimensions.clientWidth + 4, "no horizontal document overflow: " + JSON.stringify(dimensions));
     assert.deepEqual(errors, [], "uncaught browser console errors");
