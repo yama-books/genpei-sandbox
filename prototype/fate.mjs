@@ -5,7 +5,7 @@ export const FATE_RULES = Object.freeze({
   locationRef: "YS001",           // site registry ID, not a mapped 1185 event coordinate
   provinceRef: "sanuki",         // provisional semantic label, no GIS polygon attached
   openingTick: 35,
-  earliestDecisionTick: 50,
+  earliestDecisionTick: 36,
   departureTick: 82,             // fictional chapter window, not 1185 calendar date
   closingTick: 112,
   graceTicks: 15,
@@ -31,6 +31,7 @@ export function chapterMetrics(world, gravity=65) {
   return {
     leaderPresent: true,
     arrived: leader.visitedYashima===true,
+    atDecisionSite: leader.currentStationId === "yashima",
     arrivedAt: leader.arrivedAtYashimaTick ?? null,
     allyCount,
     readiness: strength(leader,allyCount),
@@ -85,7 +86,7 @@ export function advanceFate(world,gravity,log,rngNext) {
       ["屋島には到達","判断の延期と時間経過"],m,log);
     return fate;
   }
-  if(!m.arrived) return fate;
+  if(!m.atDecisionSite) return fate;
   if(t>=FATE_RULES.departureTick) {
     closeChapter(world,"empty","屋島は、すでに静かだった",
       "屋島へ向かったものの、仮想の相手勢力はすでに場を離れ、戦闘は成立しなかった。",
