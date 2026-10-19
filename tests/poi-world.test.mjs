@@ -54,7 +54,7 @@ test("人物が実在POI形状の登録先へ到達し、費用と食料の状�
   const modern=w.modernPois[0],actor=w.agents[0];
   actor.x=modern.x;actor.y=modern.y;
   actor.provisions=14;actor.energy=35;actor.money=40;
-  actor.target=modern.id;actor.clock=w.tick;
+  actor.target=modern.id;actor.adviceUntil=20;actor.clock=w.tick;
   const food=actor.provisions,cash=actor.money;
   stepWorld(w,0);
   assert.equal(actor.currentStationId,modern.id);
@@ -68,7 +68,7 @@ test("財布が空の人物は料金を払ったことにしない",()=>{
   const w=createWorld();
   installModernPois(w,[examples[0]]);
   const a=w.agents[0],p=w.modernPois[0];
-  a.x=p.x;a.y=p.y;a.target=p.id;a.money=0;
+  a.x=p.x;a.y=p.y;a.target=p.id;a.adviceUntil=20;a.money=0;
   const food=a.provisions;
   stepWorld(w,0);
   assert.equal(a.money,0);
