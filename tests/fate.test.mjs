@@ -10,6 +10,7 @@ function readyWorld(tick=50) {
   w.tick=tick;
   w.agents[0].visitedYashima=true;
   w.agents[0].arrivedAtYashimaTick=42;
+  w.agents[0].currentStationId="yashima";
   return w;
 }
 const advance=(w,gravity=65)=>advanceFate(w,gravity,logEvent,rngNext);
@@ -114,6 +115,16 @@ test("介入とシードが同一なら結末・記録は再現し、章の後�
   for(let i=0;i<20;i++)stepWorld(w,30);
   assert.deepEqual(w.fate.resolution,result);
   assert.equal(w.tick,170);
+});
+
+test("以前に屋島へ行っても、現在離れていれば戦闘を強制しない",()=>{
+  const w=readyWorld(50);
+  w.agents[0].currentStationId=null;
+  advance(w);
+  assert.equal(w.fate.resolution,null);
+  w.tick=FATE_RULES.closingTick;
+  advance(w);
+  assert.equal(w.fate.resolution.kind,"withdrawal");
 });
 
 test("未到着の集団を自動的に屋島へ移動させない",()=>{
