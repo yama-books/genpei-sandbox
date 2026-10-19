@@ -94,9 +94,10 @@
             <text x="74" y="87" class="map-subtitle">現地座標・実在の道路や海岸線ではありません</text>
             <text x="882" y="510" class="map-water" transform="rotate(-90 882 510)">WATER / ABSTRACT</text>
             <g id="station-layer"></g>
+            <g id="modern-station-layer"></g>
             <g id="agent-layer"></g>
           </svg>
-          <div class="map-legend"><span><i class="legend-dot historic"></i>運命ノード</span><span><i class="legend-dot facility"></i>仮想施設</span><span><i class="legend-dot agent"></i>人物エージェント</span></div>
+          <div class="map-legend"><span><i class="legend-dot historic"></i>運命ノード</span><span><i class="legend-dot facility"></i>仮想施設</span><span><i class="legend-dot agent"></i>人物エージェント</span><span><i class="legend-dot modern"></i>現代施設（模式位置）</span></div>
         </div>
         <section class="fate-chapter" aria-labelledby="fate-title">
           <div class="fate-head">
@@ -116,11 +117,12 @@
         </section>
         <section class="poi-section" aria-labelledby="poi-heading">
           <div class="poi-heading">
-            <div><div class="eyebrow">MODERN PLACES / OPENPOI · OPTIONAL</div><h3 id="poi-heading">現代施設のサンプル調査</h3></div>
+            <div><div class="eyebrow">MODERN PLACES / OPENPOI · OPTIONAL</div><h3 id="poi-heading">現代施設との接続</h3></div>
             <button type="button" id="fetch-poi" class="button">周辺施設を取得</button>
           </div>
-          <p class="helper">実在する屋島史跡の代表点から1.2km以内を試験検索。施設一覧は参照専用で、人物の移動・資源には影響しません。API通信はボタンを押したときだけ行います。</p>
+          <p class="helper">屋島の代表点から1.2km以内を検索。取得後に行動候補へ追加すると、人物が実在の施設名を目的地として選びます。移動線と施設の効果・費用はゲーム上の表現で、実際の道路や営業状況を示しません。</p>
           <div id="poi-status" class="load-status" role="status">未取得。現代施設データはリポジトリへ保存しません。</div>
+          <div class="poi-actions"><button id="activate-poi" type="button" class="button primary" disabled>行動候補に追加</button><button id="remove-poi" type="button" class="button quiet" disabled>行動候補から外す</button><span id="poi-integration-status" class="poi-integration-status">仮想施設のみで行動中</span></div>
           <div id="poi-list" class="poi-list"></div>
           <a class="poi-credit" href="https://openpoiapi.com/attribution.html" target="_blank" rel="noopener noreferrer">施設情報の出典・ライセンス：OpenPOI API ↗</a>
         </section>
