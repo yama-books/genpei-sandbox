@@ -1,0 +1,3751 @@
+[
+  {
+    "candidate": "baseline",
+    "scenario": "control",
+    "seed": 2946379905,
+    "gravity": 100,
+    "postponedCheckpointTick": null,
+    "postponedResumeMatches": null,
+    "decisions": [
+      {
+        "tick": 35,
+        "kind": "opening",
+        "title": "屋島をめぐる機会が近づく",
+        "detail": "人物が到着しなくても仮想世界の時間は進む"
+      },
+      {
+        "tick": 41,
+        "kind": "resolution",
+        "title": "屋島で交戦、決着つかず",
+        "detail": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+        "causes": [
+          "義経が屋島に到達",
+          "行動余力 60（仮想点）",
+          "同行候補の到達 0名",
+          "簡易対立判定 65（乱数を含む）"
+        ]
+      }
+    ],
+    "resolution": {
+      "kind": "stalemate",
+      "title": "屋島で交戦、決着つかず",
+      "summary": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+      "resolvedAt": 41,
+      "factors": [
+        "義経が屋島に到達",
+        "行動余力 60（仮想点）",
+        "同行候補の到達 0名",
+        "簡易対立判定 65（乱数を含む）"
+      ],
+      "journey": [],
+      "metrics": {
+        "leaderPresent": true,
+        "arrived": true,
+        "atDecisionSite": true,
+        "arrivedAt": 41,
+        "allyCount": 0,
+        "readiness": 60,
+        "energy": 65,
+        "provisions": 60,
+        "morale": 74,
+        "money": 45,
+        "gravity": 100,
+        "negotiationBias": 0
+      },
+      "randomFactor": -3,
+      "provenance": "fictional_simulation",
+      "geographicRef": "YS001"
+    },
+    "timeline": [
+      {
+        "tick": 35,
+        "target": "yashima",
+        "station": null,
+        "energy": 67.6,
+        "food": 61.5,
+        "money": 45,
+        "phase": "approaching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": null,
+        "station": "yashima",
+        "energy": 64.6,
+        "food": 59.7,
+        "money": 45,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島で交戦、決着つかず"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 42,
+        "target": "modern-1",
+        "station": null,
+        "energy": 64.1,
+        "food": 59.4,
+        "money": 45,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 43,
+        "target": null,
+        "station": "modern-1",
+        "energy": 63.6,
+        "food": 98.1,
+        "money": 38,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 44,
+        "target": "modern-2",
+        "station": null,
+        "energy": 63.2,
+        "food": 97.8,
+        "money": 38,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 47,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 96.9,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 48,
+        "target": "yashima",
+        "station": null,
+        "energy": 99.6,
+        "food": 96.6,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 50,
+        "target": null,
+        "station": "yashima",
+        "energy": 98.6,
+        "food": 96,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": "modern-3",
+        "station": null,
+        "energy": 98.1,
+        "food": 95.7,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 53,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 95.1,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 54,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 94.8,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 55,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 56,
+        "target": "yashima",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 57,
+        "target": null,
+        "station": "yashima",
+        "energy": 91.1,
+        "food": 99.4,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 58,
+        "target": "modern-2",
+        "station": null,
+        "energy": 90.6,
+        "food": 99.1,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 60,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 98.5,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 61,
+        "target": "yashima",
+        "station": null,
+        "energy": 99.6,
+        "food": 98.2,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 63,
+        "target": null,
+        "station": "yashima",
+        "energy": 98.6,
+        "food": 97.6,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 64,
+        "target": "modern-1",
+        "station": null,
+        "energy": 98.1,
+        "food": 97.3,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 65,
+        "target": null,
+        "station": "modern-1",
+        "energy": 97.6,
+        "food": 100,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 66,
+        "target": "yashima",
+        "station": null,
+        "energy": 97.1,
+        "food": 99.7,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 67,
+        "target": null,
+        "station": "yashima",
+        "energy": 96.6,
+        "food": 99.4,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 68,
+        "target": "modern-1",
+        "station": null,
+        "energy": 96.1,
+        "food": 99.1,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 69,
+        "target": null,
+        "station": "modern-1",
+        "energy": 95.6,
+        "food": 100,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 70,
+        "target": "yashima",
+        "station": null,
+        "energy": 95.1,
+        "food": 99.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": null,
+        "station": "yashima",
+        "energy": 94.6,
+        "food": 99.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 72,
+        "target": "modern-3",
+        "station": null,
+        "energy": 94.1,
+        "food": 99.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 74,
+        "target": null,
+        "station": "modern-3",
+        "energy": 89.1,
+        "food": 98.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 75,
+        "target": "yashima",
+        "station": null,
+        "energy": 88.6,
+        "food": 98.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 77,
+        "target": null,
+        "station": "yashima",
+        "energy": 87.6,
+        "food": 97.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 78,
+        "target": "leisure",
+        "station": null,
+        "energy": 87.1,
+        "food": 97.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 81,
+        "target": "modern-3",
+        "station": null,
+        "energy": 85.6,
+        "food": 96.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 82,
+        "target": null,
+        "station": "modern-3",
+        "energy": 81.1,
+        "food": 96.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 83,
+        "target": "yashima",
+        "station": null,
+        "energy": 80.6,
+        "food": 95.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 85,
+        "target": null,
+        "station": "yashima",
+        "energy": 79.6,
+        "food": 95.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 86,
+        "target": "modern-3",
+        "station": null,
+        "energy": 79.1,
+        "food": 94.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 88,
+        "target": null,
+        "station": "modern-3",
+        "energy": 74.1,
+        "food": 94.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": "yashima",
+        "station": null,
+        "energy": 73.6,
+        "food": 94,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": null,
+        "station": "yashima",
+        "energy": 72.6,
+        "food": 93.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 92,
+        "target": "leisure",
+        "station": null,
+        "energy": 72.1,
+        "food": 93.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "yashima",
+        "station": null,
+        "energy": 67.6,
+        "food": 90.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 110,
+        "target": null,
+        "station": "yashima",
+        "energy": 63.2,
+        "food": 87.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 111,
+        "target": "modern-3",
+        "station": null,
+        "energy": 62.8,
+        "food": 87.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate": "baseline",
+    "scenario": "stress",
+    "seed": 2946379905,
+    "gravity": 100,
+    "postponedCheckpointTick": 41,
+    "postponedResumeMatches": true,
+    "decisions": [
+      {
+        "tick": 35,
+        "kind": "opening",
+        "title": "屋島をめぐる機会が近づく",
+        "detail": "人物が到着しなくても仮想世界の時間は進む"
+      },
+      {
+        "tick": 41,
+        "kind": "postponed",
+        "title": "決断の刻：補給と体力が足りず、攻撃を延期",
+        "detail": "回復できれば次の決断で戦いへ進める。機会は無期限ではない。",
+        "causes": [
+          "体力・食料・士気による行動余力不足",
+          "再検討まで15刻"
+        ]
+      },
+      {
+        "tick": 79,
+        "kind": "resolution",
+        "title": "補給尽き、撤退を決意",
+        "detail": "休養や補給が整わないまま時間が経過し、義経は攻撃を取りやめた。",
+        "causes": [
+          "攻撃準備不足が継続",
+          "延期後も行動余力が回復せず"
+        ]
+      }
+    ],
+    "resolution": {
+      "kind": "retreat",
+      "title": "補給尽き、撤退を決意",
+      "summary": "休養や補給が整わないまま時間が経過し、義経は攻撃を取りやめた。",
+      "resolvedAt": 79,
+      "factors": [
+        "攻撃準備不足が継続",
+        "延期後も行動余力が回復せず"
+      ],
+      "journey": [
+        {
+          "tick": 44,
+          "text": "義経が「SIM synthetic visit」で見物をした"
+        },
+        {
+          "tick": 70,
+          "text": "義経が「SIM synthetic visit」で見物をした"
+        }
+      ],
+      "metrics": {
+        "leaderPresent": true,
+        "arrived": true,
+        "atDecisionSite": true,
+        "arrivedAt": 41,
+        "allyCount": 0,
+        "readiness": 25,
+        "energy": 0,
+        "provisions": 0,
+        "morale": 100,
+        "money": 0,
+        "gravity": 100,
+        "negotiationBias": 0
+      },
+      "randomFactor": null,
+      "provenance": "fictional_simulation",
+      "geographicRef": "YS001"
+    },
+    "timeline": [
+      {
+        "tick": 35,
+        "target": "yashima",
+        "station": null,
+        "energy": 24.7,
+        "food": 9.5,
+        "money": 0,
+        "phase": "approaching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": null,
+        "station": "yashima",
+        "energy": 22.3,
+        "food": 7.7,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "決断の刻：補給と体力が足りず、攻撃を延期"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 42,
+        "target": "modern-3",
+        "station": null,
+        "energy": 21.9,
+        "food": 7.4,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 44,
+        "target": null,
+        "station": "modern-3",
+        "energy": 17.1,
+        "food": 6.8,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 45,
+        "target": "yashima",
+        "station": null,
+        "energy": 16.7,
+        "food": 6.5,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 47,
+        "target": null,
+        "station": "yashima",
+        "energy": 15.9,
+        "food": 5.9,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 48,
+        "target": "modern-3",
+        "station": null,
+        "energy": 15.5,
+        "food": 5.6,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": "sea",
+        "station": null,
+        "energy": 14.3,
+        "food": 4.7,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「海上退避（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 61,
+        "target": "modern-3",
+        "station": null,
+        "energy": 10.3,
+        "food": 1.7,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 70,
+        "target": null,
+        "station": "modern-3",
+        "energy": 0.2999999999999998,
+        "food": 0,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": "yashima",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 79,
+        "target": null,
+        "station": "yashima",
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "retreat",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "補給尽き、撤退を決意"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 80,
+        "target": "modern-3",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "retreat",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 88,
+        "target": null,
+        "station": "modern-3",
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "retreat",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": "yashima",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "retreat",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": "sea",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "retreat",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「海上退避（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "yashima",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "retreat",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate": "baseline",
+    "scenario": "stress-support",
+    "seed": 2946379905,
+    "gravity": 100,
+    "postponedCheckpointTick": null,
+    "postponedResumeMatches": null,
+    "decisions": [
+      {
+        "tick": 35,
+        "kind": "opening",
+        "title": "屋島をめぐる機会が近づく",
+        "detail": "人物が到着しなくても仮想世界の時間は進む"
+      },
+      {
+        "tick": 41,
+        "kind": "resolution",
+        "title": "屋島で交戦、決着つかず",
+        "detail": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+        "causes": [
+          "義経が屋島に到達",
+          "行動余力 50（仮想点）",
+          "同行候補の到達 0名",
+          "簡易対立判定 62（乱数を含む）"
+        ]
+      }
+    ],
+    "resolution": {
+      "kind": "stalemate",
+      "title": "屋島で交戦、決着つかず",
+      "summary": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+      "resolvedAt": 41,
+      "factors": [
+        "義経が屋島に到達",
+        "行動余力 50（仮想点）",
+        "同行候補の到達 0名",
+        "簡易対立判定 62（乱数を含む）"
+      ],
+      "journey": [
+        {
+          "tick": 0,
+          "text": "義経に資金と食料を支援した"
+        },
+        {
+          "tick": 15,
+          "text": "義経が補給を行った（資金を消費）"
+        }
+      ],
+      "metrics": {
+        "leaderPresent": true,
+        "arrived": true,
+        "atDecisionSite": true,
+        "arrivedAt": 41,
+        "allyCount": 0,
+        "readiness": 50,
+        "energy": 22,
+        "provisions": 71,
+        "morale": 74,
+        "money": 11,
+        "gravity": 100,
+        "negotiationBias": 0
+      },
+      "randomFactor": 4,
+      "provenance": "fictional_simulation",
+      "geographicRef": "YS001"
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "supply",
+        "station": null,
+        "energy": 39.6,
+        "food": 39.7,
+        "money": 20,
+        "phase": "watching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「補給施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 15,
+        "target": null,
+        "station": "supply",
+        "energy": 32.8,
+        "food": 78.5,
+        "money": 11,
+        "phase": "watching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が補給を行った（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 16,
+        "target": "yashima",
+        "station": null,
+        "energy": 32.3,
+        "food": 78.2,
+        "money": 11,
+        "phase": "watching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "yashima",
+        "station": null,
+        "energy": 24.7,
+        "food": 72.5,
+        "money": 11,
+        "phase": "approaching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": null,
+        "station": "yashima",
+        "energy": 22.3,
+        "food": 70.7,
+        "money": 11,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島で交戦、決着つかず"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 42,
+        "target": "modern-2",
+        "station": null,
+        "energy": 21.9,
+        "food": 70.4,
+        "money": 11,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 44,
+        "target": null,
+        "station": "modern-2",
+        "energy": 69.1,
+        "food": 69.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 45,
+        "target": "yashima",
+        "station": null,
+        "energy": 68.6,
+        "food": 69.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 47,
+        "target": null,
+        "station": "yashima",
+        "energy": 67.6,
+        "food": 68.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 48,
+        "target": "modern-3",
+        "station": null,
+        "energy": 67.1,
+        "food": 68.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 50,
+        "target": null,
+        "station": "modern-3",
+        "energy": 62.099999999999994,
+        "food": 68,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": "yashima",
+        "station": null,
+        "energy": 61.6,
+        "food": 67.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 53,
+        "target": null,
+        "station": "yashima",
+        "energy": 60.8,
+        "food": 67.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 54,
+        "target": "modern-3",
+        "station": null,
+        "energy": 60.4,
+        "food": 66.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 56,
+        "target": null,
+        "station": "modern-3",
+        "energy": 55.6,
+        "food": 66.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 57,
+        "target": "yashima",
+        "station": null,
+        "energy": 55.2,
+        "food": 65.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 59,
+        "target": null,
+        "station": "yashima",
+        "energy": 54.4,
+        "food": 65.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 60,
+        "target": "modern-3",
+        "station": null,
+        "energy": 54,
+        "food": 65,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 62,
+        "target": null,
+        "station": "modern-3",
+        "energy": 49.2,
+        "food": 64.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 63,
+        "target": "yashima",
+        "station": null,
+        "energy": 48.8,
+        "food": 64.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 65,
+        "target": null,
+        "station": "yashima",
+        "energy": 47.8,
+        "food": 63.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 66,
+        "target": "leisure",
+        "station": null,
+        "energy": 47.3,
+        "food": 63.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": "modern-3",
+        "station": null,
+        "energy": 44.8,
+        "food": 61.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 74,
+        "target": null,
+        "station": "modern-3",
+        "energy": 39.3,
+        "food": 60.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 75,
+        "target": "yashima",
+        "station": null,
+        "energy": 38.8,
+        "food": 60.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 77,
+        "target": null,
+        "station": "yashima",
+        "energy": 37.8,
+        "food": 59.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 78,
+        "target": "leisure",
+        "station": null,
+        "energy": 37.3,
+        "food": 59.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 81,
+        "target": "modern-3",
+        "station": null,
+        "energy": 35.8,
+        "food": 58.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 82,
+        "target": null,
+        "station": "modern-3",
+        "energy": 31.299999999999997,
+        "food": 58.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 83,
+        "target": "yashima",
+        "station": null,
+        "energy": 30.9,
+        "food": 58.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 85,
+        "target": null,
+        "station": "yashima",
+        "energy": 30.1,
+        "food": 57.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 86,
+        "target": "modern-3",
+        "station": null,
+        "energy": 29.7,
+        "food": 57.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 88,
+        "target": null,
+        "station": "modern-3",
+        "energy": 24.9,
+        "food": 56.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": "yashima",
+        "station": null,
+        "energy": 24.5,
+        "food": 56.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": null,
+        "station": "yashima",
+        "energy": 23.7,
+        "food": 55.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 92,
+        "target": "modern-3",
+        "station": null,
+        "energy": 23.3,
+        "food": 55.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 94,
+        "target": null,
+        "station": "modern-3",
+        "energy": 18.5,
+        "food": 54.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 95,
+        "target": "yashima",
+        "station": null,
+        "energy": 18.1,
+        "food": 54.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 97,
+        "target": null,
+        "station": "yashima",
+        "energy": 17.3,
+        "food": 53.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 98,
+        "target": "modern-3",
+        "station": null,
+        "energy": 16.9,
+        "food": 53.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 100,
+        "target": null,
+        "station": "modern-3",
+        "energy": 12.100000000000001,
+        "food": 53,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "leisure",
+        "station": null,
+        "energy": 11.7,
+        "food": 52.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 111,
+        "target": "modern-3",
+        "station": null,
+        "energy": 7.7,
+        "food": 49.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate": "reconsider",
+    "scenario": "control",
+    "seed": 2946379905,
+    "gravity": 100,
+    "postponedCheckpointTick": null,
+    "postponedResumeMatches": null,
+    "decisions": [
+      {
+        "tick": 35,
+        "kind": "opening",
+        "title": "屋島をめぐる機会が近づく",
+        "detail": "人物が到着しなくても仮想世界の時間は進む"
+      },
+      {
+        "tick": 41,
+        "kind": "resolution",
+        "title": "屋島で交戦、決着つかず",
+        "detail": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+        "causes": [
+          "義経が屋島に到達",
+          "行動余力 60（仮想点）",
+          "同行候補の到達 0名",
+          "簡易対立判定 65（乱数を含む）"
+        ]
+      }
+    ],
+    "resolution": {
+      "kind": "stalemate",
+      "title": "屋島で交戦、決着つかず",
+      "summary": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+      "resolvedAt": 41,
+      "factors": [
+        "義経が屋島に到達",
+        "行動余力 60（仮想点）",
+        "同行候補の到達 0名",
+        "簡易対立判定 65（乱数を含む）"
+      ],
+      "journey": [],
+      "metrics": {
+        "leaderPresent": true,
+        "arrived": true,
+        "atDecisionSite": true,
+        "arrivedAt": 41,
+        "allyCount": 0,
+        "readiness": 60,
+        "energy": 65,
+        "provisions": 60,
+        "morale": 74,
+        "money": 45,
+        "gravity": 100,
+        "negotiationBias": 0
+      },
+      "randomFactor": -3,
+      "provenance": "fictional_simulation",
+      "geographicRef": "YS001"
+    },
+    "timeline": [
+      {
+        "tick": 35,
+        "target": "yashima",
+        "station": null,
+        "energy": 67.6,
+        "food": 61.5,
+        "money": 45,
+        "phase": "approaching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": null,
+        "station": "yashima",
+        "energy": 64.6,
+        "food": 59.7,
+        "money": 45,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島で交戦、決着つかず"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 42,
+        "target": "modern-1",
+        "station": null,
+        "energy": 64.1,
+        "food": 59.4,
+        "money": 45,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 43,
+        "target": null,
+        "station": "modern-1",
+        "energy": 63.6,
+        "food": 98.1,
+        "money": 38,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 44,
+        "target": "modern-2",
+        "station": null,
+        "energy": 63.2,
+        "food": 97.8,
+        "money": 38,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 47,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 96.9,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 48,
+        "target": "yashima",
+        "station": null,
+        "energy": 99.6,
+        "food": 96.6,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 50,
+        "target": null,
+        "station": "yashima",
+        "energy": 98.6,
+        "food": 96,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": "modern-3",
+        "station": null,
+        "energy": 98.1,
+        "food": 95.7,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 53,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 95.1,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 54,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 94.8,
+        "money": 32,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 55,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 56,
+        "target": "yashima",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 57,
+        "target": null,
+        "station": "yashima",
+        "energy": 91.1,
+        "food": 99.4,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 58,
+        "target": "modern-2",
+        "station": null,
+        "energy": 90.6,
+        "food": 99.1,
+        "money": 25,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 60,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 98.5,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 61,
+        "target": "yashima",
+        "station": null,
+        "energy": 99.6,
+        "food": 98.2,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 63,
+        "target": null,
+        "station": "yashima",
+        "energy": 98.6,
+        "food": 97.6,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 64,
+        "target": "modern-1",
+        "station": null,
+        "energy": 98.1,
+        "food": 97.3,
+        "money": 19,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 65,
+        "target": null,
+        "station": "modern-1",
+        "energy": 97.6,
+        "food": 100,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 66,
+        "target": "yashima",
+        "station": null,
+        "energy": 97.1,
+        "food": 99.7,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 67,
+        "target": null,
+        "station": "yashima",
+        "energy": 96.6,
+        "food": 99.4,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 68,
+        "target": "modern-1",
+        "station": null,
+        "energy": 96.1,
+        "food": 99.1,
+        "money": 12,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 69,
+        "target": null,
+        "station": "modern-1",
+        "energy": 95.6,
+        "food": 100,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 70,
+        "target": "yashima",
+        "station": null,
+        "energy": 95.1,
+        "food": 99.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": null,
+        "station": "yashima",
+        "energy": 94.6,
+        "food": 99.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 72,
+        "target": "modern-3",
+        "station": null,
+        "energy": 94.1,
+        "food": 99.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 74,
+        "target": null,
+        "station": "modern-3",
+        "energy": 89.1,
+        "food": 98.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 75,
+        "target": "yashima",
+        "station": null,
+        "energy": 88.6,
+        "food": 98.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 77,
+        "target": null,
+        "station": "yashima",
+        "energy": 87.6,
+        "food": 97.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 78,
+        "target": "leisure",
+        "station": null,
+        "energy": 87.1,
+        "food": 97.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 81,
+        "target": "modern-3",
+        "station": null,
+        "energy": 85.6,
+        "food": 96.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 82,
+        "target": null,
+        "station": "modern-3",
+        "energy": 81.1,
+        "food": 96.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 83,
+        "target": "yashima",
+        "station": null,
+        "energy": 80.6,
+        "food": 95.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 85,
+        "target": null,
+        "station": "yashima",
+        "energy": 79.6,
+        "food": 95.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 86,
+        "target": "modern-3",
+        "station": null,
+        "energy": 79.1,
+        "food": 94.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 88,
+        "target": null,
+        "station": "modern-3",
+        "energy": 74.1,
+        "food": 94.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": "yashima",
+        "station": null,
+        "energy": 73.6,
+        "food": 94,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": null,
+        "station": "yashima",
+        "energy": 72.6,
+        "food": 93.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 92,
+        "target": "leisure",
+        "station": null,
+        "energy": 72.1,
+        "food": 93.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "yashima",
+        "station": null,
+        "energy": 67.6,
+        "food": 90.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 110,
+        "target": null,
+        "station": "yashima",
+        "energy": 63.2,
+        "food": 87.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 111,
+        "target": "modern-3",
+        "station": null,
+        "energy": 62.8,
+        "food": 87.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate": "reconsider",
+    "scenario": "stress",
+    "seed": 2946379905,
+    "gravity": 100,
+    "postponedCheckpointTick": 41,
+    "postponedResumeMatches": true,
+    "decisions": [
+      {
+        "tick": 35,
+        "kind": "opening",
+        "title": "屋島をめぐる機会が近づく",
+        "detail": "人物が到着しなくても仮想世界の時間は進む"
+      },
+      {
+        "tick": 41,
+        "kind": "postponed",
+        "title": "決断の刻：補給と体力が足りず、攻撃を延期",
+        "detail": "回復できれば次の決断で戦いへ進める。機会は無期限ではない。",
+        "causes": [
+          "食料欠乏（最低食料未満）",
+          "体力・食料・士気による行動余力不足",
+          "再検討まで15刻"
+        ]
+      },
+      {
+        "tick": 56,
+        "kind": "resolution",
+        "title": "屋島への攻勢を断念",
+        "detail": "延期の猶予を経ても準備が整わず、義経は屋島の外で攻撃を取りやめた。",
+        "causes": [
+          "延期後、屋島の外で再判断",
+          "重度の疲労（最低体力未満）",
+          "食料欠乏（最低食料未満）",
+          "体力・食料・士気による行動余力不足"
+        ]
+      }
+    ],
+    "resolution": {
+      "kind": "withdrawal",
+      "title": "屋島への攻勢を断念",
+      "summary": "延期の猶予を経ても準備が整わず、義経は屋島の外で攻撃を取りやめた。",
+      "resolvedAt": 56,
+      "factors": [
+        "延期後、屋島の外で再判断",
+        "重度の疲労（最低体力未満）",
+        "食料欠乏（最低食料未満）",
+        "体力・食料・士気による行動余力不足"
+      ],
+      "journey": [
+        {
+          "tick": 44,
+          "text": "義経が「SIM synthetic visit」で見物をした"
+        }
+      ],
+      "metrics": {
+        "leaderPresent": true,
+        "arrived": true,
+        "atDecisionSite": false,
+        "arrivedAt": 41,
+        "allyCount": 0,
+        "readiness": 28,
+        "energy": 12,
+        "provisions": 3,
+        "morale": 90,
+        "money": 0,
+        "gravity": 100,
+        "negotiationBias": 0
+      },
+      "randomFactor": null,
+      "provenance": "fictional_simulation",
+      "geographicRef": "YS001"
+    },
+    "timeline": [
+      {
+        "tick": 35,
+        "target": "yashima",
+        "station": null,
+        "energy": 24.7,
+        "food": 9.5,
+        "money": 0,
+        "phase": "approaching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": null,
+        "station": "yashima",
+        "energy": 22.3,
+        "food": 7.7,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "決断の刻：補給と体力が足りず、攻撃を延期"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 42,
+        "target": "modern-3",
+        "station": null,
+        "energy": 21.9,
+        "food": 7.4,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 44,
+        "target": null,
+        "station": "modern-3",
+        "energy": 17.1,
+        "food": 6.8,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 45,
+        "target": "yashima",
+        "station": null,
+        "energy": 16.7,
+        "food": 6.5,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 47,
+        "target": null,
+        "station": "yashima",
+        "energy": 15.9,
+        "food": 5.9,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 48,
+        "target": "modern-3",
+        "station": null,
+        "energy": 15.5,
+        "food": 5.6,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": "sea",
+        "station": null,
+        "energy": 14.3,
+        "food": 4.7,
+        "money": 0,
+        "phase": "postponed",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「海上退避（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 56,
+        "target": "sea",
+        "station": null,
+        "energy": 12.3,
+        "food": 3.2,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島への攻勢を断念"
+          }
+        ]
+      },
+      {
+        "tick": 61,
+        "target": "modern-3",
+        "station": null,
+        "energy": 10.3,
+        "food": 1.7,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 70,
+        "target": null,
+        "station": "modern-3",
+        "energy": 0.2999999999999998,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": "yashima",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 79,
+        "target": null,
+        "station": "yashima",
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 80,
+        "target": "modern-3",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 88,
+        "target": null,
+        "station": "modern-3",
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": "yashima",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": "sea",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「海上退避（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "yashima",
+        "station": null,
+        "energy": 0,
+        "food": 0,
+        "money": 0,
+        "phase": "resolved",
+        "ending": "withdrawal",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "candidate": "reconsider",
+    "scenario": "stress-support",
+    "seed": 2946379905,
+    "gravity": 100,
+    "postponedCheckpointTick": null,
+    "postponedResumeMatches": null,
+    "decisions": [
+      {
+        "tick": 35,
+        "kind": "opening",
+        "title": "屋島をめぐる機会が近づく",
+        "detail": "人物が到着しなくても仮想世界の時間は進む"
+      },
+      {
+        "tick": 41,
+        "kind": "resolution",
+        "title": "屋島で交戦、決着つかず",
+        "detail": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+        "causes": [
+          "義経が屋島に到達",
+          "行動余力 50（仮想点）",
+          "同行候補の到達 0名",
+          "簡易対立判定 62（乱数を含む）"
+        ]
+      }
+    ],
+    "resolution": {
+      "kind": "stalemate",
+      "title": "屋島で交戦、決着つかず",
+      "summary": "交戦は始まったものの、双方に決定打はなく戦いは膠着した。",
+      "resolvedAt": 41,
+      "factors": [
+        "義経が屋島に到達",
+        "行動余力 50（仮想点）",
+        "同行候補の到達 0名",
+        "簡易対立判定 62（乱数を含む）"
+      ],
+      "journey": [
+        {
+          "tick": 0,
+          "text": "義経に資金と食料を支援した"
+        },
+        {
+          "tick": 15,
+          "text": "義経が補給を行った（資金を消費）"
+        }
+      ],
+      "metrics": {
+        "leaderPresent": true,
+        "arrived": true,
+        "atDecisionSite": true,
+        "arrivedAt": 41,
+        "allyCount": 0,
+        "readiness": 50,
+        "energy": 22,
+        "provisions": 71,
+        "morale": 74,
+        "money": 11,
+        "gravity": 100,
+        "negotiationBias": 0
+      },
+      "randomFactor": 4,
+      "provenance": "fictional_simulation",
+      "geographicRef": "YS001"
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "supply",
+        "station": null,
+        "energy": 39.6,
+        "food": 39.7,
+        "money": 20,
+        "phase": "watching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「補給施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 15,
+        "target": null,
+        "station": "supply",
+        "energy": 32.8,
+        "food": 78.5,
+        "money": 11,
+        "phase": "watching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が補給を行った（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 16,
+        "target": "yashima",
+        "station": null,
+        "energy": 32.3,
+        "food": 78.2,
+        "money": 11,
+        "phase": "watching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "yashima",
+        "station": null,
+        "energy": 24.7,
+        "food": 72.5,
+        "money": 11,
+        "phase": "approaching",
+        "ending": null,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": null,
+        "station": "yashima",
+        "energy": 22.3,
+        "food": 70.7,
+        "money": 11,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島で交戦、決着つかず"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 42,
+        "target": "modern-2",
+        "station": null,
+        "energy": 21.9,
+        "food": 70.4,
+        "money": 11,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 44,
+        "target": null,
+        "station": "modern-2",
+        "energy": 69.1,
+        "food": 69.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 45,
+        "target": "yashima",
+        "station": null,
+        "energy": 68.6,
+        "food": 69.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 47,
+        "target": null,
+        "station": "yashima",
+        "energy": 67.6,
+        "food": 68.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 48,
+        "target": "modern-3",
+        "station": null,
+        "energy": 67.1,
+        "food": 68.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 50,
+        "target": null,
+        "station": "modern-3",
+        "energy": 62.099999999999994,
+        "food": 68,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": "yashima",
+        "station": null,
+        "energy": 61.6,
+        "food": 67.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 53,
+        "target": null,
+        "station": "yashima",
+        "energy": 60.8,
+        "food": 67.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 54,
+        "target": "modern-3",
+        "station": null,
+        "energy": 60.4,
+        "food": 66.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 56,
+        "target": null,
+        "station": "modern-3",
+        "energy": 55.6,
+        "food": 66.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 57,
+        "target": "yashima",
+        "station": null,
+        "energy": 55.2,
+        "food": 65.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 59,
+        "target": null,
+        "station": "yashima",
+        "energy": 54.4,
+        "food": 65.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 60,
+        "target": "modern-3",
+        "station": null,
+        "energy": 54,
+        "food": 65,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 62,
+        "target": null,
+        "station": "modern-3",
+        "energy": 49.2,
+        "food": 64.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 63,
+        "target": "yashima",
+        "station": null,
+        "energy": 48.8,
+        "food": 64.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 65,
+        "target": null,
+        "station": "yashima",
+        "energy": 47.8,
+        "food": 63.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 66,
+        "target": "leisure",
+        "station": null,
+        "energy": 47.3,
+        "food": 63.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": "modern-3",
+        "station": null,
+        "energy": 44.8,
+        "food": 61.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 74,
+        "target": null,
+        "station": "modern-3",
+        "energy": 39.3,
+        "food": 60.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 75,
+        "target": "yashima",
+        "station": null,
+        "energy": 38.8,
+        "food": 60.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 77,
+        "target": null,
+        "station": "yashima",
+        "energy": 37.8,
+        "food": 59.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 78,
+        "target": "leisure",
+        "station": null,
+        "energy": 37.3,
+        "food": 59.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 81,
+        "target": "modern-3",
+        "station": null,
+        "energy": 35.8,
+        "food": 58.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 82,
+        "target": null,
+        "station": "modern-3",
+        "energy": 31.299999999999997,
+        "food": 58.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 83,
+        "target": "yashima",
+        "station": null,
+        "energy": 30.9,
+        "food": 58.1,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 85,
+        "target": null,
+        "station": "yashima",
+        "energy": 30.1,
+        "food": 57.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 86,
+        "target": "modern-3",
+        "station": null,
+        "energy": 29.7,
+        "food": 57.2,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 88,
+        "target": null,
+        "station": "modern-3",
+        "energy": 24.9,
+        "food": 56.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": "yashima",
+        "station": null,
+        "energy": 24.5,
+        "food": 56.3,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": null,
+        "station": "yashima",
+        "energy": 23.7,
+        "food": 55.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 92,
+        "target": "modern-3",
+        "station": null,
+        "energy": 23.3,
+        "food": 55.4,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 94,
+        "target": null,
+        "station": "modern-3",
+        "energy": 18.5,
+        "food": 54.8,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 95,
+        "target": "yashima",
+        "station": null,
+        "energy": 18.1,
+        "food": 54.5,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 97,
+        "target": null,
+        "station": "yashima",
+        "energy": 17.3,
+        "food": 53.9,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      },
+      {
+        "tick": 98,
+        "target": "modern-3",
+        "station": null,
+        "energy": 16.9,
+        "food": 53.6,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 100,
+        "target": null,
+        "station": "modern-3",
+        "energy": 12.100000000000001,
+        "food": 53,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "leisure",
+        "station": null,
+        "energy": 11.7,
+        "food": 52.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 111,
+        "target": "modern-3",
+        "station": null,
+        "energy": 7.7,
+        "food": 49.7,
+        "money": 5,
+        "phase": "resolved",
+        "ending": "stalemate",
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      }
+    ]
+  }
+]

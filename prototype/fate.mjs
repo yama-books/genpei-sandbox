@@ -9,6 +9,8 @@ export const FATE_RULES = Object.freeze({
   departureTick: 82,             // fictional chapter window, not 1185 calendar date
   closingTick: 112,
   graceTicks: 15,
+  minimumBattleEnergy: 15,
+  minimumBattleProvisions: 12,
 });
 export function newFateState() {
   return {
@@ -82,6 +84,12 @@ export function advanceFate(world,gravity,log,rngNext) {
   }
   if (t < FATE_RULES.earliestDecisionTick) return fate;
   const m=chapterMetrics(world,gravity);
+  const leader=world.agents.find(a=>a.id==="C036");
+  const shortages=[];
+  if(leader && leader.energy<FATE_RULES.minimumBattleEnergy) shortages.push("重度の疲労（最低体力未満）");
+  if(leader && leader.provisions<FATE_RULES.minimumBattleProvisions) shortages.push("食料欠乏（最低食料未満）");
+  if(m.readiness<46) shortages.push("体力・食料・士気による行動余力不足");
+  const canParley=fate.negotiationBias>=20 && m.readiness>=37;
   // Expiry is always checked. An agent cannot keep the chapter waiting forever.
   if(t>=FATE_RULES.closingTick) {
     if(!m.arrived) closeChapter(world,"missed","屋島の戦い、起こらず",
@@ -92,7 +100,28 @@ export function advanceFate(world,gravity,log,rngNext) {
       ["屋島には到達","判断の延期と時間経過"],m,log);
     return fate;
   }
-  if(!m.atDecisionSite) return fate;
+  // Off-site reconsideration closes only a previously postponed chapter.
+  // Recovery does not imply arrival, battle, talks, or a new grace period.
+  if(!m.atDecisionSite) {
+    if(fate.phase==="postponed" && fate.postponedUntil!==null && t>=fate.postponedUntil) {
+      if(t>=FATE_RULES.departureTick) {
+        closeChapter(world,"withdrawal","屋島への攻勢を断念",
+          "回復のため屋島を離れている間に相手勢力が退避し、交戦の機会は失われた。",
+          ["延期後も屋島の外にいる","相手勢力の退避（ゲーム上の設定）"],m,log);
+      } else if(shortages.length && !canParley) {
+        closeChapter(world,"withdrawal","屋島への攻勢を断念",
+          "延期の猶予を経ても準備が整わず、義経は屋島の外で攻撃を取りやめた。",
+          ["延期後、屋島の外で再判断",...shortages],m,log);
+      } else if(!fate.decisions.some(d=>d.kind==="reconsidered")) {
+        record(world,"reconsidered",{
+          title:"再判断：行動余力は回復、屋島への帰還を待つ",
+          detail:"現地に戻るまでは交戦や交渉を始めない。移動先は本人が判断する。",
+          causes:["延期の猶予が経過","現地での判断が必要"],
+        },log);
+      }
+    }
+    return fate;
+  }
   if(t>=FATE_RULES.departureTick) {
     closeChapter(world,"empty","屋島は、すでに静かだった",
       "屋島へ向かったものの、仮想の相手勢力はすでに場を離れ、戦闘は成立しなかった。",
@@ -107,19 +136,19 @@ export function advanceFate(world,gravity,log,rngNext) {
       ["交渉への助言を受け入れた","交渉できるだけの行動余力があった"],m,log);
     return fate;
   }
-  if(m.readiness<46) {
+  if(shortages.length) {
     if(fate.phase!=="postponed") {
       fate.phase="postponed";
       fate.postponedUntil=t+FATE_RULES.graceTicks;
       record(world,"postponed",{
         title:"決断の刻：補給と体力が足りず、攻撃を延期",
         detail:"回復できれば次の決断で戦いへ進める。機会は無期限ではない。",
-        causes:["体力・食料・士気による行動余力不足","再検討まで"+FATE_RULES.graceTicks+"刻"],
+        causes:[...shortages,"再検討まで"+FATE_RULES.graceTicks+"刻"],
       },log);
     } else {
       closeChapter(world,"retreat","補給尽き、撤退を決意",
         "休養や補給が整わないまま時間が経過し、義経は攻撃を取りやめた。",
-        ["攻撃準備不足が継続","延期後も行動余力が回復せず"],m,log);
+        ["攻撃準備不足が継続",...shortages],m,log);
     }
     return fate;
   }

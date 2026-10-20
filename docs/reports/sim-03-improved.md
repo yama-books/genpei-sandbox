@@ -1,0 +1,27 @@
+# SIM-01 fixed-seed batch
+
+Synthetic game statistics, not historical probabilities.
+
+Seeds: 128; ticks: 240; cells: 12; replay + JSON-save resume checked for every run.
+
+|Gravity|POI|Intervention|Arrived / runs|In window|Battle|Parley|Retreat|Not arrived|Late empty|Leisure|Rest|Supply|Shortage|Cash limited ticks|Exhausted agents|Stalled|Invalid|Replay / resume mismatches|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|false|false|125/128|0|0|0|0|128|0|807|955|702|0|40341|0|0|0|0/0|
+|0|false|true|91/128|5|3|2|0|123|0|918|1132|808|0|32207|0|0|0|0/0|
+|0|true|false|128/128|75|75|0|0|3|50|3612|998|1201|0|54489|0|0|0|0/0|
+|0|true|true|128/128|13|5|8|0|36|79|3844|1204|1403|0|51476|0|0|0|0/0|
+|50|false|false|128/128|124|124|0|0|0|4|711|992|739|0|34206|0|0|0|0/0|
+|50|false|true|128/128|116|29|87|0|1|11|820|1139|826|0|24891|0|0|0|0/0|
+|50|true|false|128/128|128|128|0|0|0|0|3529|955|1242|0|55125|0|0|0|0/0|
+|50|true|true|128/128|128|30|98|0|0|0|3828|1116|1483|0|52316|0|0|0|0/0|
+|100|false|false|128/128|128|128|0|0|0|0|621|1004|791|0|21978|0|0|0|0/0|
+|100|false|true|128/128|128|21|107|0|0|0|589|1146|777|0|14845|0|0|0|0/0|
+|100|true|false|128/128|128|128|0|0|0|0|5499|1127|1216|0|53193|0|0|0|0/0|
+|100|true|true|128/128|128|21|107|0|0|0|5638|1335|1441|0|50531|0|0|0|0/0|
+
+Arrived means leader arrived by the horizon (may be after chapter expiry); in window means first arrival before tick 82.
+Retreat groups retreat + withdrawal; late empty is kept separate. Detailed endings, hashes and per-seed observations are in JSON/CSV.
+Cash limited ticks count agent-ticks with money < 9 (the supply price), not free money or income. Resource bounds count agent-tick violations.
+Shortage counts emitted payment failures; exhaustion counts each agent once at simultaneous zero energy/food.
+Stalled counts 60 consecutive ticks at identical coordinates while targeting elsewhere. Zero does not prove indefinite liveness.
+Leisure/rest/supply count successful facility arrivals, not durations. All ticks through the horizon are counted, including post-chapter activity.

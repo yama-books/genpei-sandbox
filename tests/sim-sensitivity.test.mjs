@@ -6,6 +6,7 @@ import { resolve, dirname } from 'node:path';
 import * as api from '../prototype/core.mjs';
 import { setup, runOne, loadEngine, SCENARIOS } from './sim-sensitivity.mjs';
 import { advanceFate, chapterMetrics } from '../prototype/fate.mjs';
+import { advanceFate as legacyAdvance } from './fixtures/sim02-fate.mjs';
 
 test('sensitivity changes only leader resource and leaves the control untouched',()=>{
   const control=setup(api,123,SCENARIOS[0]);
@@ -38,20 +39,20 @@ test('experimental window and decision interval use isolated engine copies',asyn
     assert.equal(api.createWorld(1).fate.closingTick,112);
   } finally {if(dirname(temp)===resolve(tmpdir())) await rm(temp,{recursive:true});}
 });
-test('decision probe: high food and morale can mask complete exhaustion in weighted readiness',()=>{
+test('SIM-02 historical probe: high food and morale masked exhaustion',()=>{
   const w=api.createWorld(1);w.tick=50;
   Object.assign(w.agents[0],{energy:0,provisions:100,morale:100,currentStationId:'yashima',visitedYashima:true,arrivedAtYashimaTick:50});
   assert.equal(chapterMetrics(w).readiness,60);
-  advanceFate(w,100,api.logEvent,api.rngNext);
+  legacyAdvance(w,100,api.logEvent,api.rngNext);
   assert.ok(['upper_hand','stalemate','setback'].includes(w.fate.resolution.kind));
 });
 
 test('postponed shortage only retreats on site before departure; absence reaches withdrawal at expiry',async()=>{
   const {probe}=await import('./sim-decision-probes.mjs');
-  assert.equal(probe({energy:10,food:5,morale:20,tick:65,postponed:true}).ending,'retreat');
-  assert.equal(probe({energy:10,food:5,morale:20,tick:65,postponed:true,away:true}).ending,'pending');
-  assert.equal(probe({energy:10,food:5,morale:20,tick:82,postponed:true}).ending,'empty');
-  assert.equal(probe({energy:10,food:5,morale:20,tick:112,postponed:true,away:true}).ending,'withdrawal');
+  assert.equal(probe({energy:10,food:5,morale:20,tick:65,postponed:true},legacyAdvance).ending,'retreat');
+  assert.equal(probe({energy:10,food:5,morale:20,tick:65,postponed:true,away:true},legacyAdvance).ending,'pending');
+  assert.equal(probe({energy:10,food:5,morale:20,tick:82,postponed:true},legacyAdvance).ending,'empty');
+  assert.equal(probe({energy:10,food:5,morale:20,tick:112,postponed:true,away:true},legacyAdvance).ending,'withdrawal');
 });
 
 test('single-clock experiment keeps closing fixed when departure changes',async()=>{

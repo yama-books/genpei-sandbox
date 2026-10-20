@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
-import { runOne, loadEngine } from './sim-sensitivity.mjs';
+import { runOne } from './sim-sensitivity.mjs';
+import { loadLegacyEngine } from './sim03-rules.mjs';
 
 test('SIM-02 artifacts contain complete paired matrices and sampled trajectories reproduce',async()=>{
   const temp=await mkdtemp(resolve(tmpdir(),'genpei-artifact-test-'));
@@ -19,7 +20,7 @@ test('SIM-02 artifacts contain complete paired matrices and sampled trajectories
       const variants=new Map();
       for(const s of report.scenarios) {
         const key=JSON.stringify([s.departure,s.interval,s.closing,s.grace,s.earliest]);
-        if(!variants.has(key)) variants.set(key,await loadEngine(null,s,temp));
+        if(!variants.has(key)) variants.set(key,await loadLegacyEngine(s,temp));
         // Validate recorded hashes without requiring history in shallow CI checkouts.
         const {api,sources}=variants.get(key);assert.deepEqual(sources,report.sources);
         for(const gravity of [0,50,100]) {
