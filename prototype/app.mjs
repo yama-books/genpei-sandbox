@@ -1,10 +1,12 @@
 import { STATIONS, STATION_BY_ID, PERSONAS, createWorld, stepWorld, intervene, snapshot, fatePull, destinationScores, installModernPois, removeModernPois } from "./core.mjs";
 import { buildModernStations } from "./poi-world.mjs";
-import { buildMapModel, mapModelSignature } from "./map/map-model.mjs";
+import { buildMapModel, mapModelSignature, poiKey } from "./map/map-model.mjs";
+import { makeModernRouteRequest } from "./map/route-contract.mjs";
+import { resolveRouteProvider, createRouteClient, routeFailureLabel } from "./map/route-provider.mjs";
 import { createModernMap } from "./map/modern-map.mjs";
 import { buildAgentObservations } from "./map/agent-observation.mjs";
 
-import { loadPoiSample } from "./openpoi.mjs";
+import { loadPoiSample, distanceMeters } from "./openpoi.mjs";
 import { FATE_RULES, chapterMetrics } from "./fate.mjs";
 import { createHistoricalGeoRequest } from "./geography-bridge.mjs";
 
@@ -49,6 +51,14 @@ let heritageSites = [];
 let modernMap = null;
 let poiListSignature = "";
 let observedPoiKey = null;
+// MAP-03B route preview state. Keys are facility name + real coordinates.
+const routeProvider = resolveRouteProvider(location.search, location.hostname);
+const routeClient = createRouteClient({ provider: routeProvider });
+let routeOriginKey = null;
+let routeDestinationKey = null;
+let routeShownFor = null;
+let routeBusy = false;
+let routeEndpointsSignature = null;
 
 const element = (tag, cls, value) => {
   const e = document.createElement(tag);
@@ -229,6 +239,97 @@ function renderModernMap() {
   renderPoiList(model);
   renderMapObservation(model);
   modernMap?.update(model);
+  renderRoutePanel();
+}
+
+// Endpoints are sourced modern facilities only (adopted or eligible). Reference-only
+// POIs, fictional stations, heritage points and characters can never be selected.
+function routeEndpoints() {
+  const out=new Map();
+  const adopted=world.modernPois ?? [];
+  for(const p of [...adopted,...buildModernStations(loadedModernPois)]) {
+    const key=poiKey(p.label,p.modernLocation.lat,p.modernLocation.lng);
+    if(!out.has(key)) out.set(key,{key,place:p,adopted:adopted.includes(p)});
+  }
+  return out;
+}
+function fillRouteSelect(select,endpoints,value) {
+  select.replaceChildren(new Option("— 施設を選択 —",""));
+  for(const e of endpoints.values()) select.append(new Option(e.place.label+(e.adopted?"（行動候補）":"（採用可）"),e.key));
+  select.value=value ?? "";
+}
+function selectedRouteRequest(endpoints=routeEndpoints()) {
+  const o=endpoints.get(routeOriginKey), d=endpoints.get(routeDestinationKey);
+  if(!o || !d) return null;
+  return {o,d,result:makeModernRouteRequest(o.place,d.place)};
+}
+function clearRoute(message="") {
+  modernMap?.clearRoute();
+  routeShownFor=null;
+  const result=q("#route-result");
+  result.className="route-result";
+  result.textContent=message;
+}
+function renderRoutePanel() {
+  const endpoints=routeEndpoints();
+  const signature=[...endpoints.values()].map(e=>e.key+(e.adopted?"*":"")).join(",");
+  if(signature!==routeEndpointsSignature) {
+    routeEndpointsSignature=signature;
+    if(!endpoints.has(routeOriginKey)) routeOriginKey=null;
+    if(!endpoints.has(routeDestinationKey)) routeDestinationKey=null;
+    fillRouteSelect(q("#route-origin"),endpoints,routeOriginKey);
+    fillRouteSelect(q("#route-destination"),endpoints,routeDestinationKey);
+    if(routeShownFor && !(endpoints.has(routeShownFor.origin) && endpoints.has(routeShownFor.destination)))
+      clearRoute("選択した施設が候補から外れたため、経路を消しました。");
+  }
+  q("#route-provider").textContent="経路："+routeProvider.label;
+  q("#route-provider-note").textContent=routeProvider.note;
+  const check=q("#route-check");
+  const picked=selectedRouteRequest(endpoints);
+  let ok=false;
+  if(endpoints.size<2) check.textContent="経路の端点にできる施設が2件以上必要です。「周辺施設を取得」後に選べます（参照のみの施設は対象外）。";
+  else if(!picked) check.textContent="出発施設と到着施設を選んでください。";
+  else if(!picked.result.ok) check.textContent=routeFailureLabel(picked.result.reason)+"。";
+  else {
+    ok=true;
+    const straight=Math.round(distanceMeters(picked.o.place.modernLocation,picked.d.place.modernLocation));
+    check.textContent="照会できます。施設間の直線距離は約"+straight+"m（道路経路ではありません）。"+
+      (routeProvider.available?"":"経路プロバイダーが未設定のため、道路経路は取得しません。");
+  }
+  check.classList.toggle("warn",Boolean(picked) && !ok);
+  q("#route-fetch").disabled=!ok || !routeProvider.available || routeBusy;
+  q("#route-fetch").textContent=routeBusy?"問い合わせ中…":"経路を取得";
+  q("#route-clear").disabled=!routeShownFor && !q("#route-result").textContent;
+}
+async function fetchRoute() {
+  const picked=selectedRouteRequest();
+  if(!picked?.result.ok || !routeProvider.available || routeBusy) return;
+  const keys={origin:picked.o.key,destination:picked.d.key};
+  routeBusy=true;
+  clearRoute("経路を問い合わせ中…（"+routeProvider.label+"）");
+  renderRoutePanel();
+  const reviewed=await routeClient.fetchRoute(picked.result.request);
+  routeBusy=false;
+  // A reply for an outdated selection is discarded rather than drawn.
+  if(routeOriginKey!==keys.origin || routeDestinationKey!==keys.destination) { clearRoute(); renderRoutePanel(); return; }
+  const result=q("#route-result");
+  if(!reviewed.ok) {
+    clearRoute();
+    result.className="route-result error";
+    result.textContent=routeFailureLabel(reviewed.reason)+"。直線や推定の線は描きません。";
+  } else {
+    const preview=reviewed.routePreview;
+    const drawn=Boolean(modernMap?.showRoute(preview,routeProvider.attributionHtml));
+    routeShownFor=keys;
+    result.className="route-result";
+    result.replaceChildren(
+      element("p","",picked.o.place.label+" → "+picked.d.place.label),
+      element("p","","経路長 約"+Math.round(preview.distanceMeters)+"m（提供元の推定・徒歩）"+(reviewed.cached?"／前回の取得結果":"")),
+      element("p","poi-source","提供元："+preview.provenance.attribution+" ／ ライセンス："+preview.provenance.license+" ／ 取得："+preview.provenance.retrievedAt),
+      element("p","poi-source","人物の移動・所要時間・1185年の道ではありません。通行可否・安全は未確認です。"));
+    if(!drawn) result.append(element("p","poi-source","地図を表示できないため、線は描いていません。"));
+  }
+  renderRoutePanel();
 }
 
 function renderMapObservation(model) {
@@ -588,5 +689,15 @@ q("#activate-poi").addEventListener("click", activateModernPois);
 q("#remove-poi").addEventListener("click", deactivateModernPois);
 q("#view-schematic").addEventListener("click", () => setView("schematic"));
 q("#view-map").addEventListener("click", () => setView("map"));
+q("#route-origin").addEventListener("change", e => { routeOriginKey=e.target.value||null; if(routeShownFor) clearRoute(); renderRoutePanel(); });
+q("#route-destination").addEventListener("change", e => { routeDestinationKey=e.target.value||null; if(routeShownFor) clearRoute(); renderRoutePanel(); });
+q("#route-swap").addEventListener("click", () => {
+  [routeOriginKey,routeDestinationKey]=[routeDestinationKey,routeOriginKey];
+  q("#route-origin").value=routeOriginKey ?? ""; q("#route-destination").value=routeDestinationKey ?? "";
+  if(routeShownFor) clearRoute();
+  renderRoutePanel();
+});
+q("#route-fetch").addEventListener("click", fetchRoute);
+q("#route-clear").addEventListener("click", () => { clearRoute(); renderRoutePanel(); });
 await load();
 await loadHeritageSites();

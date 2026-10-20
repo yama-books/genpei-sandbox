@@ -154,6 +154,25 @@ input[type=range]{accent-color:#3f806e;cursor:pointer;width:126px}
 .poi-card .poi-status.ref{color:#7f8c86}
 .poi-locate{margin-top:6px;width:100%;min-height:36px}
 
+/* MAP-03B: facility-to-facility modern route preview */
+.route-preview{margin-top:12px;padding:12px;background:#f6f3f8;border:1px solid #ddd3e3;border-radius:7px}
+.route-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.route-head .tiny-pill{background:#ece4f1;color:#5e3f78}
+.route-preview .helper{margin:6px 0}
+.route-note{font-size:10px;color:#6c5a78;margin:0 0 8px}.route-note:empty{display:none}
+.route-pickers{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:end}
+.route-pickers label{display:flex;flex-direction:column;gap:3px;min-width:0}
+.route-pickers select{width:100%;min-height:40px;border:1px solid #d4ded8;background:#fff;border-radius:6px;padding:6px;font-size:12px;color:#3f524d}
+.route-pickers .button{min-height:40px}
+.route-check{font-size:11px;color:#5d716b;margin:8px 0}.route-check.warn{color:#8a5e38}
+.route-actions{display:flex;gap:8px;flex-wrap:wrap}.route-actions .button{min-height:40px;flex:1 1 140px}
+.route-result{font-size:11px;color:#3f4f4a;line-height:1.6}.route-result:empty{display:none}
+.route-result{margin-top:8px;padding:8px 10px;background:#fff;border:1px solid #e3dbe8;border-radius:6px}
+.route-result.error{color:#8e3924;background:#fff0eb;border-color:#f1d4c8}
+.route-result p{margin:2px 0;overflow-wrap:anywhere}
+.legend-line{display:inline-block;width:16px;height:4px;border-radius:2px;background:#7a3fa0;margin-right:5px;vertical-align:2px}
+@media(max-width:560px){.route-pickers{grid-template-columns:1fr}.route-pickers .button{justify-self:start}}
+
 @media(max-width:1260px){.workspace{grid-template-columns:235px minmax(340px,1fr)}.detail{grid-column:1/-1;display:block}.people-list{max-height:720px}}
 @media(max-width:780px){.shell{padding:12px}.masthead{flex-wrap:wrap}.head-links{width:100%;gap:12px}.controls{padding:10px}.workspace{grid-template-columns:1fr}.world{grid-row:1}.roster{grid-row:2}.detail{grid-column:1;grid-row:3;display:block}.people-list{max-height:260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.person-item{border:1px solid #e5eae5}.stage{aspect-ratio:1000/640}.world-content{padding:0 7px 10px}.event-section{padding:12px}.notice{font-size:10px}.panel-heading{padding:13px}.gravity-group{width:100%}.gravity-group input{flex:1}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
