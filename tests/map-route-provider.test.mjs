@@ -22,7 +22,7 @@ const osrmReply = (a, b, extra = {}) => ({
     [a.modernLocation.lng + 0.0001, a.modernLocation.lat], [134.0980, 34.3550], [b.modernLocation.lng, b.modernLocation.lat + 0.0001],
   ] }, ...extra }],
 });
-const fossgis = () => resolveRouteProvider("?route=fossgis");
+const fossgis = () => resolveRouteProvider("?route=fossgis","localhost");
 const jsonResponse = (body, status = 200) => ({ ok: status >= 200 && status < 300, status, json: async () => body });
 
 test("公開版の既定は経路プロバイダーなしで、外部依存を自動採用しない", () => {
@@ -33,6 +33,7 @@ test("公開版の既定は経路プロバイダーなしで、外部依存を�
   assert.equal(f.id, "fossgis-osrm-foot"); assert.equal(f.evaluationOnly, true);
   assert.ok(f.minIntervalMs >= 1000, "honours the one-request-per-second policy");
   assert.match(f.attributionHtml, /OpenStreetMap contributors/); assert.match(f.attributionHtml, /openstreetmap\.org\/copyright/);
+  assert.equal(resolveRouteProvider("?route=fossgis").id,"none","no host proof means evaluation is disabled");
   assert.equal(resolveRouteProvider("?route=fossgis","yama-books.github.io").id,"none", "public Pages URL cannot opt in");
   assert.equal(resolveRouteProvider("?route=local&routeEndpoint=http://localhost:5000/","yama-books.github.io").id,"none");
   assert.equal(resolveRouteProvider("?route=fossgis","127.0.0.1").id,"fossgis-osrm-foot");
@@ -42,12 +43,13 @@ test("公開版の既定は経路プロバイダーなしで、外部依存を�
 });
 
 test("ローカル経路サーバーはループバックのURLだけ受け付ける", () => {
-  const local = resolveRouteProvider("?route=local&routeEndpoint=" + encodeURIComponent("http://127.0.0.1:5000/route/v1/foot"));
+  const local = resolveRouteProvider("?route=local&routeEndpoint=" + encodeURIComponent("http://127.0.0.1:5000/route/v1/foot"),"localhost");
   assert.equal(local.id, "local-osrm-foot"); assert.equal(local.endpoint, "http://127.0.0.1:5000/route/v1/foot/");
   assert.equal(resolveRouteProvider("?route=local&routeEndpoint=" + encodeURIComponent("https://example.com/route/v1/foot/")).id, "none");
   assert.equal(isLoopbackEndpoint("http://user:pw@localhost:5000/"), false);
   assert.equal(isLoopbackEndpoint("http://localhost:5000/route/v1/foot/?x=1"), false);
   assert.equal(isLoopbackEndpoint("javascript:alert(1)"), false);
+  assert.equal(resolveRouteProvider("?route=local&routeEndpoint="+encodeURIComponent("http://127.0.0.1:5000/route/v1/foot")).id,"none","no runtime host means no local route");
 });
 
 test("照会URLは施設の実座標だけを経度,緯度の順で送る", () => {
