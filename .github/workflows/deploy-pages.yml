@@ -51,6 +51,7 @@ jobs:
           node --check prototype/map/map-model.mjs
           node --check prototype/map/modern-map.mjs
           node --check prototype/map/agent-observation.mjs
+          node --check prototype/map/route-contract.mjs
           node --test tests/*.test.mjs
 
       - name: Prepare Pages artifact
