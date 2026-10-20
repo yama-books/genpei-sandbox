@@ -52,7 +52,7 @@ let modernMap = null;
 let poiListSignature = "";
 let observedPoiKey = null;
 // MAP-03B route preview state. Keys are facility name + real coordinates.
-const routeProvider = resolveRouteProvider(location.search);
+const routeProvider = resolveRouteProvider(location.search, location.hostname);
 const routeClient = createRouteClient({ provider: routeProvider });
 let routeOriginKey = null;
 let routeDestinationKey = null;
