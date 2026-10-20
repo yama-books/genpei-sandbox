@@ -75,12 +75,61 @@ try {
     await page.locator("#activate-poi").click();
     await page.locator("#reset").click();
     assert.equal(await page.locator("#modern-station-layer circle").count(),2,"reset retains activated POI dataset");
+    // MAP-01: optional modern map. Tiles are stubbed (desktop) or blocked (mobile) to cover the fallback.
+    const tilesBlocked = viewport.width < 600;
+    await page.route(url => url.toString().includes("cyberjapandata.gsi.go.jp"), route => tilesBlocked
+      ? route.abort()
+      : route.fulfill({ status:200, contentType:"image/png", body:Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=","base64") }));
+    assert.ok(await page.locator("#map-view").isHidden(), "schematic is the default view");
+    assert.equal(await page.locator("script[data-leaflet]").count(), 0, "map library is not loaded until requested");
+    await page.locator("#view-map").click();
+    await page.locator("#modern-map.leaflet-container").waitFor({ timeout: 10000 });
+    assert.ok(await page.locator("#schematic-view").isHidden(), "schematic hidden while map is shown");
+    assert.equal(await page.locator("#view-map").getAttribute("aria-pressed"), "true");
+    assert.equal(await page.locator("path.map-poi--adopted").count(), 2, "adopted POIs drawn at real coordinates");
+    assert.equal(await page.locator("path.map-heritage").count(), 1, "only the geocoded heritage area point is drawn");
+    assert.match(await page.locator("#map-view .map-banner").innerText(), /人物の地図上の位置は未対応/, "agents are not shown on the real map");
+    const credit = await page.locator(".leaflet-control-attribution").innerText();
+    assert.match(credit, /地理院タイル/, "tile attribution"); assert.match(credit, /OpenPOI/, "POI attribution");
+    await page.locator(".poi-card .poi-locate").first().click();
+    const popup = await page.locator(".leaflet-popup-content").innerText();
+    assert.match(popup, /出典/); assert.match(popup, /ライセンス/); assert.match(popup, /営業/, "existence/opening not asserted");
+    if (tilesBlocked) {
+      await page.waitForFunction(() => /背景地図を取得できません/.test(document.querySelector("#map-status").innerText), null, { timeout: 10000 });
+      assert.equal(await page.locator("path.map-poi").count(), 2, "markers stay usable without tiles");
+    }
+    const mapDims = await page.evaluate(() => ({clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
+    assert.ok(mapDims.scrollWidth <= mapDims.clientWidth + 4, "no horizontal overflow with map: " + JSON.stringify(mapDims));
+    await page.locator("#remove-poi").click();
+    assert.equal(await page.locator("path.map-poi--adopted").count(), 0, "map follows removal");
+    assert.equal(await page.locator("path.map-poi--eligible").count(), 2, "removed POIs remain as eligible, not adopted");
+    await page.locator("#view-schematic").click();
+    assert.ok(await page.locator("#schematic-view").isVisible(), "back to schematic");
+    await page.locator("#activate-poi").click();
+    assert.equal(await page.locator("#modern-station-layer circle").count(),2,"schematic still owns abstract POI markers");
     const dimensions = await page.evaluate(() => ({clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
     assert.ok(dimensions.scrollWidth <= dimensions.clientWidth + 4, "no horizontal document overflow: " + JSON.stringify(dimensions));
     assert.deepEqual(errors, [], "uncaught browser console errors");
-    console.log("PASS browser UI " + viewport.width + "px: people, sources, historic places, slider, save, interventions, fate ending, play/pause");
+    console.log("PASS browser UI " + viewport.width + "px: people, sources, historic places, slider, save, interventions, fate ending, play/pause, modern map" + (tilesBlocked ? " (tiles blocked)" : ""));
     await page.close();
   }
+  // Map library failure must not break the rest of the prototype.
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
+  const errors = [];
+  page.on("pageerror", e => errors.push(e.message));
+  await page.route(url => url.toString().includes("/vendor/leaflet-"), route => route.fulfill({ status: 404, body: "" }));
+  await page.goto(URL + "/prototype/", { waitUntil: "domcontentloaded", timeout: 15000 });
+  await page.locator("#people-list .person-item").first().waitFor({ timeout: 12000 });
+  await page.locator("#view-map").click();
+  await page.waitForFunction(() => /地図ライブラリ/.test(document.querySelector("#map-status").innerText), null, { timeout: 10000 });
+  assert.match(await page.locator("#map-status").innerText(), /模式図と施設一覧は引き続き使えます/);
+  await page.locator("#view-schematic").click();
+  await page.locator("#step").click();
+  assert.match(await page.locator("#clock").innerText(), /1 刻/, "simulation runs after map failure");
+  assert.equal(await page.locator("#people-list .person-item").count(), 11);
+  assert.deepEqual(errors, [], "no uncaught errors on map library failure");
+  console.log("PASS map library failure fallback");
+  await page.close();
 } catch(e) {
   failures.push(e instanceof Error ? e.stack : String(e));
 } finally {
