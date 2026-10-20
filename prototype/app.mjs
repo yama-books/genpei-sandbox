@@ -1,5 +1,7 @@
 import { STATIONS, STATION_BY_ID, PERSONAS, createWorld, stepWorld, intervene, snapshot, fatePull, destinationScores, installModernPois, removeModernPois } from "./core.mjs";
-import { buildModernStations, gameActionForCategory } from "./poi-world.mjs";
+import { buildModernStations } from "./poi-world.mjs";
+import { buildMapModel, mapModelSignature } from "./map/map-model.mjs";
+import { createModernMap } from "./map/modern-map.mjs";
 
 import { loadPoiSample } from "./openpoi.mjs";
 import { FATE_RULES, chapterMetrics } from "./fate.mjs";
@@ -42,6 +44,9 @@ let checkpoint = null;
 let timer = null;
 let loadedModernPois = [];
 let poiEnabled = false;
+let heritageSites = [];
+let modernMap = null;
+let poiListSignature = "";
 
 const element = (tag, cls, value) => {
   const e = document.createElement(tag);
@@ -108,7 +113,9 @@ async function loadHeritageSites() {
     if (!response.ok) throw new Error("史跡台帳を取得できません");
     const data = await response.json();
     if (!Array.isArray(data.sites) || !data.sites.length) throw new Error("史跡台帳の形式が異なります");
+    heritageSites = data.sites;
     renderHeritageSites(data.sites);
+    renderModernMap();
     const precise = data.sites.filter(s => s.location?.precision === "verified_site_point").length;
     q("#heritage-status").textContent = data.sites.length + "地点登録。史跡単位の実測座標は" + precise + "件。現在地と伝承は分けて表示。";
   } catch (error) {
@@ -157,37 +164,89 @@ async function fetchModernPoi() {
     const sample=await loadPoiSample();
     loadedModernPois=sample.records;
     const usable=buildModernStations(loadedModernPois);
-    const list=q("#poi-list");list.replaceChildren();
     q("#poi-status").textContent="返却 "+sample.responseCount+"件／検査済み "+sample.returned+
       "件／行動候補 "+usable.length+"件（用途未分類 "+sample.unknown+"件、不正座標 "+sample.invalid+
       "件、範囲外 "+sample.outOfRange+"件）。"+
       (sample.saturated?"検索上限に達しているため全施設ではありません。":"施設の網羅性・営業状況は保証されません。");
-    const poiKey=p=>p.name+"|"+p.lat.toFixed(5)+"|"+p.lng.toFixed(5);
-    const adoptedKeys=new Set(usable.map(p=>p.label+"|"+p.modernLocation.lat.toFixed(5)+"|"+p.modernLocation.lng.toFixed(5)));
-    const featured=sample.records.filter(p=>adoptedKeys.has(poiKey(p)));
-    const extras=sample.records.filter(p=>!adoptedKeys.has(poiKey(p))).slice(0,4);
-    for(const p of [...featured,...extras]) {
-      const card=element("div","poi-card");
-      const top=element("div","poi-top");
-      top.append(element("strong","",p.name),element("span","person-tag",p.distanceMeters+"m"));
-      card.append(top);
-      const action=gameActionForCategory(p.category);
-      const label={meal:"食事候補",supplies:"食料調達候補",rest:"休息候補",visit:"見物候補"}[action]||"用途未分類・参照のみ";
-      card.append(element("p","",label+" ／ "+(p.address||"住所情報なし")));
-      card.append(element("p","poi-source","出典："+p.source+" ／ "+p.licenses.join(", ")));
-      card.append(element("p","poi-source","帰属："+p.attributions.join("; ")));
-      if(adoptedKeys.has(poiKey(p))) card.append(element("span","person-tag","行動候補"));
-      list.append(card);
-    }
-    if(sample.records.length===0) list.append(element("p","helper","近くの施設が取得できませんでした。"));
-    if(usable.length===0) list.append(element("p","helper","行動へ利用できる分類・出典付き施設はありません。"));
+    poiListSignature="";
   } catch(error) {
     q("#poi-status").classList.add("error");
     q("#poi-status").textContent="施設情報を取得できません："+error.message+"。通信環境・CORS・API状態を確認してください。";
   } finally {
     button.disabled=false;
     renderPoiIntegrationStatus();
+    renderModernMap();
+    if(modernMap?.ready) setMapStatus("ready");
   }
+}
+
+// Cards reflect the live adoption state: adopted / eligible / reference only.
+function renderPoiList(model) {
+  const signature=mapModelSignature(model)+"|"+loadedModernPois.length;
+  if(signature===poiListSignature) return;
+  poiListSignature=signature;
+  const list=q("#poi-list");list.replaceChildren();
+  if(!loadedModernPois.length) return;
+  const featured=model.pois.filter(p=>p.status==="adopted"||p.status==="eligible");
+  const extras=model.pois.filter(p=>p.status!=="adopted"&&p.status!=="eligible").slice(0,4);
+  for(const p of [...featured,...extras]) {
+    const card=element("div","poi-card");
+    const top=element("div","poi-top");
+    top.append(element("strong","",p.name),element("span","person-tag",p.distanceMeters+"m"));
+    card.append(top);
+    const css=p.status==="adopted"?"adopted":p.status==="eligible"?"eligible":"ref";
+    const meta=element("p","");
+    meta.append(element("span","person-tag poi-status "+css,p.statusLabel),document.createTextNode(p.actionLabel+" ／ "+(p.address||"住所情報なし")));
+    card.append(meta);
+    card.append(element("p","poi-source","出典："+p.source+" ／ "+p.licenses.join(", ")));
+    card.append(element("p","poi-source","帰属："+p.attributions.join("; ")));
+    const locate=element("button","button quiet poi-locate","地図で位置を見る");
+    locate.type="button";
+    locate.dataset.poiKey=p.key;
+    locate.addEventListener("click",()=>showOnMap(p.key));
+    card.append(locate);
+    list.append(card);
+  }
+  if(model.pois.length===0) list.append(element("p","helper","近くの施設が取得できませんでした。"));
+  if(featured.length===0) list.append(element("p","helper","行動へ利用できる分類・出典付き施設はありません。"));
+}
+
+function currentMapModel() {
+  return buildMapModel({records:loadedModernPois,adoptedPois:world.modernPois,sites:heritageSites});
+}
+function renderModernMap() {
+  const model=currentMapModel();
+  renderPoiList(model);
+  modernMap?.update(model);
+}
+// A tile warning stays visible once raised; the "not fetched" hint follows POI state.
+function setMapStatus(kind,text) {
+  const status=q("#map-status");
+  if(kind==="warning" || (kind!=="error" && modernMap?.tilesFailed)) {
+    status.className="load-status map-status warning";
+    status.textContent=kind==="warning"?text:status.textContent;
+    return;
+  }
+  status.className="load-status map-status"+(kind==="error"?" error":"");
+  status.textContent=kind==="ready"
+    ? (loadedModernPois.length?"":"現代施設は未取得です。下の「周辺施設を取得」で地図に表示されます。")
+    : text;
+}
+async function setView(mode) {
+  const showMap=mode==="map";
+  q("#schematic-view").hidden=showMap;
+  q("#map-view").hidden=!showMap;
+  q("#view-schematic").setAttribute("aria-pressed",String(!showMap));
+  q("#view-map").setAttribute("aria-pressed",String(showMap));
+  if(!showMap) return false;
+  if(!modernMap) modernMap=createModernMap({container:q("#modern-map"),onStatus:setMapStatus});
+  modernMap.update(currentMapModel());
+  return modernMap.open();
+}
+async function showOnMap(key) {
+  const ok=await setView("map");
+  if(ok) modernMap.focus(key);
+  q("#map-view").scrollIntoView({block:"nearest"});
 }
 
 function renderStations() {
@@ -364,6 +423,7 @@ function render() {
   q("#to-fate").disabled = Boolean(world.fate.resolution);
   renderRoster(); renderModernStations(); renderAgents(); renderStatus(); renderClaims(); renderDecision(); renderFate(); renderEvents();
   renderPoiIntegrationStatus();
+  renderModernMap();
 }
 function stop() {
   if (timer !== null) { clearInterval(timer); timer = null; }
@@ -458,5 +518,7 @@ document.addEventListener("visibilitychange", () => { if (document.hidden) stop(
 q("#fetch-poi").addEventListener("click", fetchModernPoi);
 q("#activate-poi").addEventListener("click", activateModernPois);
 q("#remove-poi").addEventListener("click", deactivateModernPois);
+q("#view-schematic").addEventListener("click", () => setView("schematic"));
+q("#view-map").addEventListener("click", () => setView("map"));
 await load();
 await loadHeritageSites();
