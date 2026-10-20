@@ -94,13 +94,14 @@ export function runOne(api,seed,gravity,s,{verify=true}={}) {
     readiness:r?.metrics.readiness??null,energy:r?.metrics.energy??null,food:r?.metrics.provisions??null,
     postponed,...counts,replayMatches,resumeMatches,worldHash,traceHash};
 }
-export async function loadEngine(ref,s,temp) {
+export async function loadEngine(ref,s,temp,{sourceOverrides={},transform=(_name,text)=>text}={}) {
   const root=resolve(temp,`${s.departure??82}-${s.interval??10}-${s.closing??(s.departure?s.departure+30:112)}-${s.grace??15}-${s.earliest??36}`);
   await mkdir(root,{recursive:true});
   const sources={};
   for(const name of ['core','fate','poi-world','openpoi']) {
     const file=`prototype/${name}.mjs`;
     let text=ref?execFileSync('git',['show',`${ref}:${file}`],{encoding:'utf8'}):await readFile(new URL(`../${file}`,import.meta.url),'utf8');
+    text=sourceOverrides[name]??text;
     sources[file]=digest(text.replace(/^\uFEFF/,'').replace(/\r\n/g,'\n'));
     if(name==='fate' && s.departure) {
       text=replaceLiteral(text,'departureTick: 82,',`departureTick: ${s.departure},`);text=replaceLiteral(text,'closingTick: 112,',`closingTick: ${s.closing??s.departure+30},`);
@@ -111,7 +112,7 @@ export async function loadEngine(ref,s,temp) {
       if(s.earliest) text=replaceLiteral(text,'earliestDecisionTick: 36,', 'earliestDecisionTick: '+s.earliest+',');
     }
     if(name==='core' && s.interval) text=replaceLiteral(text,'world.tick % 10 === 1',`world.tick % ${s.interval} === 1`);
-    await writeFile(resolve(root,`${name}.mjs`),text);
+    await writeFile(resolve(root,`${name}.mjs`),transform(name,text));
   }
   return {api:await import(pathToFileURL(resolve(root,'core.mjs')).href),sources};
 }

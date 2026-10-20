@@ -72,18 +72,26 @@ test("batch detects invalid balances/resources/positions and actual immobility",
 });
 
 
-test("128 seeds x 12 conditions reproduce the published improved report", { timeout: 120000 }, async () => {
-  const expected = JSON.parse(await readFile(new URL("../docs/reports/sim-01-improved.json", import.meta.url), "utf8"));
+test("128 seeds x 12 conditions reproduce SIM-03 and preserve SIM-01 standard trajectories", { timeout: 120000 }, async () => {
+  const expected = JSON.parse(await readFile(new URL("../docs/reports/sim-03-improved.json", import.meta.url), "utf8"));
+  const historical = JSON.parse(await readFile(new URL("../docs/reports/sim-01-improved.json", import.meta.url), "utf8"));
   const actual = await runBatch();
   assert.equal(actual.rows.length, 1536);
   assert.deepEqual(actual.seeds, expected.seeds);
   assert.deepEqual(actual.policy, expected.policy);
   assert.deepEqual(actual.sources, expected.sources);
   assert.deepEqual(actual.cells, expected.cells);
+  assert.deepEqual(actual.cells, historical.cells);
+  const keys=Object.keys(actual.rows[0]);
+  const csv=[keys.join(','),...actual.rows.map(r=>keys.map(k=>r[k]??'').join(','))].join('\n');
+  for(const name of ['sim-01-improved','sim-03-improved']) {
+    const stored=(await readFile(new URL(`../docs/reports/${name}.csv`,import.meta.url),'utf8')).trimEnd().replace(/\r\n/g,'\n');
+    assert.equal(csv,stored);
+  }
   for (const { totals: t, groups } of actual.cells) {
     assert.equal(t.moneyShortage + t.invalidBalances + t.invalidResources + t.invalidPositions +
       t.replayMismatch + t.resumeMismatch + t.stalledAgents, 0);
     assert.equal(groups.unresolved ?? 0, 0);
   }
-  console.log("SIM-01: 1536 scenarios, 240 ticks; payment failures, invalid states, stalls, replay/resume mismatches: 0");
+  console.log("SIM-03 standard: 1536 scenarios reproduce both SIM-01 and SIM-03 rows and transition hashes; payment failures, invalid states, stalls, replay/resume mismatches: 0");
 });

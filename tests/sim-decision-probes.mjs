@@ -1,15 +1,15 @@
 import { createWorld, logEvent, rngNext } from '../prototype/core.mjs';
-import { advanceFate, chapterMetrics } from '../prototype/fate.mjs';
+import { advanceFate, chapterMetrics } from './fixtures/sim02-fate.mjs';
 import { writeFile } from 'node:fs/promises';
 
 // Controlled decision probes are not autonomous playthroughs or population rates.
-export function probe({energy=85,food=72,morale=65,allies=0,tick=50,bias=0,away=false,postponed=false}={}) {
+export function probe({energy=85,food=72,morale=65,allies=0,tick=50,bias=0,away=false,postponed=false}={},advance=advanceFate) {
   const w=createWorld(1185);w.tick=tick;w.fate.negotiationBias=bias;
   Object.assign(w.agents[0],{energy,provisions:food,morale,currentStationId:away?null:'yashima',visitedYashima:true,arrivedAtYashimaTick:40});
   for(let i=1;i<=allies;i++) w.agents[i].currentStationId='yashima';
   if(postponed) {w.fate.phase='postponed';w.fate.postponedUntil=65;}
   const readiness=chapterMetrics(w).readiness;
-  advanceFate(w,65,logEvent,rngNext);
+  advance(w,65,logEvent,rngNext);
   return {energy,food,morale,allies,tick,bias,away,postponed,readiness,phase:w.fate.phase,ending:w.fate.resolution?.kind??'pending'};
 }
 export async function main(prefix) {

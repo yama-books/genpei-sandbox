@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 1,
+  "sourceHashNormalization": "UTF-8 without BOM; LF line endings",
+  "ticks": 240,
+  "seeds": [
+    2654435761,
+    1013904226,
+    3668339987,
+    2027808452,
+    387276917,
+    3041712678,
+    1401181143,
+    4055616904,
+    2415085369,
+    774553834,
+    3428989595,
+    1788458060,
+    147926525,
+    2802362286,
+    1161830751,
+    3816266512,
+    2175734977,
+    535203442,
+    3189639203,
+    1549107668,
+    4203543429,
+    2563011894,
+    922480359,
+    3576916120,
+    1936384585,
+    295853050,
+    2950288811,
+    1309757276,
+    3964193037,
+    2323661502,
+    683129967,
+    3337565728,
+    1697034193,
+    56502658,
+    2710938419,
+    1070406884,
+    3724842645,
+    2084311110,
+    443779575,
+    3098215336,
+    1457683801,
+    4112119562,
+    2471588027,
+    831056492,
+    3485492253,
+    1844960718,
+    204429183,
+    2858864944,
+    1218333409,
+    3872769170,
+    2232237635,
+    591706100,
+    3246141861,
+    1605610326,
+    4260046087,
+    2619514552,
+    978983017,
+    3633418778,
+    1992887243,
+    352355708,
+    3006791469,
+    1366259934,
+    4020695695,
+    2380164160,
+    739632625,
+    3394068386,
+    1753536851,
+    113005316,
+    2767441077,
+    1126909542,
+    3781345303,
+    2140813768,
+    500282233,
+    3154717994,
+    1514186459,
+    4168622220,
+    2528090685,
+    887559150,
+    3541994911,
+    1901463376,
+    260931841,
+    2915367602,
+    1274836067,
+    3929271828,
+    2288740293,
+    648208758,
+    3302644519,
+    1662112984,
+    21581449,
+    2676017210,
+    1035485675,
+    3689921436,
+    2049389901,
+    408858366,
+    3063294127,
+    1422762592,
+    4077198353,
+    2436666818,
+    796135283,
+    3450571044,
+    1810039509,
+    169507974,
+    2823943735,
+    1183412200,
+    3837847961,
+    2197316426,
+    556784891,
+    3211220652,
+    1570689117,
+    4225124878,
+    2584593343,
+    944061808,
+    3598497569,
+    1957966034,
+    317434499,
+    2971870260,
+    1331338725,
+    3985774486,
+    2345242951,
+    704711416,
+    3359147177,
+    1718615642,
+    78084107,
+    2732519868,
+    1091988333,
+    3746424094,
+    2105892559,
+    465361024
+  ],
+  "policy": [
+    {
+      "tick": 0,
+      "agentId": "C036",
+      "action": "advise"
+    },
+    {
+      "tick": 20,
+      "agentId": "C036",
+      "action": "mediate"
+    },
+    {
+      "tick": 45,
+      "agentId": "C036",
+      "action": "support"
+    }
+  ],
+  "sources": {
+    "prototype/core.mjs": "ee0df15a751f796a93cf1772ace6e7cacbbee8bf725b5b939ac93cb997fda595",
+    "prototype/fate.mjs": "3fcb5ae60ea9f9f08533eb546ee68bb62c861bc35daa32efcf63dfc9e204aa45",
+    "prototype/poi-world.mjs": "49d146910b97f21a21fec109850b5359fbe7c7d8917e11ab52fe4d5538e990a0",
+    "tests/sim-batch.mjs": "8f4022204a15a8d93186f3b6b7ecce2040b71bd9a1f80952189a062a1e17e931",
+    "tests/fixtures/sim-pois.mjs": "9fc8c6afffcd46bdaebdc3792d374c5098cb00b7d17dc247eddd2e8e9d266bd0"
+  },
+  "cells": [
+    {
+      "gravity": 0,
+      "pois": false,
+      "interventions": false,
+      "totals": {
+        "runs": 128,
+        "arrived": 125,
+        "arrivedInWindow": 0,
+        "agentArrivals": 362,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 807,
+        "rest": 955,
+        "supply": 702,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 40341,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "missed": 128
+      },
+      "groups": {
+        "not_arrived": 128
+      }
+    },
+    {
+      "gravity": 0,
+      "pois": false,
+      "interventions": true,
+      "totals": {
+        "runs": 128,
+        "arrived": 91,
+        "arrivedInWindow": 5,
+        "agentArrivals": 331,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 918,
+        "rest": 1132,
+        "supply": 808,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 32207,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "missed": 123,
+        "parley": 2,
+        "stalemate": 1,
+        "upper_hand": 2
+      },
+      "groups": {
+        "not_arrived": 123,
+        "parley": 2,
+        "battle": 3
+      }
+    },
+    {
+      "gravity": 0,
+      "pois": true,
+      "interventions": false,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 75,
+        "agentArrivals": 375,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 3612,
+        "rest": 998,
+        "supply": 1201,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 54489,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "empty": 50,
+        "upper_hand": 66,
+        "stalemate": 9,
+        "missed": 3
+      },
+      "groups": {
+        "late_empty": 50,
+        "battle": 75,
+        "not_arrived": 3
+      }
+    },
+    {
+      "gravity": 0,
+      "pois": true,
+      "interventions": true,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 13,
+        "agentArrivals": 380,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 3844,
+        "rest": 1204,
+        "supply": 1403,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 51476,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "missed": 36,
+        "empty": 79,
+        "parley": 8,
+        "upper_hand": 5
+      },
+      "groups": {
+        "not_arrived": 36,
+        "late_empty": 79,
+        "parley": 8,
+        "battle": 5
+      }
+    },
+    {
+      "gravity": 50,
+      "pois": false,
+      "interventions": false,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 124,
+        "agentArrivals": 376,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 711,
+        "rest": 992,
+        "supply": 739,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 34206,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "stalemate": 88,
+        "upper_hand": 36,
+        "empty": 4
+      },
+      "groups": {
+        "battle": 124,
+        "late_empty": 4
+      }
+    },
+    {
+      "gravity": 50,
+      "pois": false,
+      "interventions": true,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 116,
+        "agentArrivals": 374,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 820,
+        "rest": 1139,
+        "supply": 826,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 24891,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "parley": 87,
+        "upper_hand": 5,
+        "stalemate": 24,
+        "empty": 11,
+        "missed": 1
+      },
+      "groups": {
+        "parley": 87,
+        "battle": 29,
+        "late_empty": 11,
+        "not_arrived": 1
+      }
+    },
+    {
+      "gravity": 50,
+      "pois": true,
+      "interventions": false,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 128,
+        "agentArrivals": 384,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 3529,
+        "rest": 955,
+        "supply": 1242,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 55125,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "upper_hand": 44,
+        "stalemate": 84
+      },
+      "groups": {
+        "battle": 128
+      }
+    },
+    {
+      "gravity": 50,
+      "pois": true,
+      "interventions": true,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 128,
+        "agentArrivals": 384,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 3828,
+        "rest": 1116,
+        "supply": 1483,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 52316,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "parley": 98,
+        "stalemate": 19,
+        "upper_hand": 11
+      },
+      "groups": {
+        "parley": 98,
+        "battle": 30
+      }
+    },
+    {
+      "gravity": 100,
+      "pois": false,
+      "interventions": false,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 128,
+        "agentArrivals": 384,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 621,
+        "rest": 1004,
+        "supply": 791,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 21978,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "setback": 4,
+        "stalemate": 104,
+        "upper_hand": 20
+      },
+      "groups": {
+        "battle": 128
+      }
+    },
+    {
+      "gravity": 100,
+      "pois": false,
+      "interventions": true,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 128,
+        "agentArrivals": 384,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 589,
+        "rest": 1146,
+        "supply": 777,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 14845,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "parley": 107,
+        "upper_hand": 3,
+        "stalemate": 18
+      },
+      "groups": {
+        "parley": 107,
+        "battle": 21
+      }
+    },
+    {
+      "gravity": 100,
+      "pois": true,
+      "interventions": false,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 128,
+        "agentArrivals": 384,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 5499,
+        "rest": 1127,
+        "supply": 1216,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 53193,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "stalemate": 87,
+        "upper_hand": 41
+      },
+      "groups": {
+        "battle": 128
+      }
+    },
+    {
+      "gravity": 100,
+      "pois": true,
+      "interventions": true,
+      "totals": {
+        "runs": 128,
+        "arrived": 128,
+        "arrivedInWindow": 128,
+        "agentArrivals": 384,
+        "replayMismatch": 0,
+        "resumeMismatch": 0,
+        "leisure": 5638,
+        "rest": 1335,
+        "supply": 1441,
+        "moneyShortage": 0,
+        "unaffordableArrival": 0,
+        "cashLimitedAgentTicks": 50531,
+        "invalidBalances": 0,
+        "invalidResources": 0,
+        "invalidPositions": 0,
+        "stalledAgents": 0,
+        "exhaustedAgents": 0
+      },
+      "endings": {
+        "parley": 107,
+        "upper_hand": 7,
+        "stalemate": 14
+      },
+      "groups": {
+        "parley": 107,
+        "battle": 21
+      }
+    }
+  ]
+}
