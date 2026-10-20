@@ -1,0 +1,2400 @@
+[
+  {
+    "scenario": "control",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "empty",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": true,
+      "atDecisionSite": true,
+      "arrivedAt": 98,
+      "allyCount": 0,
+      "readiness": 88,
+      "energy": 92,
+      "provisions": 96,
+      "morale": 100,
+      "money": 6,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "supply",
+        "station": null,
+        "energy": 84.6,
+        "food": 71.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「補給施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 15,
+        "target": null,
+        "station": "supply",
+        "energy": 77.6,
+        "food": 100,
+        "money": 36,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が補給を行った（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 16,
+        "target": "rest",
+        "station": null,
+        "energy": 77.1,
+        "food": 99.7,
+        "money": 36,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "rest",
+        "station": null,
+        "energy": 67.6,
+        "food": 94,
+        "money": 36,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 36,
+        "target": null,
+        "station": "rest",
+        "energy": 100,
+        "food": 93.7,
+        "money": 30,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が休息した（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 37,
+        "target": "leisure",
+        "station": null,
+        "energy": 99.6,
+        "food": 93.4,
+        "money": 30,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 52,
+        "target": null,
+        "station": "leisure",
+        "energy": 86.1,
+        "food": 88.9,
+        "money": 25,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が娯楽施設へ寄り道した"
+          }
+        ]
+      },
+      {
+        "tick": 53,
+        "target": "rest",
+        "station": null,
+        "energy": 85.6,
+        "food": 88.6,
+        "money": 25,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 68,
+        "target": null,
+        "station": "rest",
+        "energy": 100,
+        "food": 84.1,
+        "money": 19,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が休息した（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 69,
+        "target": "modern-1",
+        "station": null,
+        "energy": 99.6,
+        "food": 83.8,
+        "money": 19,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 85,
+        "target": null,
+        "station": "modern-1",
+        "energy": 91.6,
+        "food": 100,
+        "money": 12,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 86,
+        "target": "modern-2",
+        "station": null,
+        "energy": 91.1,
+        "food": 99.7,
+        "money": 12,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 98.8,
+        "money": 6,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 90,
+        "target": "modern-3",
+        "station": null,
+        "energy": 99.6,
+        "food": 98.5,
+        "money": 6,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 95,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 97,
+        "money": 6,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 96,
+        "target": "yashima",
+        "station": null,
+        "energy": 92.6,
+        "food": 96.7,
+        "money": 6,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 98,
+        "target": null,
+        "station": "yashima",
+        "energy": 91.6,
+        "food": 96.1,
+        "money": 6,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島は、すでに静かだった"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "food-0",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "upper_hand",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": true,
+      "atDecisionSite": true,
+      "arrivedAt": 74,
+      "allyCount": 0,
+      "readiness": 87,
+      "energy": 91,
+      "provisions": 94,
+      "morale": 100,
+      "money": 1,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "supply",
+        "station": null,
+        "energy": 83.9,
+        "food": 0,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「補給施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 15,
+        "target": null,
+        "station": "supply",
+        "energy": 69.9,
+        "food": 43,
+        "money": 36,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が補給を行った（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 16,
+        "target": "modern-1",
+        "station": null,
+        "energy": 69.5,
+        "food": 42.7,
+        "money": 36,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "modern-1",
+        "station": null,
+        "energy": 60.8,
+        "food": 37,
+        "money": 36,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": "modern-4",
+        "station": null,
+        "energy": 58.4,
+        "food": 35.2,
+        "money": 36,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic supplies」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 45,
+        "target": null,
+        "station": "modern-4",
+        "energy": 56.8,
+        "food": 80,
+        "money": 27,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic supplies」で食料の調達をした"
+          }
+        ]
+      },
+      {
+        "tick": 46,
+        "target": "modern-2",
+        "station": null,
+        "energy": 56.4,
+        "food": 79.7,
+        "money": 27,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 47,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 79.4,
+        "money": 21,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 48,
+        "target": "modern-1",
+        "station": null,
+        "energy": 99.6,
+        "food": 79.1,
+        "money": 21,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": null,
+        "station": "modern-1",
+        "energy": 98.1,
+        "food": 100,
+        "money": 14,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 52,
+        "target": "modern-3",
+        "station": null,
+        "energy": 97.6,
+        "food": 99.7,
+        "money": 14,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 53,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 99.4,
+        "money": 14,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 54,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 99.1,
+        "money": 14,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 55,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 7,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 56,
+        "target": "modern-3",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 7,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 57,
+        "target": null,
+        "station": "modern-3",
+        "energy": 87.1,
+        "food": 99.4,
+        "money": 7,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 58,
+        "target": "modern-2",
+        "station": null,
+        "energy": 86.6,
+        "food": 99.1,
+        "money": 7,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 63,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 97.6,
+        "money": 1,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 64,
+        "target": "modern-3",
+        "station": null,
+        "energy": 99.6,
+        "food": 97.3,
+        "money": 1,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 69,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 95.8,
+        "money": 1,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 70,
+        "target": "sea",
+        "station": null,
+        "energy": 92.6,
+        "food": 95.5,
+        "money": 1,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「海上退避（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": "yashima",
+        "station": null,
+        "energy": 92.1,
+        "food": 95.2,
+        "money": 1,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 74,
+        "target": null,
+        "station": "yashima",
+        "energy": 90.6,
+        "food": 94.3,
+        "money": 1,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島への攻勢、優勢に"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "money-0",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "stalemate",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": true,
+      "atDecisionSite": true,
+      "arrivedAt": 49,
+      "allyCount": 0,
+      "readiness": 58,
+      "energy": 61,
+      "provisions": 57,
+      "morale": 74,
+      "money": 0,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "awa",
+        "station": null,
+        "energy": 84.6,
+        "food": 71.7,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「阿波方面」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 4,
+        "target": null,
+        "station": "awa",
+        "energy": 83.1,
+        "food": 70.8,
+        "money": 0,
+        "events": [
+          {
+            "kind": "movement",
+            "text": "義経が「阿波方面」へ到達"
+          }
+        ]
+      },
+      {
+        "tick": 5,
+        "target": "modern-3",
+        "station": null,
+        "energy": 82.6,
+        "food": 70.5,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "modern-3",
+        "station": null,
+        "energy": 67.6,
+        "food": 61.5,
+        "money": 0,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": "yashima",
+        "station": null,
+        "energy": 64.6,
+        "food": 59.7,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 49,
+        "target": null,
+        "station": "yashima",
+        "energy": 61.2,
+        "food": 57.3,
+        "money": 0,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島で交戦、決着つかず"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "money-90",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "missed",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": false,
+      "atDecisionSite": false,
+      "arrivedAt": null,
+      "allyCount": 0,
+      "readiness": 89,
+      "energy": 91,
+      "provisions": 99,
+      "morale": 100,
+      "money": 31,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "supply",
+        "station": null,
+        "energy": 84.6,
+        "food": 71.7,
+        "money": 90,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「補給施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 15,
+        "target": null,
+        "station": "supply",
+        "energy": 77.6,
+        "food": 100,
+        "money": 81,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が補給を行った（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 16,
+        "target": "rest",
+        "station": null,
+        "energy": 77.1,
+        "food": 99.7,
+        "money": 81,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "rest",
+        "station": null,
+        "energy": 67.6,
+        "food": 94,
+        "money": 81,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 36,
+        "target": null,
+        "station": "rest",
+        "energy": 100,
+        "food": 93.7,
+        "money": 75,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が休息した（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 37,
+        "target": "leisure",
+        "station": null,
+        "energy": 99.6,
+        "food": 93.4,
+        "money": 75,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 52,
+        "target": null,
+        "station": "leisure",
+        "energy": 86.1,
+        "food": 88.9,
+        "money": 70,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が娯楽施設へ寄り道した"
+          }
+        ]
+      },
+      {
+        "tick": 53,
+        "target": "rest",
+        "station": null,
+        "energy": 85.6,
+        "food": 88.6,
+        "money": 70,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 68,
+        "target": null,
+        "station": "rest",
+        "energy": 100,
+        "food": 84.1,
+        "money": 64,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が休息した（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 69,
+        "target": "modern-1",
+        "station": null,
+        "energy": 99.6,
+        "food": 83.8,
+        "money": 64,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 85,
+        "target": null,
+        "station": "modern-1",
+        "energy": 91.6,
+        "food": 100,
+        "money": 57,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 86,
+        "target": "modern-2",
+        "station": null,
+        "energy": 91.1,
+        "food": 99.7,
+        "money": 57,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 89,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 98.8,
+        "money": 51,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 90,
+        "target": "modern-3",
+        "station": null,
+        "energy": 99.6,
+        "food": 98.5,
+        "money": 51,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 95,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 97,
+        "money": 51,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 96,
+        "target": "modern-2",
+        "station": null,
+        "energy": 92.6,
+        "food": 96.7,
+        "money": 51,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 95.2,
+        "money": 45,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 102,
+        "target": "modern-1",
+        "station": null,
+        "energy": 99.6,
+        "food": 94.9,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 105,
+        "target": null,
+        "station": "modern-1",
+        "energy": 98.1,
+        "food": 100,
+        "money": 38,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 106,
+        "target": "modern-3",
+        "station": null,
+        "energy": 97.6,
+        "food": 99.7,
+        "money": 38,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 107,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 99.4,
+        "money": 38,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 108,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 99.1,
+        "money": 38,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 109,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 31,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 110,
+        "target": "modern-2",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 31,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 112,
+        "target": "modern-2",
+        "station": null,
+        "energy": 90.6,
+        "food": 99.1,
+        "money": 31,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島の戦い、起こらず"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "energy-10",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "missed",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": false,
+      "atDecisionSite": false,
+      "arrivedAt": null,
+      "allyCount": 0,
+      "readiness": 42,
+      "energy": 60,
+      "provisions": 38,
+      "morale": 39,
+      "money": 39,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "rest",
+        "station": null,
+        "energy": 9.6,
+        "food": 71.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 31,
+        "target": "modern-2",
+        "station": null,
+        "energy": 0,
+        "food": 62.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "modern-2",
+        "station": null,
+        "energy": 0,
+        "food": 61.5,
+        "money": 45,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 41,
+        "target": "rest",
+        "station": null,
+        "energy": 0,
+        "food": 59.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": "modern-2",
+        "station": null,
+        "energy": 0,
+        "food": 44.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "rest",
+        "station": null,
+        "energy": 0,
+        "food": 41.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 111,
+        "target": null,
+        "station": "rest",
+        "energy": 60,
+        "food": 38.7,
+        "money": 39,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が休息した（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 112,
+        "target": "modern-1",
+        "station": null,
+        "energy": 59.6,
+        "food": 38.4,
+        "money": 39,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島の戦い、起こらず"
+          },
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "poi-start",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "missed",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": false,
+      "atDecisionSite": false,
+      "arrivedAt": null,
+      "allyCount": 0,
+      "readiness": 63,
+      "energy": 36,
+      "provisions": 76,
+      "morale": 100,
+      "money": 0,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "modern-1",
+        "station": null,
+        "energy": 84.6,
+        "food": 71.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 4,
+        "target": null,
+        "station": "modern-1",
+        "energy": 83.1,
+        "food": 100,
+        "money": 38,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 5,
+        "target": "modern-2",
+        "station": null,
+        "energy": 82.6,
+        "food": 99.7,
+        "money": 38,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 8,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 98.8,
+        "money": 32,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 9,
+        "target": "modern-3",
+        "station": null,
+        "energy": 99.6,
+        "food": 98.5,
+        "money": 32,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 14,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 97,
+        "money": 32,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 15,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 96.7,
+        "money": 32,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 16,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 25,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 17,
+        "target": "modern-3",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 25,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 18,
+        "target": null,
+        "station": "modern-3",
+        "energy": 87.1,
+        "food": 99.4,
+        "money": 25,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 19,
+        "target": "modern-1",
+        "station": null,
+        "energy": 86.6,
+        "food": 99.1,
+        "money": 25,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 20,
+        "target": null,
+        "station": "modern-1",
+        "energy": 86.1,
+        "food": 100,
+        "money": 18,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 21,
+        "target": "modern-2",
+        "station": null,
+        "energy": 85.6,
+        "food": 99.7,
+        "money": 18,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 24,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 98.8,
+        "money": 12,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 25,
+        "target": "modern-3",
+        "station": null,
+        "energy": 99.6,
+        "food": 98.5,
+        "money": 12,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 30,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 97,
+        "money": 12,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 31,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 96.7,
+        "money": 12,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 32,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 5,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 33,
+        "target": "modern-3",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 5,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 34,
+        "target": null,
+        "station": "modern-3",
+        "energy": 87.1,
+        "food": 99.4,
+        "money": 5,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "leisure",
+        "station": null,
+        "energy": 86.6,
+        "food": 99.1,
+        "money": 5,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          },
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 54,
+        "target": null,
+        "station": "leisure",
+        "energy": 71.1,
+        "food": 93.4,
+        "money": 0,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が娯楽施設へ寄り道した"
+          }
+        ]
+      },
+      {
+        "tick": 55,
+        "target": "modern-3",
+        "station": null,
+        "energy": 70.6,
+        "food": 93.1,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 74,
+        "target": null,
+        "station": "modern-3",
+        "energy": 57.6,
+        "food": 87.4,
+        "money": 0,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 75,
+        "target": "yashima",
+        "station": null,
+        "energy": 57.2,
+        "food": 87.1,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 81,
+        "target": "awa",
+        "station": null,
+        "energy": 54.8,
+        "food": 85.3,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「阿波方面」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 91,
+        "target": "modern-3",
+        "station": null,
+        "energy": 50.8,
+        "food": 82.3,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 95,
+        "target": null,
+        "station": "modern-3",
+        "energy": 44.8,
+        "food": 81.1,
+        "money": 0,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 96,
+        "target": "yashima",
+        "station": null,
+        "energy": 44.3,
+        "food": 80.8,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "awa",
+        "station": null,
+        "energy": 41.8,
+        "food": 79.3,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「阿波方面」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 111,
+        "target": "modern-3",
+        "station": null,
+        "energy": 36.8,
+        "food": 76.3,
+        "money": 0,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 112,
+        "target": "modern-3",
+        "station": null,
+        "energy": 36.3,
+        "food": 76,
+        "money": 0,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島の戦い、起こらず"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "poi-remote",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "missed",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": false,
+      "atDecisionSite": false,
+      "arrivedAt": null,
+      "allyCount": 0,
+      "readiness": 78,
+      "energy": 69,
+      "provisions": 89,
+      "morale": 100,
+      "money": 3,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 1,
+        "target": "supply",
+        "station": null,
+        "energy": 84.6,
+        "food": 71.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「補給施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 15,
+        "target": null,
+        "station": "supply",
+        "energy": 77.6,
+        "food": 100,
+        "money": 36,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が補給を行った（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 16,
+        "target": "rest",
+        "station": null,
+        "energy": 77.1,
+        "food": 99.7,
+        "money": 36,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "rest",
+        "station": null,
+        "energy": 67.6,
+        "food": 94,
+        "money": 36,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 36,
+        "target": null,
+        "station": "rest",
+        "energy": 100,
+        "food": 93.7,
+        "money": 30,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が休息した（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 37,
+        "target": "leisure",
+        "station": null,
+        "energy": 99.6,
+        "food": 93.4,
+        "money": 30,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「娯楽施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 51,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 89.2,
+        "money": 30,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 58,
+        "target": null,
+        "station": "modern-1",
+        "energy": 89.1,
+        "food": 100,
+        "money": 23,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 59,
+        "target": "modern-3",
+        "station": null,
+        "energy": 88.6,
+        "food": 99.7,
+        "money": 23,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 60,
+        "target": null,
+        "station": "modern-3",
+        "energy": 84.1,
+        "food": 99.4,
+        "money": 23,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 61,
+        "target": "modern-2",
+        "station": null,
+        "energy": 83.6,
+        "food": 99.1,
+        "money": 23,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 66,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 97.6,
+        "money": 17,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 67,
+        "target": "modern-1",
+        "station": null,
+        "energy": 99.6,
+        "food": 97.3,
+        "money": 17,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 70,
+        "target": null,
+        "station": "modern-1",
+        "energy": 98.1,
+        "food": 100,
+        "money": 10,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": "modern-3",
+        "station": null,
+        "energy": 97.6,
+        "food": 99.7,
+        "money": 10,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 72,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 99.4,
+        "money": 10,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 73,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 99.1,
+        "money": 10,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 74,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 3,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 75,
+        "target": "modern-3",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 3,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 76,
+        "target": null,
+        "station": "modern-3",
+        "energy": 87.1,
+        "food": 99.4,
+        "money": 3,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 77,
+        "target": "yashima",
+        "station": null,
+        "energy": 86.6,
+        "food": 99.1,
+        "money": 3,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 81,
+        "target": "awa",
+        "station": null,
+        "energy": 84.6,
+        "food": 97.9,
+        "money": 3,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「阿波方面」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 101,
+        "target": "modern-3",
+        "station": null,
+        "energy": 74.6,
+        "food": 91.9,
+        "money": 3,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 112,
+        "target": "modern-3",
+        "station": null,
+        "energy": 69.1,
+        "food": 88.6,
+        "money": 3,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島の戦い、起こらず"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "scenario": "advise-only",
+    "seed": 2654435761,
+    "gravity": 0,
+    "ending": "upper_hand",
+    "metrics": {
+      "leaderPresent": true,
+      "arrived": true,
+      "atDecisionSite": true,
+      "arrivedAt": 80,
+      "allyCount": 0,
+      "readiness": 89,
+      "energy": 92,
+      "provisions": 99,
+      "morale": 100,
+      "money": 3,
+      "gravity": 0,
+      "negotiationBias": 0
+    },
+    "timeline": [
+      {
+        "tick": 21,
+        "target": "supply",
+        "station": null,
+        "energy": 74.6,
+        "food": 65.7,
+        "money": 45,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「補給施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 27,
+        "target": null,
+        "station": "supply",
+        "energy": 71.6,
+        "food": 100,
+        "money": 36,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が補給を行った（資金を消費）"
+          }
+        ]
+      },
+      {
+        "tick": 28,
+        "target": "rest",
+        "station": null,
+        "energy": 71.1,
+        "food": 99.7,
+        "money": 36,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「休息施設（仮）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 31,
+        "target": "modern-2",
+        "station": null,
+        "energy": 69.6,
+        "food": 98.8,
+        "money": 36,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 35,
+        "target": "modern-2",
+        "station": null,
+        "energy": 67.6,
+        "food": 97.6,
+        "money": 36,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島をめぐる機会が近づく"
+          }
+        ]
+      },
+      {
+        "tick": 55,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 91.6,
+        "money": 30,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 56,
+        "target": "modern-1",
+        "station": null,
+        "energy": 99.6,
+        "food": 91.3,
+        "money": 30,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 59,
+        "target": null,
+        "station": "modern-1",
+        "energy": 98.1,
+        "food": 100,
+        "money": 23,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 60,
+        "target": "modern-3",
+        "station": null,
+        "energy": 97.6,
+        "food": 99.7,
+        "money": 23,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 61,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 99.4,
+        "money": 23,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 62,
+        "target": "modern-1",
+        "station": null,
+        "energy": 92.6,
+        "food": 99.1,
+        "money": 23,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 63,
+        "target": null,
+        "station": "modern-1",
+        "energy": 92.1,
+        "food": 100,
+        "money": 16,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 64,
+        "target": "modern-3",
+        "station": null,
+        "energy": 91.6,
+        "food": 99.7,
+        "money": 16,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 65,
+        "target": null,
+        "station": "modern-3",
+        "energy": 87.1,
+        "food": 99.4,
+        "money": 16,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 66,
+        "target": "modern-2",
+        "station": null,
+        "energy": 86.6,
+        "food": 99.1,
+        "money": 16,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic rest」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 71,
+        "target": null,
+        "station": "modern-2",
+        "energy": 100,
+        "food": 97.6,
+        "money": 10,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic rest」で休息をした"
+          }
+        ]
+      },
+      {
+        "tick": 72,
+        "target": "modern-1",
+        "station": null,
+        "energy": 99.6,
+        "food": 97.3,
+        "money": 10,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic meal」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 75,
+        "target": null,
+        "station": "modern-1",
+        "energy": 98.1,
+        "food": 100,
+        "money": 3,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic meal」で食事をした"
+          }
+        ]
+      },
+      {
+        "tick": 76,
+        "target": "modern-3",
+        "station": null,
+        "energy": 97.6,
+        "food": 99.7,
+        "money": 3,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「SIM synthetic visit」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 77,
+        "target": null,
+        "station": "modern-3",
+        "energy": 93.1,
+        "food": 99.4,
+        "money": 3,
+        "events": [
+          {
+            "kind": "facility",
+            "text": "義経が「SIM synthetic visit」で見物をした"
+          }
+        ]
+      },
+      {
+        "tick": 78,
+        "target": "yashima",
+        "station": null,
+        "energy": 92.6,
+        "food": 99.1,
+        "money": 3,
+        "events": [
+          {
+            "kind": "decision",
+            "text": "義経が「屋島（運命の場所）」に向かうと判断"
+          }
+        ]
+      },
+      {
+        "tick": 80,
+        "target": null,
+        "station": "yashima",
+        "energy": 91.6,
+        "food": 98.5,
+        "money": 3,
+        "events": [
+          {
+            "kind": "fate",
+            "text": "屋島への攻勢、優勢に"
+          },
+          {
+            "kind": "fate",
+            "text": "義経が屋島へ到達した"
+          }
+        ]
+      }
+    ]
+  }
+]

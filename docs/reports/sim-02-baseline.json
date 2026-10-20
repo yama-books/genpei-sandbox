@@ -1,0 +1,2003 @@
+{
+  "schemaVersion": 1,
+  "ref": "8d69a85",
+  "ticks": 240,
+  "seeds": [
+    2654435761,
+    1013904226,
+    3668339987,
+    2027808452,
+    387276917,
+    3041712678,
+    1401181143,
+    4055616904,
+    2415085369,
+    774553834,
+    3428989595,
+    1788458060,
+    147926525,
+    2802362286,
+    1161830751,
+    3816266512,
+    2175734977,
+    535203442,
+    3189639203,
+    1549107668,
+    4203543429,
+    2563011894,
+    922480359,
+    3576916120,
+    1936384585,
+    295853050,
+    2950288811,
+    1309757276,
+    3964193037,
+    2323661502,
+    683129967,
+    3337565728,
+    1697034193,
+    56502658,
+    2710938419,
+    1070406884,
+    3724842645,
+    2084311110,
+    443779575,
+    3098215336,
+    1457683801,
+    4112119562,
+    2471588027,
+    831056492,
+    3485492253,
+    1844960718,
+    204429183,
+    2858864944,
+    1218333409,
+    3872769170,
+    2232237635,
+    591706100,
+    3246141861,
+    1605610326,
+    4260046087,
+    2619514552,
+    978983017,
+    3633418778,
+    1992887243,
+    352355708,
+    3006791469,
+    1366259934,
+    4020695695,
+    2380164160,
+    739632625,
+    3394068386,
+    1753536851,
+    113005316,
+    2767441077,
+    1126909542,
+    3781345303,
+    2140813768,
+    500282233,
+    3154717994,
+    1514186459,
+    4168622220,
+    2528090685,
+    887559150,
+    3541994911,
+    1901463376,
+    260931841,
+    2915367602,
+    1274836067,
+    3929271828,
+    2288740293,
+    648208758,
+    3302644519,
+    1662112984,
+    21581449,
+    2676017210,
+    1035485675,
+    3689921436,
+    2049389901,
+    408858366,
+    3063294127,
+    1422762592,
+    4077198353,
+    2436666818,
+    796135283,
+    3450571044,
+    1810039509,
+    169507974,
+    2823943735,
+    1183412200,
+    3837847961,
+    2197316426,
+    556784891,
+    3211220652,
+    1570689117,
+    4225124878,
+    2584593343,
+    944061808,
+    3598497569,
+    1957966034,
+    317434499,
+    2971870260,
+    1331338725,
+    3985774486,
+    2345242951,
+    704711416,
+    3359147177,
+    1718615642,
+    78084107,
+    2732519868,
+    1091988333,
+    3746424094,
+    2105892559,
+    465361024
+  ],
+  "scenarios": [
+    {
+      "id": "control"
+    },
+    {
+      "id": "food-0",
+      "resources": {
+        "provisions": 0
+      }
+    },
+    {
+      "id": "food-20",
+      "resources": {
+        "provisions": 20
+      }
+    },
+    {
+      "id": "food-100",
+      "resources": {
+        "provisions": 100
+      }
+    },
+    {
+      "id": "energy-10",
+      "resources": {
+        "energy": 10
+      }
+    },
+    {
+      "id": "energy-40",
+      "resources": {
+        "energy": 40
+      }
+    },
+    {
+      "id": "energy-100",
+      "resources": {
+        "energy": 100
+      }
+    },
+    {
+      "id": "money-0",
+      "resources": {
+        "money": 0
+      }
+    },
+    {
+      "id": "money-9",
+      "resources": {
+        "money": 9
+      }
+    },
+    {
+      "id": "money-90",
+      "resources": {
+        "money": 90
+      }
+    },
+    {
+      "id": "window-60",
+      "departure": 60
+    },
+    {
+      "id": "window-100",
+      "departure": 100
+    },
+    {
+      "id": "window-140",
+      "departure": 140
+    },
+    {
+      "id": "no-poi",
+      "layout": "none"
+    },
+    {
+      "id": "poi-start",
+      "layout": "start"
+    },
+    {
+      "id": "poi-mid",
+      "layout": "mid"
+    },
+    {
+      "id": "poi-remote",
+      "layout": "remote"
+    },
+    {
+      "id": "decide-5",
+      "interval": 5
+    },
+    {
+      "id": "decide-20",
+      "interval": 20
+    },
+    {
+      "id": "advise-only",
+      "policy": [
+        {
+          "tick": 0,
+          "action": "advise"
+        }
+      ]
+    },
+    {
+      "id": "mediate-only",
+      "policy": [
+        {
+          "tick": 20,
+          "action": "mediate"
+        }
+      ]
+    },
+    {
+      "id": "support-only",
+      "policy": [
+        {
+          "tick": 45,
+          "action": "support"
+        }
+      ]
+    },
+    {
+      "id": "support-early",
+      "policy": [
+        {
+          "tick": 0,
+          "action": "support"
+        }
+      ]
+    },
+    {
+      "id": "stress",
+      "resources": {
+        "energy": 40,
+        "provisions": 20,
+        "money": 0
+      },
+      "interaction": true
+    },
+    {
+      "id": "stress-support",
+      "resources": {
+        "energy": 40,
+        "provisions": 20,
+        "money": 0
+      },
+      "policy": [
+        {
+          "tick": 0,
+          "action": "support"
+        }
+      ],
+      "interaction": true
+    }
+  ],
+  "sources": {
+    "prototype/core.mjs": "713e6cc1a2d997b3b1cefebf52c88372cd3469fde5aeb812f8f64fda3551e362",
+    "prototype/fate.mjs": "39e95e6edf9e726d8e26a01104b57c52603735c4baad369e37344a589c69b61d",
+    "prototype/poi-world.mjs": "06c826a9da4b3ec94875999abb4164d4c9121da6c7099feb3b59aa4b5e623ef2",
+    "prototype/openpoi.mjs": "df7b24c3164e44d7c1fb1098b862fb677ec24a746451a972a7694f3705c95605"
+  },
+  "cells": [
+    {
+      "scenario": "control",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "empty": 50,
+        "upper_hand": 66,
+        "stalemate": 9,
+        "missed": 3
+      },
+      "arrived": 128,
+      "atResolution": 125,
+      "inWindow": 75,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 3612,
+      "rest": 998,
+      "supply": 1201,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "control",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 44,
+        "stalemate": 84
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 3529,
+      "rest": 955,
+      "supply": 1242,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "control",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 87,
+        "upper_hand": 41
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 5499,
+      "rest": 1127,
+      "supply": 1216,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-0",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 108,
+        "stalemate": 7,
+        "missed": 2,
+        "empty": 11
+      },
+      "arrived": 128,
+      "atResolution": 126,
+      "inWindow": 115,
+      "postponed": 0,
+      "changedEndings": 70,
+      "leisure": 3552,
+      "rest": 944,
+      "supply": 1251,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-0",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "stalemate": 94,
+        "upper_hand": 34
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 56,
+      "leisure": 3547,
+      "rest": 925,
+      "supply": 1281,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-0",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 46,
+        "setback": 57,
+        "upper_hand": 25
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 23,
+      "changedEndings": 78,
+      "leisure": 5447,
+      "rest": 1011,
+      "supply": 1302,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-20",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 92,
+        "stalemate": 7,
+        "empty": 27,
+        "missed": 2
+      },
+      "arrived": 128,
+      "atResolution": 126,
+      "inWindow": 99,
+      "postponed": 0,
+      "changedEndings": 59,
+      "leisure": 3585,
+      "rest": 936,
+      "supply": 1256,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-20",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 46,
+        "stalemate": 78,
+        "empty": 4
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 124,
+      "postponed": 0,
+      "changedEndings": 51,
+      "leisure": 3559,
+      "rest": 914,
+      "supply": 1282,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-20",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 112,
+        "setback": 5,
+        "upper_hand": 11
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 39,
+      "leisure": 5486,
+      "rest": 1021,
+      "supply": 1298,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-100",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 46,
+        "stalemate": 2,
+        "empty": 75,
+        "missed": 5
+      },
+      "arrived": 128,
+      "atResolution": 123,
+      "inWindow": 48,
+      "postponed": 0,
+      "changedEndings": 62,
+      "leisure": 3685,
+      "rest": 1141,
+      "supply": 1123,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-100",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 34,
+        "stalemate": 94
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 46,
+      "leisure": 3720,
+      "rest": 1084,
+      "supply": 1197,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "food-100",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 76,
+        "stalemate": 52
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 55,
+      "leisure": 5577,
+      "rest": 1218,
+      "supply": 1189,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-10",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 128
+      },
+      "arrived": 127,
+      "atResolution": 0,
+      "inWindow": 0,
+      "postponed": 0,
+      "changedEndings": 125,
+      "leisure": 3349,
+      "rest": 1178,
+      "supply": 1119,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-10",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "missed": 128
+      },
+      "arrived": 128,
+      "atResolution": 0,
+      "inWindow": 0,
+      "postponed": 0,
+      "changedEndings": 128,
+      "leisure": 3216,
+      "rest": 1157,
+      "supply": 1157,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-10",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "missed": 128
+      },
+      "arrived": 128,
+      "atResolution": 0,
+      "inWindow": 0,
+      "postponed": 0,
+      "changedEndings": 128,
+      "leisure": 4983,
+      "rest": 1257,
+      "supply": 1167,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-40",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 46,
+        "empty": 71,
+        "missed": 9,
+        "stalemate": 2
+      },
+      "arrived": 128,
+      "atResolution": 119,
+      "inWindow": 48,
+      "postponed": 0,
+      "changedEndings": 83,
+      "leisure": 3596,
+      "rest": 1171,
+      "supply": 1117,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-40",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 94,
+        "stalemate": 34
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 94,
+      "leisure": 3596,
+      "rest": 1150,
+      "supply": 1173,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-40",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 56,
+        "setback": 58,
+        "upper_hand": 14
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 2,
+      "changedEndings": 84,
+      "leisure": 5456,
+      "rest": 1241,
+      "supply": 1171,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-100",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "empty": 102,
+        "withdrawal": 1,
+        "upper_hand": 23,
+        "missed": 1,
+        "stalemate": 1
+      },
+      "arrived": 128,
+      "atResolution": 127,
+      "inWindow": 24,
+      "postponed": 0,
+      "changedEndings": 68,
+      "leisure": 3664,
+      "rest": 978,
+      "supply": 1148,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-100",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 77,
+        "stalemate": 51
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 37,
+      "leisure": 3593,
+      "rest": 945,
+      "supply": 1256,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "energy-100",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 65,
+        "upper_hand": 63
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 22,
+      "leisure": 5519,
+      "rest": 1132,
+      "supply": 1218,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-0",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "stalemate": 66,
+        "setback": 62
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 125,
+      "leisure": 3521,
+      "rest": 697,
+      "supply": 740,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-0",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "stalemate": 123,
+        "setback": 5
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 49,
+      "leisure": 3411,
+      "rest": 670,
+      "supply": 770,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-0",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 127,
+        "upper_hand": 1
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 40,
+      "leisure": 5231,
+      "rest": 768,
+      "supply": 786,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-9",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "stalemate": 120,
+        "upper_hand": 6,
+        "empty": 2
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 126,
+      "postponed": 0,
+      "changedEndings": 111,
+      "leisure": 3445,
+      "rest": 698,
+      "supply": 843,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-9",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 33,
+        "stalemate": 95
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 19,
+      "leisure": 3389,
+      "rest": 671,
+      "supply": 885,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-9",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 88,
+        "upper_hand": 40
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 5,
+      "leisure": 5096,
+      "rest": 759,
+      "supply": 909,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-90",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 76,
+        "empty": 30,
+        "upper_hand": 15,
+        "withdrawal": 7
+      },
+      "arrived": 128,
+      "atResolution": 52,
+      "inWindow": 15,
+      "postponed": 0,
+      "changedEndings": 100,
+      "leisure": 4027,
+      "rest": 1332,
+      "supply": 1758,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-90",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 44,
+        "stalemate": 84
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 4005,
+      "rest": 1305,
+      "supply": 1800,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "money-90",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 87,
+        "upper_hand": 41
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 5535,
+      "rest": 1487,
+      "supply": 1704,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-60",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 27,
+        "empty": 97,
+        "withdrawal": 2,
+        "upper_hand": 2
+      },
+      "arrived": 128,
+      "atResolution": 101,
+      "inWindow": 2,
+      "postponed": 0,
+      "changedEndings": 99,
+      "leisure": 3591,
+      "rest": 996,
+      "supply": 1197,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-60",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 43,
+        "stalemate": 84,
+        "empty": 1
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 127,
+      "postponed": 0,
+      "changedEndings": 1,
+      "leisure": 3529,
+      "rest": 955,
+      "supply": 1241,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-60",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 87,
+        "upper_hand": 41
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 5499,
+      "rest": 1127,
+      "supply": 1216,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-100",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "stalemate": 20,
+        "upper_hand": 96,
+        "empty": 12
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 116,
+      "postponed": 0,
+      "changedEndings": 44,
+      "leisure": 3631,
+      "rest": 999,
+      "supply": 1202,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-100",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 44,
+        "stalemate": 84
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 3529,
+      "rest": 955,
+      "supply": 1242,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-100",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 87,
+        "upper_hand": 41
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 5499,
+      "rest": 1127,
+      "supply": 1216,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-140",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "stalemate": 28,
+        "upper_hand": 100
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 53,
+      "leisure": 3631,
+      "rest": 998,
+      "supply": 1203,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-140",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 44,
+        "stalemate": 84
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 3529,
+      "rest": 955,
+      "supply": 1242,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "window-140",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 87,
+        "upper_hand": 41
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 0,
+      "leisure": 5499,
+      "rest": 1127,
+      "supply": 1216,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "no-poi",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 128
+      },
+      "arrived": 125,
+      "atResolution": 0,
+      "inWindow": 0,
+      "postponed": 0,
+      "changedEndings": 125,
+      "leisure": 807,
+      "rest": 955,
+      "supply": 702,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "no-poi",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "stalemate": 88,
+        "upper_hand": 36,
+        "empty": 4
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 124,
+      "postponed": 0,
+      "changedEndings": 52,
+      "leisure": 711,
+      "rest": 992,
+      "supply": 739,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "no-poi",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "setback": 4,
+        "stalemate": 104,
+        "upper_hand": 20
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 37,
+      "leisure": 621,
+      "rest": 1004,
+      "supply": 791,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-start",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 124,
+        "empty": 4
+      },
+      "arrived": 6,
+      "atResolution": 4,
+      "inWindow": 0,
+      "postponed": 0,
+      "changedEndings": 124,
+      "leisure": 4821,
+      "rest": 1015,
+      "supply": 1193,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-start",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 83,
+        "stalemate": 39,
+        "empty": 6
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 122,
+      "postponed": 0,
+      "changedEndings": 69,
+      "leisure": 3540,
+      "rest": 1098,
+      "supply": 1077,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-start",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "setback": 4,
+        "stalemate": 90,
+        "upper_hand": 29,
+        "empty": 5
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 123,
+      "postponed": 0,
+      "changedEndings": 43,
+      "leisure": 3438,
+      "rest": 986,
+      "supply": 1189,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-mid",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 59,
+        "upper_hand": 15,
+        "empty": 34,
+        "stalemate": 19,
+        "withdrawal": 1
+      },
+      "arrived": 97,
+      "atResolution": 69,
+      "inWindow": 34,
+      "postponed": 0,
+      "changedEndings": 104,
+      "leisure": 4108,
+      "rest": 960,
+      "supply": 1174,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-mid",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 53,
+        "stalemate": 73,
+        "empty": 2
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 126,
+      "postponed": 0,
+      "changedEndings": 52,
+      "leisure": 3603,
+      "rest": 1002,
+      "supply": 1144,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-mid",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 25,
+        "stalemate": 97,
+        "setback": 5,
+        "empty": 1
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 127,
+      "postponed": 0,
+      "changedEndings": 49,
+      "leisure": 3115,
+      "rest": 1003,
+      "supply": 1225,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-remote",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 127,
+        "empty": 1
+      },
+      "arrived": 31,
+      "atResolution": 1,
+      "inWindow": 0,
+      "postponed": 0,
+      "changedEndings": 125,
+      "leisure": 3710,
+      "rest": 909,
+      "supply": 936,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-remote",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 41,
+        "stalemate": 70,
+        "empty": 17
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 111,
+      "postponed": 0,
+      "changedEndings": 62,
+      "leisure": 3491,
+      "rest": 1068,
+      "supply": 791,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "poi-remote",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "setback": 5,
+        "stalemate": 101,
+        "upper_hand": 21,
+        "empty": 1
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 127,
+      "postponed": 0,
+      "changedEndings": 37,
+      "leisure": 4289,
+      "rest": 1040,
+      "supply": 836,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "decide-5",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "empty": 49,
+        "missed": 3,
+        "upper_hand": 64,
+        "stalemate": 12
+      },
+      "arrived": 128,
+      "atResolution": 125,
+      "inWindow": 76,
+      "postponed": 0,
+      "changedEndings": 73,
+      "leisure": 3940,
+      "rest": 983,
+      "supply": 1206,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "decide-5",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "stalemate": 74,
+        "upper_hand": 54
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 62,
+      "leisure": 4008,
+      "rest": 918,
+      "supply": 1274,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "decide-5",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 98,
+        "upper_hand": 29,
+        "setback": 1
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 47,
+      "leisure": 5915,
+      "rest": 1181,
+      "supply": 1254,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "decide-20",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "empty": 42,
+        "upper_hand": 78,
+        "missed": 2,
+        "stalemate": 6
+      },
+      "arrived": 128,
+      "atResolution": 126,
+      "inWindow": 84,
+      "postponed": 0,
+      "changedEndings": 69,
+      "leisure": 3553,
+      "rest": 1024,
+      "supply": 1138,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "decide-20",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 62,
+        "stalemate": 66
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 66,
+      "leisure": 3509,
+      "rest": 931,
+      "supply": 1233,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "decide-20",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 98,
+        "upper_hand": 30
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 39,
+      "leisure": 5004,
+      "rest": 1143,
+      "supply": 1168,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "advise-only",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 29,
+        "empty": 88,
+        "stalemate": 1,
+        "missed": 10
+      },
+      "arrived": 128,
+      "atResolution": 118,
+      "inWindow": 30,
+      "postponed": 0,
+      "changedEndings": 78,
+      "leisure": 3611,
+      "rest": 1005,
+      "supply": 1196,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "advise-only",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "stalemate": 88,
+        "upper_hand": 40
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 52,
+      "leisure": 3557,
+      "rest": 950,
+      "supply": 1275,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "advise-only",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 115,
+        "upper_hand": 13
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 40,
+      "leisure": 5477,
+      "rest": 1135,
+      "supply": 1218,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "mediate-only",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "empty": 52,
+        "missed": 6,
+        "parley": 52,
+        "upper_hand": 18
+      },
+      "arrived": 128,
+      "atResolution": 122,
+      "inWindow": 70,
+      "postponed": 0,
+      "changedEndings": 96,
+      "leisure": 3656,
+      "rest": 993,
+      "supply": 1198,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "mediate-only",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "parley": 98,
+        "stalemate": 21,
+        "upper_hand": 9
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 111,
+      "leisure": 3579,
+      "rest": 951,
+      "supply": 1252,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "mediate-only",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "parley": 107,
+        "stalemate": 17,
+        "upper_hand": 4
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 112,
+      "leisure": 5496,
+      "rest": 1172,
+      "supply": 1204,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "support-only",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 17,
+        "empty": 90,
+        "upper_hand": 21
+      },
+      "arrived": 128,
+      "atResolution": 111,
+      "inWindow": 21,
+      "postponed": 0,
+      "changedEndings": 84,
+      "leisure": 3868,
+      "rest": 1183,
+      "supply": 1397,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "support-only",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 46,
+        "stalemate": 82
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 2,
+      "leisure": 3645,
+      "rest": 1006,
+      "supply": 1320,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "support-only",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 86,
+        "upper_hand": 42
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 1,
+      "leisure": 5510,
+      "rest": 1150,
+      "supply": 1254,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "support-early",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "missed": 19,
+        "empty": 93,
+        "withdrawal": 2,
+        "upper_hand": 14
+      },
+      "arrived": 128,
+      "atResolution": 109,
+      "inWindow": 14,
+      "postponed": 0,
+      "changedEndings": 76,
+      "leisure": 3816,
+      "rest": 1181,
+      "supply": 1414,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "support-early",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "stalemate": 108,
+        "upper_hand": 20
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 46,
+      "leisure": 3857,
+      "rest": 1189,
+      "supply": 1451,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "support-early",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "upper_hand": 62,
+        "stalemate": 66
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 0,
+      "changedEndings": 33,
+      "leisure": 5594,
+      "rest": 1350,
+      "supply": 1427,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "stress",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "withdrawal": 121,
+        "empty": 6,
+        "missed": 1
+      },
+      "arrived": 128,
+      "atResolution": 127,
+      "inWindow": 121,
+      "postponed": 121,
+      "changedEndings": 123,
+      "leisure": 3460,
+      "rest": 697,
+      "supply": 741,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "stress",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "withdrawal": 115,
+        "empty": 12,
+        "retreat": 1
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 128,
+      "changedEndings": 128,
+      "leisure": 3371,
+      "rest": 659,
+      "supply": 767,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "stress",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "retreat": 105,
+        "empty": 23
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 127,
+      "postponed": 127,
+      "changedEndings": 128,
+      "leisure": 4849,
+      "rest": 756,
+      "supply": 780,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "stress-support",
+      "gravity": 0,
+      "runs": 128,
+      "endings": {
+        "empty": 21,
+        "stalemate": 95,
+        "setback": 8,
+        "missed": 4
+      },
+      "arrived": 128,
+      "atResolution": 124,
+      "inWindow": 103,
+      "postponed": 0,
+      "changedEndings": 109,
+      "leisure": 3428,
+      "rest": 830,
+      "supply": 865,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "stress-support",
+      "gravity": 50,
+      "runs": 128,
+      "endings": {
+        "stalemate": 124,
+        "upper_hand": 1,
+        "empty": 3
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 125,
+      "postponed": 0,
+      "changedEndings": 46,
+      "leisure": 3290,
+      "rest": 796,
+      "supply": 894,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    },
+    {
+      "scenario": "stress-support",
+      "gravity": 100,
+      "runs": 128,
+      "endings": {
+        "stalemate": 76,
+        "setback": 39,
+        "upper_hand": 12,
+        "empty": 1
+      },
+      "arrived": 128,
+      "atResolution": 128,
+      "inWindow": 128,
+      "postponed": 1,
+      "changedEndings": 77,
+      "leisure": 5204,
+      "rest": 900,
+      "supply": 910,
+      "invalid": 0,
+      "stalled": 0,
+      "unaffordable": 0,
+      "replayMismatch": 0,
+      "resumeMismatch": 0
+    }
+  ]
+}
