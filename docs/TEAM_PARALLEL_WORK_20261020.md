@@ -7,6 +7,14 @@
 - **この文書が作業分担・編集境界・受入条件の共通入口**。実装仕様は現在のコード・各専門設計書を参照し、古い進捗記録だけで実装済みと判断しない。
 - **注意：この文書のGitHub登録は、ユーザーのWindowsフォルダやクローンを操作したことを意味しない。** ローカル操作は各セッションが実行して確認すること。
 
+## 2026-10-20 統合チェックポイント（追補）
+
+- **MAP-01（Claude Code）完了・統合済み**：[PR #2](https://github.com/yama-books/genpei-sandbox/pull/2)、squash統合コミット [`ec4fa85`](https://github.com/yama-books/genpei-sandbox/commit/ec4fa852ff05f6d34186ce65f0721e98ca1a4028)。地図UI・現代POI地図表示・フォールバック・テストがmainへ入った。
+- 引継ぎ書：[`docs/handoff/CLAUDE_MAP_20261020.md`](handoff/CLAUDE_MAP_20261020.md)。**担当ClaudeへMAP-01を再実装させないこと。** 追加改善は新タスクとして別ブランチで計画する。
+- **次の着手：SIM-01（Codex）**。 `D:\dev\genpei-sandbox` のmainを `git fetch origin` と `git pull --ff-only origin main` で更新後、既存worktreeがないことを確認して `D:\dev\genpei-codex-sim` を作成し、セクション4の作業を進める。
+- Codexの変更ファイルはロジック・テストに限定。画面変更や地図マーカーの追加要望は引継ぎ書の§5の位置・経路契約を参照して提案する。
+- **公開反映はActionsの成功確認とは別にサイトで検証する**。iPhone Safariの実機試験と人物の現代道路上の移動は未実施。
+
 ## 0. この取り組みの原則
 
 「史実には引力があり、結末には自由がある」。自律的な人物が娯楽・休息・食料調達・資金不足などを経験し、その結果、歴史上の事件が成立・回避・失機し得る。プレイヤーは観察を基本とし、有限の助言・支援を行う。
