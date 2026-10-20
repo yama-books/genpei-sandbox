@@ -42,6 +42,7 @@ jobs:
           node --check prototype/geography-bridge.mjs
           node --check prototype/map/map-model.mjs
           node --check prototype/map/modern-map.mjs
+          node --check prototype/map/agent-observation.mjs
       - name: Prototype tests
         run: node --test tests/*.test.mjs
       - name: Install lightweight browser driver
