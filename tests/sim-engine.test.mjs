@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { createWorld, stepWorld, installModernPois, snapshot, STATIONS } from "../prototype/core.mjs";
 import { POI_GAME_EFFECT } from "../prototype/poi-world.mjs";
 import { SIM_POIS } from "./fixtures/sim-pois.mjs";
-import { SEEDS, simulate, verifyRun } from "./sim-batch.mjs";
+import { readFile } from "node:fs/promises";
+import { SEEDS, simulate, verifyRun, runBatch } from "./sim-batch.mjs";
 
 const cost = p => p.kind === "modern-poi" ? POI_GAME_EFFECT[p.action].cost : ({ supply: 9, rest: 6, leisure: 5 }[p.id] ?? 0);
 
@@ -68,4 +69,21 @@ test("batch detects invalid balances/resources/positions and actual immobility",
   assert.ok(r.counts.invalidPositions > 0);
   assert.equal(r.counts.stalledAgents, 2);
   assert.equal(r.group, "unresolved");
+});
+
+
+test("128 seeds x 12 conditions reproduce the published improved report", { timeout: 120000 }, async () => {
+  const expected = JSON.parse(await readFile(new URL("../docs/reports/sim-01-improved.json", import.meta.url), "utf8"));
+  const actual = await runBatch();
+  assert.equal(actual.rows.length, 1536);
+  assert.deepEqual(actual.seeds, expected.seeds);
+  assert.deepEqual(actual.policy, expected.policy);
+  assert.deepEqual(actual.sources, expected.sources);
+  assert.deepEqual(actual.cells, expected.cells);
+  for (const { totals: t, groups } of actual.cells) {
+    assert.equal(t.moneyShortage + t.invalidBalances + t.invalidResources + t.invalidPositions +
+      t.replayMismatch + t.resumeMismatch + t.stalledAgents, 0);
+    assert.equal(groups.unresolved ?? 0, 0);
+  }
+  console.log("SIM-01: 1536 scenarios, 240 ticks; payment failures, invalid states, stalls, replay/resume mismatches: 0");
 });
