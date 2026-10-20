@@ -56,6 +56,17 @@
 - 旧国名エンジンの時代付き出典情報と現代道路、人物のゲーム座標は引き続き分離。人物の現代地図上の移動は未実装。iPhone Safari実機は未確認。
 - **次の管理作業**：Codexの`feat/genpei-sim03`の実施状況・PR・引継ぎとmainの整合を確認してから統合判断する。既存worktree・旧ブランチは削除しない。
 
+## 2026-10-20 SIM-03統合・MAP-03B結合検証（最新チェックポイント）
+
+- **SIM-03（Codex）完了・main統合済み**：[PR #7](https://github.com/yama-books/genpei-sandbox/pull/7)、[統合コミット `63ee4a0`](https://github.com/yama-books/genpei-sandbox/commit/63ee4a0f7f8b5754b3c2d0c92e04f5d6631a5334)。資源最低条件の導入と、延期後の屋島外再判断を実装。MAP-03Bの現代経路パネルは変更しない。
+- **MAP-03B + SIM-03の統合CI検証済み**：[Prototype integrity 39414511876](https://github.com/yama-books/genpei-sandbox/actions/runs/39414511876) のログにて**95件の単体テストPASS、失敗0**、ブラウザ1280px・390px、地図ライブラリ失敗時、模擬経路プレビュー1280px・390pxを確認。
+- **GitHub Pagesデプロイ成功**：[run 39414511937](https://github.com/yama-books/genpei-sandbox/actions/runs/39414511937)。公開ブラウザのSafari実機テストや実店舗の通行可能性、実際の人物位置は未検証。
+- SIM-03の数値「体力15・食料12」はゲーム上の交戦最低条件で、歴史や人体に基づく値ではない。欠乏時も交渉は別条件で継続可能。詳細は[Codex原引継ぎ](handoff/CODEX_SIM03_20261020.md)と[比較報告](reports/SIM_03_RULES_20261020.md)を参照。
+- **仕様裁定**：屋島の外では交戦・交渉を確定させない。延期満了後に回復不足なら `withdrawal`、回復済みなら `fate.decisions[].kind="reconsidered"` を一度だけ記録して帰還を待つ。現地の `retreat`、時機を逸した `empty` とは区別。既存 `resolution` は不変とし、物理的な撤退経路を作らない。
+- **次タスクの提案 MAP-04（Claude Code所有）**：歴史的な決断と行動の因果を画面から確認しやすくする。 `postponed` → `reconsidered` → `withdrawal/retreat/empty` を、ログと段階の違いが分かる軽量UIへ。画面側の `prototype/app.mjs` 等だけ編集し、SIM-03の判定値は変更しない。体力と食料を個別に表示する場合、丸め済みmetricsが判定閾値と食い違う境界（14.9/15）に注意し、判定理由を正本とする。
+- **次タスクの提案 SIM-04（Codex所有）**：人物の現代地図上での表示を解禁する前に、`abstract`・`modern_wgs84`・`historical_geo` の位置ドメインを保ったまま、人物移動の**模式移動/現代施設間の道案内/1185年史実地理**の用途と、経路プロバイダーの失敗時の挙動をデータ契約として詰める。現段階で `realGeo` にPOIの終点や現在地の推定値を代入しない。旧国名エンジンの正式仕様がない限り中世の道を仮生成しない。
+- いずれも**旧ブランチを再利用せず**最新 `origin/main` を確認して担当別の新ブランチ・既存worktreeで作業する。提案を採用する場合も同じファイルを同時編集しない。Jevの権限リストや過去の引継ぎは独断で書き換えない。
+
 ## 0. この取り組みの原則
 
 「史実には引力があり、結末には自由がある」。自律的な人物が娯楽・休息・食料調達・資金不足などを経験し、その結果、歴史上の事件が成立・回避・失機し得る。プレイヤーは観察を基本とし、有限の助言・支援を行う。
