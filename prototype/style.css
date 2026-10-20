@@ -116,6 +116,33 @@ input[type=range]{accent-color:#3f806e;cursor:pointer;width:126px}
 .modern-station-dot:hover{fill:#286b72;stroke:#ffcc76;stroke-width:4}
 .legend-dot.modern{background:#427f76;outline:2px solid #c5dbd2}
 
+/* MAP-01: schematic / modern-map switch. Real coordinates never mix with the abstract stage. */
+.view-switch{display:inline-flex;border:1px solid #d3ddd5;border-radius:7px;overflow:hidden;background:#fff;flex:0 0 auto}
+.view-button{border:0;background:transparent;color:#5d716b;font-size:11px;font-weight:600;padding:0 13px;min-height:36px;min-width:72px}
+.view-button+.view-button{border-left:1px solid #d3ddd5}
+.view-button[aria-pressed=true]{background:#285a5a;color:#fff}
+.view-button:focus-visible{outline:2px solid #f1c982;outline-offset:-2px}
+.legend-domain{margin-left:auto;font-size:9px;letter-spacing:.04em;color:#8c9b94}
+.map-banner{margin:0 0 8px;padding:7px 10px;font-size:10px;line-height:1.55;color:#4f625c;background:#eef3ee;border:1px solid #d9e4da;border-radius:6px}
+.map-banner strong{margin-right:7px;color:#285a5a}
+.modern-map{width:100%;aspect-ratio:1000/640;min-height:300px;border-radius:7px;box-shadow:inset 0 0 0 1px #ccd6ce;background:#e8ece6;overflow:hidden;z-index:0}
+.modern-map.tiles-failed{background:repeating-linear-gradient(45deg,#eef0ea 0 10px,#e6e9e2 10px 20px)}
+.map-status{margin:7px 2px 0}.map-status:empty{display:none}
+.map-status.warning{color:#8a5e38}
+.legend-dot.adopted{background:#285a5a}.legend-dot.eligible{background:#e6f0ec;box-shadow:inset 0 0 0 2px #285a5a}.legend-dot.reference{background:#f4f5f1;box-shadow:inset 0 0 0 1.5px #7f8c86}
+.legend-ring{display:inline-block;width:10px;height:10px;border-radius:50%;border:1.5px dashed #3f6f8a;margin-right:5px;vertical-align:-1px}
+.map-popup{font:11px/1.55 "Noto Sans JP",sans-serif;color:#33463f;max-width:250px}
+.map-popup strong{display:block;font-size:12px;margin-bottom:3px}
+.map-popup-tag{display:inline-block;font-size:9px;border:1px solid #cfdcd3;border-radius:3px;padding:0 5px;color:#4b7568;margin-bottom:4px}
+.leaflet-popup-content .map-popup p{margin:2px 0;overflow-wrap:anywhere}
+.modern-map .leaflet-popup-content{margin:10px 12px}.map-popup-key{color:#88958e;margin-right:6px}
+.modern-map .leaflet-control-attribution{font-size:9px}
+.poi-card .poi-status{display:inline-block;margin-right:6px}
+.poi-card .poi-status.adopted{background:#285a5a;color:#fff;border-color:#285a5a}
+.poi-card .poi-status.eligible{color:#285a5a;border-color:#9fbeb2}
+.poi-card .poi-status.ref{color:#7f8c86}
+.poi-locate{margin-top:6px;width:100%;min-height:36px}
+
 @media(max-width:1260px){.workspace{grid-template-columns:235px minmax(340px,1fr)}.detail{grid-column:1/-1;display:block}.people-list{max-height:720px}}
 @media(max-width:780px){.shell{padding:12px}.masthead{flex-wrap:wrap}.head-links{width:100%;gap:12px}.controls{padding:10px}.workspace{grid-template-columns:1fr}.world{grid-row:1}.roster{grid-row:2}.detail{grid-column:1;grid-row:3;display:block}.people-list{max-height:260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.person-item{border:1px solid #e5eae5}.stage{aspect-ratio:1000/640}.world-content{padding:0 7px 10px}.event-section{padding:12px}.notice{font-size:10px}.panel-heading{padding:13px}.gravity-group{width:100%}.gravity-group input{flex:1}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}

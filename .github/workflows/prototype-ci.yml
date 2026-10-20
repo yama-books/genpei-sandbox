@@ -40,6 +40,8 @@ jobs:
           node --check prototype/openpoi.mjs
           node --check prototype/fate.mjs
           node --check prototype/geography-bridge.mjs
+          node --check prototype/map/map-model.mjs
+          node --check prototype/map/modern-map.mjs
       - name: Prototype tests
         run: node --test tests/*.test.mjs
       - name: Install lightweight browser driver
