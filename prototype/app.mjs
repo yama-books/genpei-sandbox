@@ -2,6 +2,7 @@ import { STATIONS, STATION_BY_ID, PERSONAS, createWorld, stepWorld, intervene, s
 import { buildModernStations } from "./poi-world.mjs";
 import { buildMapModel, mapModelSignature } from "./map/map-model.mjs";
 import { createModernMap } from "./map/modern-map.mjs";
+import { buildAgentObservations } from "./map/agent-observation.mjs";
 
 import { loadPoiSample } from "./openpoi.mjs";
 import { FATE_RULES, chapterMetrics } from "./fate.mjs";
@@ -47,6 +48,7 @@ let poiEnabled = false;
 let heritageSites = [];
 let modernMap = null;
 let poiListSignature = "";
+let observedPoiKey = null;
 
 const element = (tag, cls, value) => {
   const e = document.createElement(tag);
@@ -212,12 +214,74 @@ function renderPoiList(model) {
 }
 
 function currentMapModel() {
-  return buildMapModel({records:loadedModernPois,adoptedPois:world.modernPois,sites:heritageSites});
+  // Saved/adopted facilities remain observable even after a different search result.
+  const records=[...loadedModernPois];
+  for(const p of world.modernPois ?? []) records.push({name:p.label,...p.modernLocation,...p.provenance});
+  const model=buildMapModel({records,adoptedPois:world.modernPois,sites:heritageSites});
+  if(!model.pois.some(p=>p.key===observedPoiKey)) observedPoiKey=null;
+  model.observations=buildAgentObservations(world,Number(q("#gravity").value));
+  model.selectedAgentId=selected;
+  model.selectedPoiKey=observedPoiKey;
+  return model;
 }
 function renderModernMap() {
   const model=currentMapModel();
   renderPoiList(model);
+  renderMapObservation(model);
   modernMap?.update(model);
+}
+
+function renderMapObservation(model) {
+  const root=q("#map-observation");root.replaceChildren();
+  const people=element("div","map-observation-people");
+  for(const a of model.observations) {
+    const button=element("button","button quiet",a.name);
+    button.type="button";button.dataset.agentId=a.agentId;
+    button.setAttribute("aria-pressed",String(a.agentId===selected));
+    button.addEventListener("click",()=>{selected=a.agentId;observedPoiKey=null;render();});
+    people.append(button);
+  }
+  root.append(people);
+  const a=model.observations.find(a=>a.agentId===selected);
+  if(!a) root.append(element("p","helper","選択人物は資料のみ表示。仮想移動の対象ではありません。"));
+  else {
+    const detail=element("div","map-agent-detail");
+    detail.append(element("strong","",a.name+"｜"+a.statusLabel),
+      element("p","","第 "+a.tick+" 刻 ／ "+(a.movementStatus==="arrived"?"到着先：":"目的地：")+a.stationLabel),
+      element("p","","直近の選択理由："+a.lastDecision));
+    if(a.blockedReason) detail.append(element("p","helper","観測データの診断："+a.blockedReason+"（道路障害の判定ではありません）"));
+    if(a.facilityKey && model.pois.some(p=>p.key===a.facilityKey)) {
+      const locate=element("button","button map-destination",(a.movementStatus==="arrived"?"到着先":"目的地")+"施設の位置を見る");locate.type="button";
+      locate.addEventListener("click",()=>showOnMap(a.facilityKey));detail.append(locate);
+    } else detail.append(element("p","helper","実座標を持つ目的地施設はありません。人物の位置は模式図で確認できます。"));
+    root.append(detail);
+    const interests=element("div","map-interests");
+    interests.append(element("p","helper","現代施設への現在の関心（仮想得点・訪問予測ではありません）"));
+    for(const interest of a.interests.slice(0,3)) {
+      const row=element("div","map-interest");
+      row.append(element("span","",interest.label+"："+interest.why+" ／ "+interest.score));
+      if(model.pois.some(p=>p.key===interest.key)) {
+        const b=element("button","button quiet","施設を見る");b.type="button";
+        b.addEventListener("click",()=>showOnMap(interest.key));row.append(b);
+      }
+      interests.append(row);
+    }
+    if(!a.interests.length) interests.append(element("p","helper","現代施設の行動候補は未追加です。"));
+    root.append(interests);
+  }
+  const p=model.pois.find(p=>p.key===observedPoiKey);
+  if(p) {
+    const facility=element("div","map-facility-detail");
+    facility.append(element("strong","",p.name+"｜"+p.statusLabel));
+    const related=model.observations.filter(a=>a.facilityKey===p.key);
+    facility.append(element("p","",related.length?related.map(a=>a.name+"："+a.statusLabel).join(" ／ "):"この施設を目的地・到着先とする人物はいません。"));
+    for(const person of model.observations) {
+      const interest=person.interests.find(i=>i.key===p.key);
+      if(interest) facility.append(element("p","",person.name+"の現在の関心："+interest.why+" ／ "+interest.score+"（仮想得点）"));
+    }
+    facility.append(element("p","helper","施設の座標を表示しています。人物の現在地・実際の到着を示しません。"));
+    root.append(facility);
+  }
 }
 // A tile warning stays visible once raised; the "not fetched" hint follows POI state.
 function setMapStatus(kind,text) {
@@ -239,11 +303,15 @@ async function setView(mode) {
   q("#view-schematic").setAttribute("aria-pressed",String(!showMap));
   q("#view-map").setAttribute("aria-pressed",String(showMap));
   if(!showMap) return false;
-  if(!modernMap) modernMap=createModernMap({container:q("#modern-map"),onStatus:setMapStatus});
+  if(!modernMap) modernMap=createModernMap({container:q("#modern-map"),onStatus:setMapStatus,onPoiSelect:key=>{
+    observedPoiKey=key;renderModernMap();
+  }});
   modernMap.update(currentMapModel());
   return modernMap.open();
 }
 async function showOnMap(key) {
+  observedPoiKey=key;
+  renderModernMap();
   const ok=await setView("map");
   if(ok) modernMap.focus(key);
   q("#map-view").scrollIntoView({block:"nearest"});
@@ -289,7 +357,7 @@ function renderRoster() {
     const b = element("button", "person-item" + (p.candidate_id === selected ? " active" : ""));
     b.type = "button";
     b.setAttribute("aria-pressed", p.candidate_id === selected ? "true" : "false");
-    b.addEventListener("click", () => { selected = p.candidate_id; render(); });
+    b.addEventListener("click", () => { selected = p.candidate_id; observedPoiKey=null; render(); });
     const left = element("div", "person-main");
     left.append(element("div", "person-name", p.display_name));
     left.append(element("div", "person-small", p.research_group.replace("東国武士・鎌倉勢力・義経郎党", "東国・義経郎党").replace("実在・人物像の監査重点（文学・伝承）", "軍記・伝承の監査重点")));

@@ -56,7 +56,7 @@ function popupContent(doc, rows, title, tag) {
   return root;
 }
 
-export function createModernMap({ container, onStatus = () => {}, doc = document, loader = loadLeaflet }) {
+export function createModernMap({ container, onStatus = () => {}, onPoiSelect = () => {}, doc = document, loader = loadLeaflet }) {
   let L = null, map = null, poiLayer = null, heritageLayer = null;
   let model = null, signature = "", tileErrors = 0, tileLoads = 0, tilesFailed = false, opening = null;
   const markers = new Map();
@@ -74,7 +74,11 @@ export function createModernMap({ container, onStatus = () => {}, doc = document
       heritageLayer.addLayer(m);
     }
     for (const p of model.pois) {
-      const m = L.circleMarker([p.lat, p.lng], { ...styleFor(p.status), className: "map-poi map-poi--" + p.status });
+      const related = (model.observations ?? []).filter(a => a.facilityKey === p.key);
+      const highlighted = model.selectedPoiKey === p.key || related.some(a => a.agentId === model.selectedAgentId);
+      const m = L.circleMarker([p.lat, p.lng], { ...styleFor(p.status),
+        ...(highlighted ? { color: "#b44923", weight: 5, radius: 13 } : {}),
+        className: "map-poi map-poi--" + p.status + (highlighted ? " map-poi--observed" : "") });
       m.bindPopup(popupContent(doc, [
         ["分類", p.actionLabel + "（元分類：" + p.category + "）"],
         ["住所", p.address || "住所情報なし"],
@@ -82,9 +86,12 @@ export function createModernMap({ container, onStatus = () => {}, doc = document
         ["出典", p.source],
         ["ライセンス", p.licenses.join(", ")],
         ["帰属", p.attributions.join("; ")],
+        ["人物の行動", related.map(a => a.name + "：" + a.statusLabel).join(" ／ ")],
+        ["位置の意味", "施設の所在地です。人物の現在地ではありません"],
         ["注意", "存在・営業・立入可否は未確認"],
       ], p.name, p.statusLabel), POPUP_OPTIONS);
       m.bindTooltip(p.name);
+      m.on("click", () => { onPoiSelect(p.key); markers.get(p.key)?.openPopup(); });
       poiLayer.addLayer(m);
       markers.set(p.key, m);
     }

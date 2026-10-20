@@ -104,7 +104,14 @@
         </div>
         <div class="world-content map-view" id="map-view" hidden>
           <p class="map-banner"><strong>現代の実座標</strong>施設と史跡範囲の代表点のみ。人物の地図上の位置は未対応のため、人物は模式図で観察します。</p>
-          <div id="modern-map" class="modern-map" role="region" aria-label="現代地図（屋島周辺の施設）"></div>
+          <div class="map-observation-layout">
+            <div id="modern-map" class="modern-map" role="region" aria-label="現代地図（屋島周辺の施設）"></div>
+            <aside class="map-observation-panel" aria-labelledby="map-observation-title">
+              <h3 id="map-observation-title">人物と施設の行動観察</h3>
+              <p class="helper">人物の移動・到着・理由はゲーム内の状態です。強調する点は施設の所在地です。</p>
+              <div id="map-observation"></div>
+            </aside>
+          </div>
           <div id="map-status" class="load-status map-status" role="status"></div>
           <div class="map-legend"><span><i class="legend-dot adopted"></i>行動候補に採用中</span><span><i class="legend-dot eligible"></i>採用可</span><span><i class="legend-dot reference"></i>参照のみ</span><span><i class="legend-dot historic"></i>史跡範囲の代表点</span><span><i class="legend-ring"></i>検索範囲 1.2km</span></div>
         </div>

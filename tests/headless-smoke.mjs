@@ -98,9 +98,41 @@ try {
       await page.waitForFunction(() => /背景地図を取得できません/.test(document.querySelector("#map-status").innerText), null, { timeout: 10000 });
       assert.equal(await page.locator("path.map-poi").count(), 2, "markers stay usable without tiles");
     }
+    // MAP-02: deterministic fixture journey; facility positions never become agent positions.
+    await page.locator('#map-observation button[data-agent-id="C115"]').click();
+    assert.match(await page.locator(".map-agent-detail").innerText(), /那須与一.*移動中/s);
+    assert.match(await page.locator(".map-interests").innerText(), /見物.*仮想得点|仮想得点.*見物/s);
+    assert.equal(await page.locator(".map-destination").count(), 0, "abstract destination has no map focus");
+    for(let i=0;i<21;i++) await page.locator("#step").click();
+    assert.match(await page.locator(".map-agent-detail").innerText(), /第 21 刻.*試験資料館B/s);
+    assert.match(await page.locator(".map-agent-detail").innerText(), /直近の選択理由：見物/);
+    assert.equal(await page.locator("path.map-poi--observed").count(), 1, "selected agent highlights destination facility");
+    await page.locator(".map-destination").click();
+    assert.match(await page.locator(".leaflet-popup-content").innerText(), /那須与一：移動中/);
+    assert.match(await page.locator(".map-facility-detail").innerText(), /人物の現在地.*示しません/);
+    await page.locator("#save").click();
+    for(let i=0;i<7;i++) await page.locator("#step").click();
+    assert.match(await page.locator(".map-agent-detail").innerText(), /到着（模式空間）/);
+    assert.match(await page.locator(".map-facility-detail").innerText(), /那須与一：到着/);
+    if(process.env.MAP_SCREENSHOT_DIR) await page.locator("#map-view").screenshot({path:process.env.MAP_SCREENSHOT_DIR+"/map02-"+viewport.width+".png"});
+    await page.locator("#restore").click();
+    assert.match(await page.locator(".map-agent-detail").innerText(), /第 21 刻.*試験資料館B/s);
+    assert.match(await page.locator(".map-facility-detail").innerText(), /那須与一：移動中/);
+    if(await page.locator(".leaflet-popup-close-button").count()) await page.locator(".leaflet-popup-close-button").click();
+    await page.locator("path.map-poi").first().click({force:true});
+    assert.match(await page.locator(".map-facility-detail").innerText(), /試験カフェA/);
+    assert.match(await page.locator(".map-facility-detail").innerText(), /現在の関心/);
+    await page.locator("#people-list .person-item").first().click();
+    assert.match(await page.locator("#map-observation").innerText(), /資料のみ/);
+    assert.equal(await page.locator("#modern-map .leaflet-overlay-pane path").count(), 4,
+      "only search circle, two facilities and heritage; no agents or routes");
+    await page.locator('#map-observation button[data-agent-id="C115"]').click();
+    await page.locator(".map-destination").click();
     const mapDims = await page.evaluate(() => ({clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
     assert.ok(mapDims.scrollWidth <= mapDims.clientWidth + 4, "no horizontal overflow with map: " + JSON.stringify(mapDims));
     await page.locator("#remove-poi").click();
+    assert.equal(await page.locator(".map-interest").count(), 0, "removal clears interests");
+    assert.match(await page.locator(".map-facility-detail").innerText(), /人物はいません/);
     assert.equal(await page.locator("path.map-poi--adopted").count(), 0, "map follows removal");
     assert.equal(await page.locator("path.map-poi--eligible").count(), 2, "removed POIs remain as eligible, not adopted");
     await page.locator("#view-schematic").click();
@@ -123,6 +155,9 @@ try {
   await page.locator("#view-map").click();
   await page.waitForFunction(() => /地図ライブラリ/.test(document.querySelector("#map-status").innerText), null, { timeout: 10000 });
   assert.match(await page.locator("#map-status").innerText(), /模式図と施設一覧は引き続き使えます/);
+  assert.equal(await page.locator("#map-observation button[data-agent-id]").count(), 3, "observations work without Leaflet");
+  await page.locator('#map-observation button[data-agent-id="C115"]').click();
+  assert.match(await page.locator(".map-agent-detail").innerText(), /那須与一/);
   await page.locator("#view-schematic").click();
   await page.locator("#step").click();
   assert.match(await page.locator("#clock").innerText(), /1 刻/, "simulation runs after map failure");
