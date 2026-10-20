@@ -117,6 +117,17 @@ input[type=range]{accent-color:#3f806e;cursor:pointer;width:126px}
 .legend-dot.modern{background:#427f76;outline:2px solid #c5dbd2}
 
 /* MAP-01: schematic / modern-map switch. Real coordinates never mix with the abstract stage. */
+.map-observation-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:12px;align-items:start}
+.map-observation-panel{min-width:0;padding:12px;background:#f4f5f1;border:1px solid #ccd6ce;border-radius:7px;overflow-wrap:anywhere}
+.map-observation-panel h3{margin:0 0 8px;font-size:15px}
+.map-observation-people{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.map-observation-panel button{min-height:44px;white-space:normal}
+.map-observation-people [aria-pressed="true"]{border-color:#b44923;background:#faede2}
+.map-agent-detail,.map-facility-detail{border-top:1px solid #ccd6ce;padding-top:10px;margin-top:10px}
+.map-observation-panel p,.map-interest{font-size:12px;line-height:1.7}
+.map-interest{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:6px 0}
+.map-interest span{min-width:0}.map-interest button{flex-shrink:0}
+@media(max-width:1100px){.map-observation-layout{grid-template-columns:minmax(0,1fr)}}
 .view-switch{display:inline-flex;border:1px solid #d3ddd5;border-radius:7px;overflow:hidden;background:#fff;flex:0 0 auto}
 .view-button{border:0;background:transparent;color:#5d716b;font-size:11px;font-weight:600;padding:0 13px;min-height:36px;min-width:72px}
 .view-button+.view-button{border-left:1px solid #d3ddd5}

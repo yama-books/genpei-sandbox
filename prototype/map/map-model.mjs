@@ -119,5 +119,6 @@ export function buildMapModel({ records = [], adoptedPois = [], sites = [] } = {
 
 // Cheap signature so the view only redraws when the visible data changes.
 export function mapModelSignature(model) {
-  return model.pois.map(p => p.key + ":" + p.status).join(",") + "#" + model.heritage.map(h => h.id).join(",");
+  return JSON.stringify([model.pois, model.heritage, model.selectedPoiKey, model.selectedAgentId,
+    model.observations?.map(a => [a.agentId, a.name, a.facilityKey, a.movementStatus])]);
 }
