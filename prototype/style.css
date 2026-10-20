@@ -173,6 +173,47 @@ input[type=range]{accent-color:#3f806e;cursor:pointer;width:126px}
 .legend-line{display:inline-block;width:16px;height:4px;border-radius:2px;background:#7a3fa0;margin-right:5px;vertical-align:2px}
 @media(max-width:560px){.route-pickers{grid-template-columns:1fr}.route-pickers .button{justify-self:start}}
 
+/* MAP-04: compact causal chain for the chapter (read-only view of fate.decisions) */
+.fate-steps{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;counter-reset:fs}
+.fate-step{position:relative;padding:7px 8px 7px 30px;border:1px solid #e3dccf;border-radius:7px;background:#fbf8f2;min-width:0;font-size:11px;line-height:1.4;color:#6f6252}
+.fate-step::before{counter-increment:fs;content:counter(fs);position:absolute;left:8px;top:8px;width:16px;height:16px;border-radius:50%;background:#e6ddcf;color:#7c6a52;font-size:10px;font-weight:700;text-align:center;line-height:16px}
+.fate-step strong{display:block;font-size:12px;color:#5b4a37;overflow-wrap:anywhere}
+.fate-step .fs-tick{font-variant-numeric:tabular-nums;font-size:10px;color:#94836e}
+.fate-step.done{background:#fff;border-color:#d8ccb8}.fate-step.done::before{background:#8d7756;color:#fff;content:"✓"}
+.fate-step.current{border-color:#bf8b4e;box-shadow:0 0 0 2px #f1dcc0 inset;background:#fff8ee}.fate-step.current::before{background:#bf8b4e;color:#fff}
+.fate-step.warn.done::before{background:#b06a3b}
+.fate-step.skipped{opacity:.55;border-style:dashed}
+.fate-causes{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.fate-causes:empty{display:none}
+.fate-cause{font-size:10px;padding:3px 7px;border-radius:4px;background:#fdf1e6;color:#8a5a33;border:1px solid #efd9c2}
+.fate-cause-label{font-size:10px;color:#94836e;align-self:center}
+.fate-status{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.fate-status:empty{display:none}
+.fate-chip{font-size:11px;padding:4px 8px;border-radius:5px;background:#fff;border:1px solid #e3dccf;color:#5f5444;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fate-chip.bad{background:#fdecea;border-color:#efc9c2;color:#9a3d2c}.fate-chip.ok{border-color:#cfe0d3;color:#3f6b55}
+.fate-chip.next{background:#f3eee4;border-style:dashed}
+.fate-chart-wrap{margin:9px 0 0}
+.fate-chart{width:100%;height:auto;display:block;background:#fffdf8;border:1px solid #e7dfd2;border-radius:6px}
+.fate-chart .fc-axis{fill:#a09380;font-size:10px}.fate-chart .fc-mark{stroke:#cbbba3;stroke-dasharray:3 3}.fate-chart .fc-mark-label{fill:#8f7f68;font-size:10px}
+.fate-chart .fc-site{fill:#cfe3d6;opacity:.9}.fate-chart .fc-grace{fill:#f6dfc6;opacity:.75}
+.fate-chart .fc-floor{stroke-width:1;stroke-dasharray:4 3}.fate-chart .fc-floor.energy{stroke:#2f7d6d}.fate-chart .fc-floor.provisions{stroke:#c08a2e}
+.fate-chart .fc-line{fill:none;stroke-width:2;stroke-linejoin:round}.fate-chart .fc-line.energy{stroke:#2f7d6d}.fate-chart .fc-line.provisions{stroke:#c08a2e}
+.fate-chart .fc-ev{stroke:#fff;stroke-width:1}.fate-chart .fc-ev.facility{fill:#4b8b87}.fate-chart .fc-ev.intervention{fill:#3d6e85}.fate-chart .fc-ev.warning{fill:#b5653a}
+.fate-chart .fc-dec{stroke:#fff;stroke-width:1}.fate-chart .fc-dec.postponed{fill:#b5653a}.fate-chart .fc-dec.reconsidered{fill:#7a5aa0}.fate-chart .fc-dec.resolution{fill:#4f3e2a}
+.fate-chart .fc-now{stroke:#5b4a37;stroke-width:1.5}
+.fate-legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:5px;font-size:10px;color:#8b7d69}
+.fl-line{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:4px;vertical-align:3px}.fl-line.energy{background:#2f7d6d}.fl-line.food{background:#c08a2e}
+.fl-floor{display:inline-block;width:14px;border-top:1.5px dashed #9a8a70;margin-right:4px;vertical-align:3px}
+.fl-site,.fl-grace{display:inline-block;width:12px;height:9px;margin-right:4px;vertical-align:-1px;border-radius:2px}.fl-site{background:#cfe3d6}.fl-grace{background:#f6dfc6}
+.fl-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4b8b87;margin-right:4px}
+.fate-trail{margin-top:9px;font-size:11px;color:#6d6252}
+.fate-trail summary{cursor:pointer;min-height:32px;display:flex;align-items:center;font-weight:600;color:#6f5c42}
+.fate-trail ol{list-style:none;margin:4px 0 0;padding:0;max-height:180px;overflow-y:auto}
+.fate-trail li{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid #eee6d9}.fate-trail li span:first-child{min-width:44px;color:#a09380;font-variant-numeric:tabular-nums}
+.fate-trail li.fate{color:#8d6d39;font-weight:600}
+.fate-foot{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin-top:10px}
+.fate-scenario{display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}.fate-scenario select{border:1px solid #dcd2c2;background:#fff;border-radius:6px;padding:6px;min-height:36px;font-size:11px;color:#5b4a37;max-width:100%;min-width:0}
+.fate-foot .fate-caption{margin:0;flex:1 1 220px}
+@media(max-width:560px){.fate-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.fate-scenario{flex-wrap:wrap;width:100%}.fate-scenario select{width:100%}}
+
 @media(max-width:1260px){.workspace{grid-template-columns:235px minmax(340px,1fr)}.detail{grid-column:1/-1;display:block}.people-list{max-height:720px}}
 @media(max-width:780px){.shell{padding:12px}.masthead{flex-wrap:wrap}.head-links{width:100%;gap:12px}.controls{padding:10px}.workspace{grid-template-columns:1fr}.world{grid-row:1}.roster{grid-row:2}.detail{grid-column:1;grid-row:3;display:block}.people-list{max-height:260px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.person-item{border:1px solid #e5eae5}.stage{aspect-ratio:1000/640}.world-content{padding:0 7px 10px}.event-section{padding:12px}.notice{font-size:10px}.panel-heading{padding:13px}.gravity-group{width:100%}.gravity-group input{flex:1}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}

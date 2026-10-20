@@ -134,9 +134,19 @@
             <span id="fate-phase" class="tiny-pill">運命はまだ遠い</span>
           </div>
           <p id="fate-description" class="fate-description">人物たちが日常を過ごす間も、歴史の機会は静かに近づく。</p>
-          <div id="fate-progress" class="fate-progress" aria-label="運命の時間経過"></div>
+          <ol id="fate-steps" class="fate-steps" aria-label="屋島篇の判断の段階"></ol>
+          <div id="fate-causes" class="fate-causes"></div>
+          <div id="fate-status" class="fate-status" aria-label="義経の現在の準備状況"></div>
+          <figure class="fate-chart-wrap">
+            <svg id="fate-chart" class="fate-chart" viewBox="0 0 600 150" role="img" aria-labelledby="fate-chart-title"><title id="fate-chart-title">義経の体力・食料と出来事の時間経過（第0〜112刻）</title></svg>
+            <figcaption class="fate-legend"><span><i class="fl-line energy"></i>体力</span><span><i class="fl-line food"></i>食料</span><span><i class="fl-floor"></i>交戦の最低ライン（体力15・食料12）</span><span><i class="fl-site"></i>屋島に滞在</span><span><i class="fl-grace"></i>延期の猶予</span><span><i class="fl-dot"></i>寄り道・介入</span></figcaption>
+          </figure>
           <div id="fate-reasons" class="fate-reasons" aria-live="polite"></div>
-          <div class="fate-caption">※日時・敵勢力・判定はゲーム用の架空設定です。中世地理の復元や戦闘史実の検証ではありません。</div>
+          <details id="fate-trail" class="fate-trail"><summary>義経の道中記録</summary><ol id="fate-trail-list"></ol></details>
+          <div class="fate-foot">
+            <label class="fate-scenario"><span class="small-label">観察条件</span><select id="fate-scenario" autocomplete="off"><option value="normal">通常</option><option value="shortage">資源不足で開始（義経：体力40・食料20・所持金0）</option></select></label>
+            <span class="fate-caption">変更するとリセットします。資源不足はSIM-03検証と同じ初期値です。日時・敵勢力・判定はゲーム用の架空設定で、中世地理や戦闘史実の検証ではありません。</span>
+          </div>
         </section>
         <section class="heritage-section" aria-labelledby="heritage-heading">
           <div class="section-head"><div class="eyebrow">HISTORICAL PLACES / MUNICIPAL SOURCES</div><h3 id="heritage-heading">屋島の史跡と伝承地</h3></div>

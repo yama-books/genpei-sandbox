@@ -172,6 +172,54 @@ try {
   assert.deepEqual(errors, [], "no uncaught errors on map library failure");
   console.log("PASS map library failure fallback");
   await page.close();
+  // MAP-04: SIM-03 causal chain (postponement -> reassessment -> off-site withdrawal), read-only view.
+  for (const viewport of [{ width: 1280, height: 850 }, { width: 390, height: 844 }]) {
+    const fp = await browser.newPage({ viewport, reducedMotion: "reduce" });
+    const fateErrors = [];
+    fp.on("pageerror", e => fateErrors.push(e.message));
+    await fp.goto(URL + "/prototype/", { waitUntil: "domcontentloaded", timeout: 15000 });
+    await fp.locator("#people-list .person-item").first().waitFor({ timeout: 12000 });
+    assert.deepEqual(await fp.locator("#fate-steps .fate-step").evaluateAll(n => n.map(x => x.dataset.stage + ":" + x.className.split(" ")[1])),
+      ["opening:upcoming", "decision:upcoming", "reconsider:upcoming", "ending:upcoming"], "four stages before the chapter opens");
+    assert.match(await fp.locator("#fate-status").innerText(), /体力 \d+(\.\d)? \/ 15/);
+    await fp.locator("#seed").fill("3");
+    await fp.locator("#fate-scenario").selectOption("shortage");
+    assert.match(await fp.locator("#clock").innerText(), /第 0 刻/, "scenario change resets");
+    assert.match(await fp.locator("#fate-status").innerText(), /体力 40 \/ 15.*食料 20 \/ 12/s);
+    for (let i = 0; i < 49; i++) await fp.locator("#step").click();
+    assert.match(await fp.locator("#fate-phase").innerText(), /攻撃を延期/);
+    const stage = id => fp.locator('#fate-steps [data-stage="' + id + '"]');
+    assert.match(await stage("decision").innerText(), /攻撃を延期.*第 49 刻/s);
+    assert.match(await stage("reconsider").getAttribute("class"), /current/);
+    assert.match(await stage("reconsider").innerText(), /第64刻に準備を再判断/);
+    assert.match(await fp.locator("#fate-causes").innerText(), /第 49 刻の判定理由/);
+    assert.match(await fp.locator("#fate-causes").innerText(), /行動余力不足|疲労|食料欠乏/);
+    assert.match(await fp.locator("#fate-status").innerText(), /次：第 64 刻 延期の猶予が終わる/);
+    assert.equal(await fp.locator("#fate-chart .fc-grace").count(), 1, "grace window on chart");
+    assert.equal(await fp.locator("#fate-chart .fc-dec.postponed").count(), 1);
+    assert.equal(await fp.locator("#fate-chart polyline").count(), 2, "energy and food lines");
+    const savedTrail = await fp.locator("#fate-trail summary").innerText();
+    await fp.locator("#save").click();
+    await fp.locator("#to-fate").click();
+    assert.match(await fp.locator("#fate-phase").innerText(), /結末/);
+    assert.match(await stage("ending").innerText(), /屋島の外で攻勢断念.*第 64 刻/s);
+    assert.match(await stage("reconsider").innerText(), /猶予後に判断/);
+    assert.match(await fp.locator("#fate-status").innerText(), /確定時：屋島の外/);
+    assert.ok(await fp.locator("#fate-reasons .fate-reason").count() >= 2, "resolution factors kept");
+    assert.match(await fp.locator("#fate-reasons").innerText(), /屋島の外で再判断/);
+    if(process.env.MAP_SCREENSHOT_DIR) await fp.locator(".fate-chapter").screenshot({path:process.env.MAP_SCREENSHOT_DIR+"/map04-"+viewport.width+".png"});
+    const dims = await fp.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+    assert.ok(dims[0] <= dims[1] + 4, "no horizontal overflow with fate chain: " + dims);
+    await fp.locator("#restore").click();
+    assert.match(await fp.locator("#fate-phase").innerText(), /攻撃を延期/, "restore returns to the postponed state");
+    assert.equal(await fp.locator("#fate-trail summary").innerText(), savedTrail, "trail rewinds with the checkpoint");
+    assert.equal(await fp.locator("#fate-chart .fc-dec.resolution").count(), 0);
+    await fp.locator("#fate-scenario").selectOption("normal");
+    assert.match(await fp.locator("#fate-status").innerText(), /現在地/);
+    assert.deepEqual(fateErrors, [], "no uncaught errors in fate chain view");
+    console.log("PASS fate chain " + viewport.width + "px (postponed -> reassessment -> off-site withdrawal, restore)");
+    await fp.close();
+  }
   // MAP-03B opt-in evaluation provider, fully stubbed: no live routing request leaves the test.
   const routeFixture = { code: "Ok", routes: [{ distance: 95, geometry: { type: "LineString", coordinates: [[134.1008,34.3572],[134.10095,34.35752],[134.1011,34.3578]] } }] };
   for (const viewport of [{ width: 1280, height: 850 }, { width: 390, height: 844 }]) {
