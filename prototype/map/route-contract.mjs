@@ -47,6 +47,13 @@ export function makeModernRouteRequest(origin, destination) {
     destination:end,
   }};
 }
+const validRequestEndpoint = e => e && nonEmpty(e.placeId) && nonEmpty(e.name) &&
+  validCoord(e.coordinate) && e.provenance &&
+  nonEmpty(e.provenance.provider) && nonEmpty(e.provenance.source) &&
+  Array.isArray(e.provenance.licenses) && e.provenance.licenses.length>0 &&
+  e.provenance.licenses.every(nonEmpty) &&
+  Array.isArray(e.provenance.attributions) && e.provenance.attributions.length>0 &&
+  e.provenance.attributions.every(nonEmpty);
 const radians = d => d*Math.PI/180;
 function metersBetween(a,b) {
   const dLat=radians(b.lat-a.lat), dLon=radians(b.lng-a.lng);
@@ -61,8 +68,8 @@ export function reviewModernRoute(request, answer) {
       request.positionDomain!==SPATIAL_DOMAINS.modern ||
       request.routePurpose!=="facility_to_facility_preview" ||
       request.travelMode!=="walking" || request.yearContext!=="present_day" ||
-      !request.origin || !request.destination ||
-      !validCoord(request.origin.coordinate) || !validCoord(request.destination.coordinate))
+      !validRequestEndpoint(request.origin) || !validRequestEndpoint(request.destination) ||
+      request.origin.placeId===request.destination.placeId)
     return fail("invalid_request");
   if (!answer || typeof answer!=="object") return fail("no_provider_response");
   if (answer.schemaVersion!==ROUTE_CONTRACT_VERSION || answer.positionDomain!==SPATIAL_DOMAINS.modern ||
