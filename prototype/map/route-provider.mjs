@@ -6,6 +6,7 @@ import { reviewModernRoute, ROUTE_CONTRACT_VERSION, SPATIAL_DOMAINS } from "./ro
 
 export const ROUTE_PROVIDER_VERSION = "0.1";
 const OSM_COPYRIGHT = "https://www.openstreetmap.org/copyright";
+const OSM_FIX_MAP = "https://www.openstreetmap.org/fixthemap";
 
 // The public site defaults to "none": no third-party routing dependency is
 // adopted without the integration lead's decision. Others are opt-in via URL.
@@ -21,7 +22,7 @@ export const ROUTE_PROVIDERS = Object.freeze({
     minIntervalMs: 1100, // published limit: at most one request per second
     sourceId: "openstreetmap", license: "ODbL-1.0",
     attribution: "経路：FOSSGIS OSRM（routing.openstreetmap.de）／データ © OpenStreetMap contributors",
-    attributionHtml: '経路：<a href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noopener noreferrer">FOSSGIS OSRM</a>・© <a href="' + OSM_COPYRIGHT + '" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>',
+    attributionHtml: '経路：<a href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noopener noreferrer">FOSSGIS OSRM</a>・© <a href="' + OSM_COPYRIGHT + '" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>・<a href="' + OSM_FIX_MAP + '" target="_blank" rel="noopener noreferrer">地図を修正</a>',
     note: "評価用の共用サーバーです（無保証・1秒1回まで・大量利用禁止）。本番の必須依存ではありません。",
   }),
   "local-osrm-foot": Object.freeze({
@@ -47,11 +48,18 @@ export function isLoopbackEndpoint(value) {
 
 // ?route=fossgis enables the evaluation server; ?route=local&routeEndpoint=http://127.0.0.1:5000/route/v1/foot/
 // a self-hosted OSRM. Anything else resolves to "none".
-export function resolveRouteProvider(search = "") {
+export function resolveRouteProvider(search = "", runtimeHost = "localhost") {
+  // A public URL parameter is not a production approval or global rate limit.
+  // Keep live routing behind locally served developer/test pages until
+  // the full usage conditions and a sustainable provider are confirmed.
+  const isLocalPage = LOOPBACK.has(runtimeHost);
   const params = new URLSearchParams(search);
   const choice = params.get("route");
-  if (choice === "fossgis") return { ...ROUTE_PROVIDERS["fossgis-osrm-foot"] };
+  if (choice === "fossgis") return isLocalPage
+    ? { ...ROUTE_PROVIDERS["fossgis-osrm-foot"] }
+    : { ...ROUTE_PROVIDERS.none, note:"公開サイトでは外部の経路取得を停止しています。施設間の直線距離のみ表示します。" };
   if (choice === "local") {
+    if (!isLocalPage) return { ...ROUTE_PROVIDERS.none, note:"公開サイトでローカルの経路サーバーには接続できません。" };
     let endpoint = params.get("routeEndpoint") || "";
     if (endpoint && !endpoint.endsWith("/")) endpoint += "/";
     if (isLoopbackEndpoint(endpoint)) return { ...ROUTE_PROVIDERS["local-osrm-foot"], endpoint };
