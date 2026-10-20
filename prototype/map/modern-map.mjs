@@ -57,8 +57,9 @@ function popupContent(doc, rows, title, tag) {
 }
 
 export function createModernMap({ container, onStatus = () => {}, onPoiSelect = () => {}, doc = document, loader = loadLeaflet }) {
-  let L = null, map = null, poiLayer = null, heritageLayer = null;
+  let L = null, map = null, poiLayer = null, heritageLayer = null, routeLayer = null, attribution = null;
   let model = null, signature = "", tileErrors = 0, tileLoads = 0, tilesFailed = false, opening = null;
+  let route = null, routeAttribution = "";
   const markers = new Map();
 
   function draw() {
@@ -117,7 +118,7 @@ export function createModernMap({ container, onStatus = () => {}, onPoiSelect = 
           zoom: 14, minZoom: TILE_SOURCE.minZoom, maxZoom: TILE_SOURCE.maxZoom,
           attributionControl: false, tap: true,
         });
-        L.control.attribution({ prefix: '<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a>' })
+        attribution = L.control.attribution({ prefix: '<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a>' })
           .addAttribution(TILE_ATTRIBUTION_HTML).addAttribution(POI_ATTRIBUTION_HTML).addTo(map);
         L.control.scale({ imperial: false }).addTo(map);
         const tiles = L.tileLayer(TILE_SOURCE.url, { minZoom: TILE_SOURCE.minZoom, maxZoom: TILE_SOURCE.maxZoom, crossOrigin: false });
@@ -129,9 +130,11 @@ export function createModernMap({ container, onStatus = () => {}, onPoiSelect = 
             radius: model.searchRadiusMeters, color: "#3f6f8a", weight: 2, opacity: 0.85, dashArray: "6 6", fill: false, interactive: false, className: "map-radius",
           }).addTo(map);
         }
+        routeLayer = L.layerGroup().addTo(map);
         heritageLayer = L.layerGroup().addTo(map);
         poiLayer = L.layerGroup().addTo(map);
         draw();
+        drawRoute(false);
         onStatus("ready", "");
         return true;
       } catch (error) {
@@ -145,8 +148,32 @@ export function createModernMap({ container, onStatus = () => {}, onPoiSelect = 
     return opening;
   }
 
+  // MAP-03B: a reviewed facility-to-facility preview only (route-contract canDrawPreview).
+  function drawRoute(fit) {
+    if (!map) return;
+    routeLayer.clearLayers();
+    if (routeAttribution) { attribution.removeAttribution(routeAttribution); routeAttribution = ""; }
+    if (!route) return;
+    const line = L.polyline(route.preview.geometry.coordinates.map(([lng, lat]) => [lat, lng]), {
+      color: "#7a3fa0", weight: 5, opacity: 0.85, lineCap: "round", className: "map-route-preview",
+    });
+    line.bindTooltip("現代の施設間経路（提供元の推定）。人物の移動経路・1185年の道ではありません");
+    routeLayer.addLayer(line);
+    routeAttribution = route.attributionHtml;
+    if (routeAttribution) attribution.addAttribution(routeAttribution);
+    if (fit) map.fitBounds(line.getBounds(), { padding: [24, 24], maxZoom: 17, animate: false });
+  }
+
   return {
     open,
+    showRoute(preview, attributionHtml) {
+      if (!preview?.geometry || preview.positionDomain !== "modern_wgs84") return false;
+      route = { preview, attributionHtml };
+      drawRoute(true);
+      return Boolean(map); // kept and drawn later if the map opens afterwards
+    },
+    clearRoute() { route = null; drawRoute(false); },
+    get hasRoute() { return Boolean(route); },
     update(nextModel) { model = nextModel; draw(); },
     focus(key) {
       const m = markers.get(key);

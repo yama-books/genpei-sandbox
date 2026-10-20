@@ -113,7 +113,20 @@
             </aside>
           </div>
           <div id="map-status" class="load-status map-status" role="status"></div>
-          <div class="map-legend"><span><i class="legend-dot adopted"></i>行動候補に採用中</span><span><i class="legend-dot eligible"></i>採用可</span><span><i class="legend-dot reference"></i>参照のみ</span><span><i class="legend-dot historic"></i>史跡範囲の代表点</span><span><i class="legend-ring"></i>検索範囲 1.2km</span></div>
+          <div class="map-legend"><span><i class="legend-dot adopted"></i>行動候補に採用中</span><span><i class="legend-dot eligible"></i>採用可</span><span><i class="legend-dot reference"></i>参照のみ</span><span><i class="legend-dot historic"></i>史跡範囲の代表点</span><span><i class="legend-ring"></i>検索範囲 1.2km</span><span><i class="legend-line"></i>施設間の現代経路</span></div>
+          <section class="route-preview" aria-labelledby="route-preview-title">
+            <div class="route-head"><h3 id="route-preview-title">施設間の現代経路（プレビュー）</h3><span id="route-provider" class="tiny-pill">経路：未設定</span></div>
+            <p class="helper">現在の道路データによる施設から施設への参考経路です。人物の移動経路でも、1185年の道でもありません。</p>
+            <p id="route-provider-note" class="route-note"></p>
+            <div class="route-pickers">
+              <label><span class="small-label">出発施設</span><select id="route-origin"></select></label>
+              <button id="route-swap" type="button" class="button quiet" aria-label="出発と到着を入れ替え">⇅ 入替</button>
+              <label><span class="small-label">到着施設</span><select id="route-destination"></select></label>
+            </div>
+            <p id="route-check" class="route-check" role="status"></p>
+            <div class="route-actions"><button id="route-fetch" type="button" class="button primary" disabled>経路を取得</button><button id="route-clear" type="button" class="button quiet" disabled>経路を消す</button></div>
+            <div id="route-result" class="route-result" aria-live="polite"></div>
+          </section>
         </div>
         <section class="fate-chapter" aria-labelledby="fate-title">
           <div class="fate-head">
