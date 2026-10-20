@@ -5,10 +5,6 @@ import { POI_GAME_EFFECT } from "../prototype/poi-world.mjs";
 import { SIM_POIS } from "./fixtures/sim-pois.mjs";
 import { readFile } from "node:fs/promises";
 import { SEEDS, simulate, verifyRun, runBatch } from "./sim-batch.mjs";
-import { loadLegacyEngine } from './sim03-rules.mjs';
-import { mkdtemp, rm, mkdir, copyFile } from 'node:fs/promises';
-import { resolve, dirname } from 'node:path';
-import { tmpdir } from 'node:os';
 
 const cost = p => p.kind === "modern-poi" ? POI_GAME_EFFECT[p.action].cost : ({ supply: 9, rest: 6, leisure: 5 }[p.id] ?? 0);
 
@@ -76,25 +72,26 @@ test("batch detects invalid balances/resources/positions and actual immobility",
 });
 
 
-test("128 seeds x 12 conditions reproduce the published improved report", { timeout: 120000 }, async () => {
-  const expected = JSON.parse(await readFile(new URL("../docs/reports/sim-01-improved.json", import.meta.url), "utf8"));
-  const temp=await mkdtemp(resolve(tmpdir(),'genpei-sim01-history-'));
-  let actual;
-  try {
-    const {api:legacy}=await loadLegacyEngine({},temp);
-    await mkdir(resolve(temp,'prototype'));
-    for(const name of ['core','fate','poi-world']) await copyFile(resolve(temp,'82-10-112-15-36',`${name}.mjs`),resolve(temp,'prototype',`${name}.mjs`));
-    actual=await runBatch({api:legacy,engineRoot:temp});
-  } finally {if(dirname(temp)===resolve(tmpdir())) await rm(temp,{recursive:true});}
+test("128 seeds x 12 conditions reproduce SIM-03 and preserve SIM-01 standard trajectories", { timeout: 120000 }, async () => {
+  const expected = JSON.parse(await readFile(new URL("../docs/reports/sim-03-improved.json", import.meta.url), "utf8"));
+  const historical = JSON.parse(await readFile(new URL("../docs/reports/sim-01-improved.json", import.meta.url), "utf8"));
+  const actual = await runBatch();
   assert.equal(actual.rows.length, 1536);
   assert.deepEqual(actual.seeds, expected.seeds);
   assert.deepEqual(actual.policy, expected.policy);
   assert.deepEqual(actual.sources, expected.sources);
   assert.deepEqual(actual.cells, expected.cells);
+  assert.deepEqual(actual.cells, historical.cells);
+  const keys=Object.keys(actual.rows[0]);
+  const csv=[keys.join(','),...actual.rows.map(r=>keys.map(k=>r[k]??'').join(','))].join('\n');
+  for(const name of ['sim-01-improved','sim-03-improved']) {
+    const stored=(await readFile(new URL(`../docs/reports/${name}.csv`,import.meta.url),'utf8')).trimEnd().replace(/\r\n/g,'\n');
+    assert.equal(csv,stored);
+  }
   for (const { totals: t, groups } of actual.cells) {
     assert.equal(t.moneyShortage + t.invalidBalances + t.invalidResources + t.invalidPositions +
       t.replayMismatch + t.resumeMismatch + t.stalledAgents, 0);
     assert.equal(groups.unresolved ?? 0, 0);
   }
-  console.log("SIM-01: 1536 scenarios, 240 ticks; payment failures, invalid states, stalls, replay/resume mismatches: 0");
+  console.log("SIM-03 standard: 1536 scenarios reproduce both SIM-01 and SIM-03 rows and transition hashes; payment failures, invalid states, stalls, replay/resume mismatches: 0");
 });
