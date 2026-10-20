@@ -33,6 +33,10 @@ test("公開版の既定は経路プロバイダーなしで、外部依存を�
   assert.equal(f.id, "fossgis-osrm-foot"); assert.equal(f.evaluationOnly, true);
   assert.ok(f.minIntervalMs >= 1000, "honours the one-request-per-second policy");
   assert.match(f.attributionHtml, /OpenStreetMap contributors/); assert.match(f.attributionHtml, /openstreetmap\.org\/copyright/);
+  assert.equal(resolveRouteProvider("?route=fossgis","yama-books.github.io").id,"none", "public Pages URL cannot opt in");
+  assert.equal(resolveRouteProvider("?route=local&routeEndpoint=http://localhost:5000/","yama-books.github.io").id,"none");
+  assert.equal(resolveRouteProvider("?route=fossgis","127.0.0.1").id,"fossgis-osrm-foot");
+  assert.ok(f.attributionHtml.includes("openstreetmap.org/fixthemap"),"fix-the-map link is required");
   assert.equal(f.license, "ODbL-1.0");
   for (const provider of Object.values(ROUTE_PROVIDERS)) assert.ok(!JSON.stringify(provider).match(/key=|token=|apikey/i), "no API keys in client code");
 });
