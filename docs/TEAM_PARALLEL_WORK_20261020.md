@@ -3,7 +3,7 @@
 - 制定：2026-10-20
 - 正本：`yama-books/genpei-sandbox` の `main`
 - 対象：[源平異聞録](https://github.com/yama-books/genpei-sandbox) ／ [公開試作](https://yama-books.github.io/genpei-sandbox/prototype/)
-- 基準ローカルフォルダ：`D:\\dev\\genpei-sandbox`
+- 基準ローカルフォルダ：`D:\dev\genpei-sandbox`
 - **この文書が作業分担・編集境界・受入条件の共通入口**。実装仕様は現在のコード・各専門設計書を参照し、古い進捗記録だけで実装済みと判断しない。
 - **注意：この文書のGitHub登録は、ユーザーのWindowsフォルダやクローンを操作したことを意味しない。** ローカル操作は各セッションが実行して確認すること。
 
@@ -170,11 +170,11 @@ node --test tests/*.test.mjs
 
 ### Claude Codeへの開始指示
 
-> `D:\\dev\\genpei-claude-map` を専用作業フォルダにしてください。GitHubの `yama-books/genpei-sandbox` の `docs/TEAM_PARALLEL_WORK_20261020.md` を最初に読み、セクション3「MAP-01」を担当してください。基準クローンは `D:\\dev\\genpei-sandbox` です。worktree未作成ならセクション1を安全に実行し、既存の変更は保持してください。Codexの所有ファイルは変更せず、実装・テスト・引継ぎmd・PR作成まで進め、mainにはマージしないでください。
+> `D:\dev\genpei-claude-map` を専用作業フォルダにしてください。GitHubの `yama-books/genpei-sandbox` の `docs/TEAM_PARALLEL_WORK_20261020.md` を最初に読み、セクション3「MAP-01」を担当してください。基準クローンは `D:\dev\genpei-sandbox` です。worktree未作成ならセクション1を安全に実行し、既存の変更は保持してください。Codexの所有ファイルは変更せず、実装・テスト・引継ぎmd・PR作成まで進め、mainにはマージしないでください。
 
 ### Codexへの開始指示
 
-> `D:\\dev\\genpei-codex-sim` を専用作業フォルダにしてください。GitHubの `yama-books/genpei-sandbox` の `docs/TEAM_PARALLEL_WORK_20261020.md` を最初に読み、セクション4「SIM-01」を担当してください。基準クローンは `D:\\dev\\genpei-sandbox` です。worktree未作成ならセクション1を安全に実行し、既存の変更は保持してください。Claude Codeの所有ファイルは変更せず、実装・大量シード検証・テスト・引継ぎmd・PR作成まで進め、mainにはマージしないでください。
+> `D:\dev\genpei-codex-sim` を専用作業フォルダにしてください。GitHubの `yama-books/genpei-sandbox` の `docs/TEAM_PARALLEL_WORK_20261020.md` を最初に読み、セクション4「SIM-01」を担当してください。基準クローンは `D:\dev\genpei-sandbox` です。worktree未作成ならセクション1を安全に実行し、既存の変更は保持してください。Claude Codeの所有ファイルは変更せず、実装・大量シード検証・テスト・引継ぎmd・PR作成まで進め、mainにはマージしないでください。
 
 ### 統合担当への短文
 
