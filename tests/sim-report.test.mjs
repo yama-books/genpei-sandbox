@@ -11,7 +11,7 @@ test('SIM-02 artifacts contain complete paired matrices and sampled trajectories
   try {
     for(const name of ['baseline','time']) {
       const report=JSON.parse(await readFile(new URL(`../docs/reports/sim-02-${name}.json`,import.meta.url),'utf8'));
-      const lines=(await readFile(new URL(`../docs/reports/sim-02-${name}.csv`,import.meta.url),'utf8')).trim().split('\n');
+      const lines=(await readFile(new URL(`../docs/reports/sim-02-${name}.csv`,import.meta.url),'utf8')).trim().split(/\r?\n/);
       const [header,...body]=lines,keys=header.split(',');
       const rows=body.map(line=>Object.fromEntries(line.split(',').map((v,i)=>[keys[i],v])));
       assert.equal(report.seeds.length,128);assert.equal(rows.length,report.scenarios.length*3*128);
