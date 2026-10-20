@@ -9,6 +9,7 @@ import { buildAgentObservations } from "./map/agent-observation.mjs";
 import { loadPoiSample, distanceMeters } from "./openpoi.mjs";
 import { FATE_RULES, chapterMetrics } from "./fate.mjs";
 import { createHistoricalGeoRequest } from "./geography-bridge.mjs";
+import { buildFateStages, readinessView, upcomingCheckpoints, endingLabel, createTrail, recordTrail, truncateTrail, chartModel, applyObservationScenario, CHART, CHART_COMPACT, LEADER_ID } from "./map/fate-timeline.mjs";
 
 const q = selector => document.querySelector(selector);
 const svgNS = "http://www.w3.org/2000/svg";
@@ -43,6 +44,8 @@ let roster = [];
 let claims = [];
 let selected = "C036";
 let world = createWorld(1185);
+// MAP-04 observation trail of the leader (UI-only; rebuilt from the same deterministic steps).
+let trail = recordTrail(createTrail(), world);
 let checkpoint = null;
 let timer = null;
 let loadedModernPois = [];
@@ -544,15 +547,50 @@ function renderDecision() {
   root.append(list);
 }
 
+// MAP-04: the chapter as a short causal chain. Every stage, reason and ending is
+// read from world.fate (fate.mjs); this view never re-derives a decision.
 function renderFate() {
   const f=world.fate;
   const m=chapterMetrics(world, Number(q("#gravity").value));
+  const leader=world.agents.find(a=>a.id===LEADER_ID);
   const label={watching:"運命はまだ遠い",approaching:"運命が近づく",postponed:"攻撃を延期",resolved:"屋島篇の結末"};
-  q("#fate-phase").textContent=label[f.phase] || "観察中";
-  const progress=Math.min(100,Math.max(0,Math.round(world.tick/FATE_RULES.closingTick*100)));
-  const bar=q("#fate-progress");bar.replaceChildren();
-  const track=element("div","fate-track");const fill=element("div","fate-track-fill");fill.style.width=progress+"%";track.append(fill);
-  bar.append(element("span","",String(world.tick)+" / "+FATE_RULES.closingTick+" 刻"),track);
+  const reconsidered=f.decisions.some(d=>d.kind==="reconsidered");
+  q("#fate-phase").textContent=f.resolution?label.resolved:(f.phase==="postponed"&&reconsidered?"回復・帰還待ち":label[f.phase] || "観察中");
+
+  const steps=q("#fate-steps");steps.replaceChildren();
+  for(const stage of buildFateStages(f,world.tick)) {
+    const li=element("li","fate-step "+stage.status+(stage.tone?" "+stage.tone:""));
+    li.dataset.stage=stage.id;
+    li.append(element("strong","",stage.label));
+    li.append(element("span","fs-tick",stage.status==="done" ? "第 "+stage.tick+" 刻" : (stage.note || (stage.tick!=null ? "第 "+stage.tick+" 刻" : ""))));
+    steps.append(li);
+  }
+
+  // The latest recorded decision's own causes are the authoritative "why".
+  const causes=q("#fate-causes");causes.replaceChildren();
+  const latest=[...f.decisions].reverse().find(d=>d.kind==="postponed"||d.kind==="reconsidered");
+  if(latest && !f.resolution) {
+    causes.append(element("span","fate-cause-label","第 "+latest.tick+" 刻の判定理由："));
+    for(const c of latest.causes||[]) causes.append(element("span","fate-cause",c));
+  }
+
+  const status=q("#fate-status");status.replaceChildren();
+  const chip=(text,cls="")=>status.append(element("span","fate-chip"+(cls?" "+cls:""),text));
+  if(f.resolution) {
+    const r=f.resolution;
+    chip("第 "+r.resolvedAt+" 刻に確定："+endingLabel(r));
+    chip(r.metrics?.atDecisionSite?"確定時：屋島にいた":"確定時：屋島の外");
+  } else if(leader) {
+    const v=readinessView(leader,m);
+    chip(v.atSite?"現在地：屋島":"現在地：屋島の外");
+    for(const k of ["energy","provisions","readiness"]) {
+      const item=v[k];
+      chip(item.label+" "+item.value+" / "+item.min+(item.ok?"":" 不足"),item.ok?"ok":"bad");
+    }
+    const next=upcomingCheckpoints(f,world.tick)[0];
+    if(next) chip("次：第 "+next.tick+" 刻 "+next.label,"next");
+  }
+
   const reasons=q("#fate-reasons");reasons.replaceChildren();
   const resolution=f.resolution;
   if(resolution){
@@ -565,17 +603,58 @@ function renderFate() {
     }
     reasons.append(element("div","fate-footnote","世界の生活は続きます。再生すると章の結末を保持したまま人物が移動します。"));
   }else{
-    const title=f.phase==="postponed"?"補給・休息が整うか、機会が去るか。":
-      f.phase==="approaching"?"運命の場所に着いても、戦うとは限らない。":"人物の寄り道も、運命の結末を変える。";
-    q("#fate-description").textContent=title;
-    reasons.append(element("div","fate-preview",m.arrived?"義経は屋島を訪問済み":"義経はまだ屋島へ到着していません"));
-    reasons.append(element("div","fate-preview","行動余力 "+m.readiness+"／交渉意向 "+m.negotiationBias+"（いずれも仮想値）"));
-    const next=f.decisions[f.decisions.length-1];
-    if(next && next.kind==="postponed") reasons.append(element("div","fate-reason",next.title));
+    q("#fate-description").textContent=
+      f.phase==="postponed" && reconsidered ? "体力と食料は戻った。屋島へ戻れば、改めて交戦か交渉を判断する。" :
+      f.phase==="postponed" ? "攻撃を延期中。第 "+f.postponedUntil+" 刻の再判断までに、体力と食料が戻るか。" :
+      f.phase==="approaching" ? (m.arrived?"屋島に着いても、戦うとは限らない。準備が整うかどうか。":"機会は近い。義経はまだ屋島に着いていない。") :
+      "人物の寄り道も、運命の結末を変える。";
+    if(m.negotiationBias) reasons.append(element("div","fate-preview","交渉意向 "+m.negotiationBias+"（仮想値。助言の受諾で上がる）"));
   }
+
+  renderFateChart();
+  renderFateTrail();
   // Stable semantic ID only; the future historical-province engine supplies verified GIS separately.
   const geo=createHistoricalGeoRequest();
   q("#fate-title").title="地理連携待機中："+geo.feature.provinceLabel+"（旧国名エンジン側の地物ID・中世座標・経路は未接続）";
+}
+
+function renderFateChart() {
+  const svg=q("#fate-chart");
+  const title=svg.querySelector("title");
+  svg.replaceChildren(title);
+  const dims=svg.clientWidth && svg.clientWidth<480 ? CHART_COMPACT : CHART;
+  svg.setAttribute("viewBox","0 0 "+dims.width+" "+dims.height);
+  const c=chartModel(trail,world.fate,world.tick,dims);
+  const top=dims.top, bottom=dims.height-dims.bottom;
+  const add=(name,attrs,text)=>{const n=svgNode(name,attrs);if(text!==undefined){const t=svgNode("title");t.textContent=text;n.append(t);}svg.append(n);return n;};
+  // Grace first so a short stay at Yashima stays visible on top of it.
+  if(c.grace) add("rect",{x:c.grace.x1,y:top,width:Math.max(1,c.grace.x2-c.grace.x1),height:bottom-top,class:"fc-grace"},"延期の猶予（再判断まで）");
+  for(const s of c.siteSpans) add("rect",{x:s.x1,y:top,width:Math.max(2,s.x2-s.x1),height:bottom-top,class:"fc-site"},"屋島に滞在");
+  for(const v of [0,50,100]) { const t=add("text",{x:dims.left-4,y:c.y(v)+3,class:"fc-axis","text-anchor":"end"}); t.textContent=String(v); }
+  for(const mk of c.markers) {
+    add("line",{x1:mk.x,x2:mk.x,y1:top,y2:bottom,class:"fc-mark"},"第 "+mk.tick+" 刻："+mk.label);
+    const t=add("text",{x:mk.x,y:top-6,class:"fc-mark-label","text-anchor":mk.anchor||"middle"}); t.textContent=mk.label+" "+mk.tick;
+  }
+  for(const fl of c.floors) add("line",{x1:dims.left,x2:dims.width-dims.right,y1:fl.y,y2:fl.y,class:"fc-floor "+fl.key},(fl.key==="energy"?"体力":"食料")+"の交戦最低ライン "+fl.value);
+  if(c.energyPoints) add("polyline",{points:c.energyPoints,class:"fc-line energy"},"体力の推移");
+  if(c.provisionsPoints) add("polyline",{points:c.provisionsPoints,class:"fc-line provisions"},"食料の推移");
+  for(const e of c.events) add("circle",{cx:e.x,cy:bottom+8,r:3.5,class:"fc-ev "+e.kind},"第 "+e.tick+" 刻："+e.text);
+  for(const d of c.decisions) add("path",{d:"M"+d.x+","+(top-1)+"l5,5l-5,5l-5,-5z",class:"fc-dec "+d.kind},"第 "+d.tick+" 刻："+d.title);
+  if(c.now!==null) add("line",{x1:c.now,x2:c.now,y1:top,y2:bottom,class:"fc-now"},"現在：第 "+world.tick+" 刻");
+  const end=add("text",{x:dims.width-dims.right,y:dims.height-3,class:"fc-axis","text-anchor":"end"}); end.textContent=c.maxT+"刻";
+  const start=add("text",{x:dims.left,y:dims.height-3,class:"fc-axis"}); start.textContent="0";
+}
+
+function renderFateTrail() {
+  const list=q("#fate-trail-list");list.replaceChildren();
+  const items=[...trail.events].reverse().slice(0,20);
+  for(const e of items) {
+    const li=element("li",e.kind);
+    li.append(element("span","",String(e.tick).padStart(3,"0")+"刻"),element("span","",e.text));
+    list.append(li);
+  }
+  if(!items.length) { const li=element("li",""); li.append(element("span","","—"),element("span","","まだ記録はありません")); list.append(li); }
+  q("#fate-trail summary").textContent="義経の道中記録（"+trail.events.length+"件）";
 }
 
 function renderEvents() {
@@ -587,6 +666,7 @@ function renderEvents() {
 }
 
 function render() {
+  recordTrail(trail, world);
   q("#clock").textContent = "第 " + world.tick + " 刻";
   q("#gravity-value").textContent = q("#gravity").value;
   q("#to-fate").disabled = Boolean(world.fate.resolution);
@@ -603,6 +683,7 @@ function tick() {
   for (let i = 0; i < count; i++) {
     const unresolved=!world.fate.resolution;
     stepWorld(world, Number(q("#gravity").value));
+    recordTrail(trail, world);
     if(unresolved && world.fate.resolution){stop();break;}
   }
   render();
@@ -615,7 +696,9 @@ function toggle() {
 function reset() {
   stop();
   world = createWorld(q("#seed").value);
+  applyObservationScenario(world, q("#fate-scenario").value);
   if(poiEnabled && loadedModernPois.length) installModernPois(world,loadedModernPois);
+  trail = createTrail();
   checkpoint = null;
   q("#restore").disabled = true;
   render();
@@ -647,10 +730,11 @@ q("#play").addEventListener("click", toggle);
 q("#step").addEventListener("click", () => { stop(); tick(); });
 q("#to-fate").addEventListener("click", () => {
   stop();
-  for(let i=0;i<200 && !world.fate.resolution;i++) stepWorld(world,Number(q("#gravity").value));
+  for(let i=0;i<200 && !world.fate.resolution;i++) { stepWorld(world,Number(q("#gravity").value)); recordTrail(trail, world); }
   render();
 });
 q("#reset").addEventListener("click", reset);
+q("#fate-scenario").addEventListener("change", reset);
 q("#gravity").addEventListener("input", render);
 q("#advise").addEventListener("click", () => {
   const result = intervene(world, selected, "advise", Number(q("#gravity").value));
@@ -677,6 +761,7 @@ q("#restore").addEventListener("click", () => {
   if (!checkpoint) return;
   stop();
   world = snapshot(checkpoint.world);
+  truncateTrail(trail, world.tick);
   poiEnabled = Boolean(world.modernPois?.length);
   selected = checkpoint.selected;
   q("#gravity").value = checkpoint.gravity;
@@ -684,6 +769,7 @@ q("#restore").addEventListener("click", () => {
   render();
 });
 document.addEventListener("visibilitychange", () => { if (document.hidden) stop(); });
+window.addEventListener("resize", () => renderFateChart());
 q("#fetch-poi").addEventListener("click", fetchModernPoi);
 q("#activate-poi").addEventListener("click", activateModernPois);
 q("#remove-poi").addEventListener("click", deactivateModernPois);
