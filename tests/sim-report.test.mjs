@@ -19,7 +19,8 @@ test('SIM-02 artifacts contain complete paired matrices and sampled trajectories
       const variants=new Map();
       for(const s of report.scenarios) {
         const key=JSON.stringify([s.departure,s.interval,s.closing,s.grace,s.earliest]);
-        if(!variants.has(key)) variants.set(key,await loadEngine(report.ref,s,temp));
+        if(!variants.has(key)) variants.set(key,await loadEngine(null,s,temp));
+        // Validate recorded hashes without requiring history in shallow CI checkouts.
         const {api,sources}=variants.get(key);assert.deepEqual(sources,report.sources);
         for(const gravity of [0,50,100]) {
           const cell=report.cells.find(c=>c.scenario===s.id&&c.gravity===gravity);
