@@ -103,12 +103,20 @@ export function logEvent(world, kind, text, personId = null) {
   if (world.events.length > 140) world.events.length = 140;
 }
 
+function stationCost(station) {
+  if (station.kind === "modern-poi") return POI_GAME_EFFECT[station.action]?.cost ?? Infinity;
+  return { supply: 9, rest: 6, leisure: 5 }[station.id] ?? 0;
+}
+
 function chooseTarget(world, agent, gravity) {
   const scores = destinationScores(agent, gravity, world);
   agent.lastScores = scores;
-  // Top 2 get random exploration; both deterministically seeded.
+  // Affordability is a constraint, including for the random second choice.
+  // Keep all scores for observation; a fixed penalty alone can be outweighed
+  // by hunger/fatigue, causing repeated journeys to unaffordable facilities.
+  const affordable = scores.filter(p => agent.money >= stationCost(getStation(world, p.id)));
   const chosen = rngNext(world) < (0.10 + agent.curiosity * 0.12)
-    ? (scores[1] || scores[0]) : scores[0];
+    ? (affordable[1] || affordable[0]) : affordable[0];
   const changed = chosen.id !== agent.target;
   agent.target = chosen.id;
   agent.lastDecision = chosen.why + "（得点 " + chosen.score + "）";
