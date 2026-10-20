@@ -44,6 +44,7 @@ jobs:
           node --check prototype/map/modern-map.mjs
           node --check prototype/map/agent-observation.mjs
           node --check prototype/map/route-contract.mjs
+          node --check prototype/map/route-provider.mjs
       - name: Prototype tests
         run: node --test tests/*.test.mjs
       - name: Install lightweight browser driver
