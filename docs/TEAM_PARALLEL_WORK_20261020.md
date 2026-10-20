@@ -7,6 +7,20 @@
 - **この文書が作業分担・編集境界・受入条件の共通入口**。実装仕様は現在のコード・各専門設計書を参照し、古い進捗記録だけで実装済みと判断しない。
 - **注意：この文書のGitHub登録は、ユーザーのWindowsフォルダやクローンを操作したことを意味しない。** ローカル操作は各セッションが実行して確認すること。
 
+## 最新：2026-10-21 MAP-04・SIM-04統合チェックポイント
+
+**この節は下に残る過去の「次の作業」指示より優先する。MAP-01～04、SIM-01～04は完了済み。旧PR・旧ブランチへ積み直さないこと。**
+
+- **SIM-04 / Codex 完了・main統合**：[PR #9](https://github.com/yama-books/genpei-sandbox/pull/9)、squash `0a6eac5cb30be44b3c68fcb16e4e61239e5cf1fa`。新規 `prototype/movement-state.mjs` と単体テスト。 `getAgentMovementState(world,agentId,{previous})`、`getAgentRouteState(world,agentId,attempt)` は副作用なしの観測API。 `realGeo:null` を守り、人物の位置ドメインは `abstract` のまま、施設・経路 `modern_wgs84` と歴史資料 `historical_geo` を分離。地図・本体行動を変更しない。[Codex引継ぎ](handoff/CODEX_SIM04_20261021.md)
+- **MAP-04 / Claude Code 完了・main統合**：[PR #8](https://github.com/yama-books/genpei-sandbox/pull/8)、squash `b6a92e7f31cc2eae5773608f4ebce0364b9c9226`。運命の4段階、原因・資源のグラフ、道中記録と保存復帰の観察履歴、任意の「資源不足で開始」を表示。`fate.mjs`の判定は無変更。[Claude引継ぎ](handoff/CLAUDE_MAP04_20261021.md)
+- **「資源不足で開始」の裁定：採用。** SIM-03の合成試験条件に基づく教材向けの観察モードとして使用可。既定は「通常」。選択すると `createWorld(seed)` 後に義経の初期値（体力40・食料20・所持金0）を設定してリセット。乱数消費・交戦閾値・ルールは変更しない。これによる分岐比率を史実の確率として説明しない。
+- **両PR統合後の回帰確認成功**：[Prototype integrity 39514298591](https://github.com/yama-books/genpei-sandbox/actions/runs/39514298591)。110/110件の単体テストPASS、ブラウザPC 1280px・スマホ幅390px、地図ライブラリ障害、運命の因果表示・巻戻し、経路の模擬成功/失敗を確認。新規 `fate-timeline.mjs` と `movement-state.mjs` の `node --check` も追加。
+- **GitHub Pagesデプロイ成功**：[run 39514305616](https://github.com/yama-books/genpei-sandbox/actions/runs/39514305616)。これはActionsによる配信成功を意味し、iPhone Safari実機試験や現地施設の営業/通行検証とは別。公開実地図での人物GPS・現代道路追従・1185年の地理復元は未実装。
+- **経路公開方針は維持**：公開ドメインの`?route=fossgis`/`?route=local`指定は無効。ローカル環境の最小評価のみ。正式条件と全利用者を通算したレート制御が確認されるまで外部経路APIを公開有効化しない。
+- **次の作業候補 MAP-05（Claude Code）**：SIM-04の読取APIを既存の人物観察パネルへ接続し、移動の選択・進行・到着・再判断を少数の情報で時系列可視化。新規の実座標・歴史道路を作らない。旧 `getAgentPlacement` との違いを明示し、保存復帰時にprevious観測を破棄/復元して偽の遷移を表示しない。既存MAP-04の運命グラフは保持。
+- **次の作業候補 SIM-05（Codex）**：公開サービスに依存せず、`agent-movement/1`の観測と行動コアの既存イベントを照合し、現代施設間のルートプレビューと人物位置の間の**不足契約**を洗い出す。位置参照の信頼性・時代、時間刻と道路長の非同値性、経路失敗時の扱いを設計してテスト。旧国名エンジンの正式なID/年代/幾何は未確認として扱い、SIM本体の架空移動を現実のGPSへ勝手に置換しない。
+- **担当境界**：MAP-05は`prototype/app.mjs`、`prototype/map/**`とUIテスト。SIM-05は`prototype/movement-state.mjs`等のロジックと独自テスト。各担当が既存の分離された`D:\dev\genpei-claude-map`/`D:\dev\genpei-codex-sim` worktreeを使用、未コミット差分とHEAD・担当を確認して最新`origin/main`から**新ブランチ**を作成。旧ブランチは維持。新PRで本番マージせず統合審査を待つ。
+
 ## 2026-10-20 統合チェックポイント（追補）
 
 - **MAP-01（Claude Code）完了・統合済み**：[PR #2](https://github.com/yama-books/genpei-sandbox/pull/2)、squash統合コミット [`ec4fa85`](https://github.com/yama-books/genpei-sandbox/commit/ec4fa852ff05f6d34186ce65f0721e98ca1a4028)。地図UI・現代POI地図表示・フォールバック・テストがmainへ入った。
