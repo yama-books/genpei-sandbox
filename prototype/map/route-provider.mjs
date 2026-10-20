@@ -48,7 +48,7 @@ export function isLoopbackEndpoint(value) {
 
 // ?route=fossgis enables the evaluation server; ?route=local&routeEndpoint=http://127.0.0.1:5000/route/v1/foot/
 // a self-hosted OSRM. Anything else resolves to "none".
-export function resolveRouteProvider(search = "", runtimeHost = "localhost") {
+export function resolveRouteProvider(search = "", runtimeHost = "") {
   // A public URL parameter is not a production approval or global rate limit.
   // Keep live routing behind locally served developer/test pages until
   // the full usage conditions and a sustainable provider are confirmed.
